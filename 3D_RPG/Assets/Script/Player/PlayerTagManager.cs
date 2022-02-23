@@ -25,8 +25,8 @@ public class PlayerTagManager : MonoBehaviour
             }
         }
 
-        _playerCharacters[_thirdCharacterIndex].SetActive(true);
-        CurrentCharacterIndex = _thirdCharacterIndex;
+        _playerCharacters[0].SetActive(true);
+        CurrentCharacterIndex = 0;
     }
 
     void Update()
