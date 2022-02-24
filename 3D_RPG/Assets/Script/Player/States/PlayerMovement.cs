@@ -3,13 +3,22 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour, IState
 {
     [SerializeField] private PlayerRotator _rotator;
-    [SerializeField] private Transform _cameraPoint;
-    [SerializeField] private Transform _managerTransform;
     [SerializeField] private Animator _animator;
-    [SerializeField] private PlayerInput _input;
     [SerializeField] private StateMachine _stateMachine;
 
+    private PlayerInput _input;
+    private Transform _cameraPoint;
+    private Transform _managerTransform;
+
     private float _moveSpeed { get; set; } = 5f;
+
+    private void Start()
+    {
+        _cameraPoint = transform.parent.Find("Camera Point");
+        _managerTransform = transform.parent;
+        _input = transform.parent.gameObject.GetComponent<PlayerInput>();
+    }
+
     public void Enter() { }
 
     void IState.Update()
@@ -23,10 +32,10 @@ public class PlayerMovement : MonoBehaviour, IState
         Move();
     }
 
-    public void Exit() 
+    public void Exit()
     {
         _animator.SetFloat(PlayerAnimID.MOVE, 0);
-        //_animator.applyRootMotion = true;
+        _animator.applyRootMotion = false;
     }
 
     private void Move()
@@ -44,7 +53,7 @@ public class PlayerMovement : MonoBehaviour, IState
 
             Vector3 moveDir = (lookForward * moveInput.y) + (lookRight * moveInput.x);
 
-            _rotator.Rotate(moveDir);
+            _rotator.Rotate(new Vector2(_input.InputHorizontal, _input.InputVertical), _cameraPoint);
 
             _managerTransform.position += moveDir * Time.deltaTime * _moveSpeed;
         }

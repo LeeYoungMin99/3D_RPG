@@ -11,7 +11,7 @@ public class StateMachine : MonoBehaviour
     private void Start()
     {
         AddState(EStateTag.Movement, GetComponent<PlayerMovement>());
-        AddState(EStateTag.Attack, GetComponent<PlayerAttack>());
+        AddState(EStateTag.Attack, GetComponent<Attack>());
     }
 
     private void Update()

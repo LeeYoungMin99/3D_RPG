@@ -86,17 +86,17 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: -8953468709395334755}
-    m_Position: {x: 290, y: 120, z: 0}
+    m_Position: {x: 300, y: 130, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1650486003559297432}
-    m_Position: {x: 290, y: 200, z: 0}
+    m_Position: {x: 300, y: 200, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 70, y: 70, z: 0}
-  m_EntryPosition: {x: 310, y: 50, z: 0}
+  m_EntryPosition: {x: 320, y: 70, z: 0}
   m_ExitPosition: {x: 70, y: 120, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: -8953468709395334755}
@@ -274,7 +274,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Playerable Character
+  m_Name: Character
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: Move
