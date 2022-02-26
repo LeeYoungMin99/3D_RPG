@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour, IState
     private Transform _cameraPoint;
     private Transform _managerTransform;
 
-    private float _moveSpeed { get; set; } = 5f;
+    private float _moveSpeed = 5f;
 
     private void Start()
     {

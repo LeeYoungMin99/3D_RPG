@@ -12,11 +12,13 @@ public class StateMachine : MonoBehaviour
     {
         AddState(EStateTag.Movement, GetComponent<PlayerMovement>());
         AddState(EStateTag.Attack, GetComponent<Attack>());
+
+        ChangeState((int)EStateTag.Movement);
     }
 
     private void Update()
     {
-        _curState?.Update();
+        _curState.Update();
     }
 
     public void AddState(EStateTag tag, IState state)
