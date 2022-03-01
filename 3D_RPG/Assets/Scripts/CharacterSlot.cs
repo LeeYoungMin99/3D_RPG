@@ -8,6 +8,8 @@ public class CharacterSlot : CharacterInventorySlot
     {
         base.Awake();
 
+        _path = $"Images/Character Slot/{CharacterInfo.Name}";
+
         SlotButton.onClick.RemoveListener(OnClick);
         SlotButton.onClick.AddListener(OnClick);
     }
@@ -29,7 +31,7 @@ public class CharacterSlot : CharacterInventorySlot
         else
         {
             SlotButton.interactable = true;
-            _image.sprite = Resources.Load<Sprite>($"Images/Character Slot/{CharacterInfo.Name}");
+            _image.sprite = Resources.Load<Sprite>(_path);
         }
     }
 }

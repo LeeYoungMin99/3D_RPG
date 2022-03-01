@@ -10,7 +10,7 @@ public class CharacterInventorySlot : MonoBehaviour
 
     [SerializeField] protected Image _image;
     public Button SlotButton { get; set; }
-
+    protected string _path;
     protected virtual void Awake()
     {
         SlotButton = GetComponent<Button>();

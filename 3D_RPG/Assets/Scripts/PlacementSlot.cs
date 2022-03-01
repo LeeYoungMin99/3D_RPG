@@ -11,6 +11,8 @@ public class PlacementSlot : CharacterInventorySlot
     {
         base.Awake();
 
+        _path = $"Images/Deployment Slot/{CharacterInfo.Name}";
+
         SlotButton.onClick.RemoveListener(OnClick);
         SlotButton.onClick.AddListener(OnClick);
     }
@@ -19,7 +21,7 @@ public class PlacementSlot : CharacterInventorySlot
     {
         if (true == _characterInventory._curSelectCharacterData.IsDeployment)
         {
-            _characterInventory.DisplacementCharacter(_characterInventory._curSelectCharacterData);
+            _characterInventory.WithdrawCharacter(_characterInventory._curSelectCharacterData);
         }
 
         CharacterInfo = _characterInventory._curSelectCharacterData;
@@ -27,32 +29,40 @@ public class PlacementSlot : CharacterInventorySlot
 
         CharacterInfo.IsDeployment = true;
 
-        SetSlotDatas();
+        SetSlotData();
 
         _characterInventory.SetInteractableDeploymentSlots(false);
     }
 
     private void OnEnable()
     {
-        SetSlotDatas();
+        SetSlotData();
     }
 
-    public void DisplacementCharacter(CharacterData data)
+    public bool CheckCharacterInfo(CharacterData data)
     {
         if (data == CharacterInfo)
         {
-            data.IsDeployment = false;
-            CharacterInfo = null;
-
-            SetSlotDatas();
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
+    public void WithdrawCharacter()
+    {
+        CharacterInfo.IsDeployment = false;
+        CharacterInfo = null;
 
-    private void SetSlotDatas()
+        SetSlotData();
+    }
+
+    private void SetSlotData()
     {
         if (null != CharacterInfo)
         {
-            _image.sprite = Resources.Load<Sprite>($"Images/Deployment Slot/{CharacterInfo.Name}");
+            _image.sprite = Resources.Load<Sprite>(_path);
             _text.text = $"Level : {CharacterInfo.Level}\nName : {CharacterInfo.Name}\nHP : {CharacterInfo.MaxHP}\nATK : {CharacterInfo.ATK}\nDEF : {CharacterInfo.DEF}";
         }
         else

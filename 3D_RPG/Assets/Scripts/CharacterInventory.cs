@@ -50,11 +50,16 @@ public class CharacterInventory : MonoBehaviour
         CharacterDatas.Add(data);
     }
 
-    public void DisplacementCharacter(CharacterData data)
+    public void WithdrawCharacter(CharacterData data)
     {
         for (int i = 0; i < 3; ++i)
         {
-            _deploymentSlot[i].DisplacementCharacter(data);
+            if(true == _deploymentSlot[i].CheckCharacterInfo(data))
+            {
+                _deploymentSlot[i].WithdrawCharacter();
+
+                break;
+            }
         }
     }
 
