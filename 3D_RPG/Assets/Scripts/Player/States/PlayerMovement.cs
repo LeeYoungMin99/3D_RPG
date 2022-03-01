@@ -35,7 +35,6 @@ public class PlayerMovement : MonoBehaviour, IState
     public void Exit()
     {
         _animator.SetFloat(PlayerAnimID.MOVE, 0);
-        _animator.applyRootMotion = false;
     }
 
     private void Move()
@@ -44,24 +43,21 @@ public class PlayerMovement : MonoBehaviour, IState
 
         _animator.SetFloat(PlayerAnimID.MOVE, Mathf.Clamp(moveInput.magnitude, 0f, 1f));
 
-        if (_animator.GetFloat(PlayerAnimID.MOVE) != 0)
+        if (0 != _animator.GetFloat(PlayerAnimID.MOVE))
         {
-            _animator.applyRootMotion = false;
-
             Vector3 lookForward = new Vector3(_cameraPoint.forward.x, 0f, _cameraPoint.forward.z).normalized;
             Vector3 lookRight = new Vector3(_cameraPoint.right.x, 0f, _cameraPoint.right.z).normalized;
-
+            
             Vector3 moveDir = (lookForward * moveInput.y) + (lookRight * moveInput.x);
 
             _rotator.Rotate(new Vector2(_input.InputHorizontal, _input.InputVertical), _cameraPoint);
 
             _managerTransform.position += moveDir * Time.deltaTime * _moveSpeed;
         }
-        else
-        {
-            _animator.applyRootMotion = true;
-            transform.localPosition = new Vector3(0, 0, 0);
-        }
     }
 
+    private void LateUpdate()
+    {
+        transform.localPosition = new Vector3(0, 0, 0);
+    }
 }

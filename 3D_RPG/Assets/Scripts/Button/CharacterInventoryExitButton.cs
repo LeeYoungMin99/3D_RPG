@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class CharacterInventoryExitButton : MonoBehaviour
 {
     [SerializeField] private GameObject _field;
-    [SerializeField] private GameObject _characterInventoryWindow;
+    [SerializeField] private GameObject _characterInventory;
 
     [SerializeField] private Button _button;
 
@@ -16,7 +16,7 @@ public class CharacterInventoryExitButton : MonoBehaviour
 
     void OnClick()
     {
-        _characterInventoryWindow.SetActive(false);
+        _characterInventory.SetActive(false);
 
         _field.SetActive(true);
     }

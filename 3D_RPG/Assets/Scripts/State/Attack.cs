@@ -15,5 +15,7 @@ public class Attack : MonoBehaviour, IState
     {
     }
 
-    public void Exit() { }
+    public void Exit() 
+    {
+    }
 }

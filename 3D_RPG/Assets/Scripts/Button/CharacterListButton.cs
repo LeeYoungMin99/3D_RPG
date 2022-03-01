@@ -6,8 +6,7 @@ using UnityEngine.UI;
 public class CharacterListButton : MonoBehaviour
 {
     [SerializeField] private GameObject _field;
-    [SerializeField] private GameObject _characterInventoryWindow
-        ;
+    [SerializeField] private GameObject _characterInventory;
 
     [SerializeField] private Button _button;
 
@@ -21,6 +20,6 @@ public class CharacterListButton : MonoBehaviour
     {
         _field.SetActive(false);
 
-        _characterInventoryWindow.SetActive(true);
+        _characterInventory.SetActive(true);
     }
 }
