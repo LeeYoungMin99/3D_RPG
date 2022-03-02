@@ -1,47 +1,38 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PlacementSlot : CharacterInventorySlot
 {
-    [SerializeField] private Text _text;
-
-    protected override void Awake()
+    private void Awake()
     {
-        base.Awake();
-
-        _path = $"Images/Deployment Slot/{CharacterInfo.Name}";
-
-        SlotButton.onClick.RemoveListener(OnClick);
-        SlotButton.onClick.AddListener(OnClick);
+        _slotButton.onClick.RemoveListener(OnClick);
+        _slotButton.onClick.AddListener(OnClick);
     }
 
     private void OnClick()
     {
-        if (true == _characterInventory._curSelectCharacterData.IsDeployment)
+        if (true == _characterInventorySlotManager.CurSelectCharacter.bIsDeployment)
         {
-            _characterInventory.WithdrawCharacter(_characterInventory._curSelectCharacterData);
+            _characterInventorySlotManager.WithdrawCharacter(_characterInventorySlotManager.CurSelectCharacter);
         }
 
-        CharacterInfo = _characterInventory._curSelectCharacterData;
-        _characterInventory._curSelectCharacterData = null;
+        _character = _characterInventorySlotManager.CurSelectCharacter;
+        _characterInventorySlotManager.CurSelectCharacter = null;
 
-        CharacterInfo.IsDeployment = true;
+        _character.bIsDeployment = true;
 
-        SetSlotData();
+        RefreshSlotData();
 
-        _characterInventory.SetInteractableDeploymentSlots(false);
+        _characterInventorySlotManager.SetInteractablePlacementSlots(false);
     }
 
     private void OnEnable()
     {
-        SetSlotData();
+        RefreshSlotData();
     }
 
-    public bool CheckCharacterInfo(CharacterData data)
+    public bool CheckCharacterInfo(Character data)
     {
-        if (data == CharacterInfo)
+        if (data == _character)
         {
             return true;
         }
@@ -50,25 +41,26 @@ public class PlacementSlot : CharacterInventorySlot
             return false;
         }
     }
+
     public void WithdrawCharacter()
     {
-        CharacterInfo.IsDeployment = false;
-        CharacterInfo = null;
+        _character.bIsDeployment = false;
+        _character = null;
 
-        SetSlotData();
+        RefreshSlotData();
     }
 
-    private void SetSlotData()
+    private void RefreshSlotData()
     {
-        if (null != CharacterInfo)
+        if (null != _character)
         {
-            _image.sprite = Resources.Load<Sprite>(_path);
-            _text.text = $"Level : {CharacterInfo.Level}\nName : {CharacterInfo.Name}\nHP : {CharacterInfo.MaxHP}\nATK : {CharacterInfo.ATK}\nDEF : {CharacterInfo.DEF}";
+            _image.sprite = Resources.Load<Sprite>($"Images/Deployment Slot/{_character.Name}");
+            _text.text = $"Level : {_character.Level}\nName : {_character.Name}\nHP : {_character.MaxHP}\nATK : {_character.ATK}\nDEF : {_character.DEF}";
         }
         else
         {
             _image.sprite = null;
-            _text.text = "";
+            _text.text = null;
         }
     }
 }

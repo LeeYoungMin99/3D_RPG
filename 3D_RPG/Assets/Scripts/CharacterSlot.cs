@@ -1,37 +1,33 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CharacterSlot : CharacterInventorySlot
 {
-    protected override void Awake()
+    private void Awake()
     {
-        base.Awake();
-
-        _path = $"Images/Character Slot/{CharacterInfo.Name}";
-
-        SlotButton.onClick.RemoveListener(OnClick);
-        SlotButton.onClick.AddListener(OnClick);
+        _slotButton.onClick.RemoveListener(OnClick);
+        _slotButton.onClick.AddListener(OnClick);
     }
 
     private void OnClick()
     {
-        _characterInventory._curSelectCharacterData = CharacterInfo;
+        _characterInventorySlotManager.CurSelectCharacter = _character;
 
-        _characterInventory.SetInteractableDeploymentSlots(true);
+        _characterInventorySlotManager.SetInteractablePlacementSlots(true);
     }
 
     private void OnEnable()
     {
-        if (null == CharacterInfo)
+        if (null == _character)
         {
-            SlotButton.interactable = false;
+            SetInteractabletSlotButton(false);
             _image.sprite = null;
+            _text.text = null;
         }
         else
         {
-            SlotButton.interactable = true;
-            _image.sprite = Resources.Load<Sprite>(_path);
+            SetInteractabletSlotButton(true);
+            _image.sprite = Resources.Load<Sprite>($"Images/Character Slot/{_character.Name}");
+            _text.text = $"Level : {_character.Level}";
         }
     }
 }

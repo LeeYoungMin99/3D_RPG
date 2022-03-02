@@ -1,18 +1,22 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class CharacterInventorySlot : MonoBehaviour
 {
-    public CharacterData CharacterInfo { get; set; }
-
-    [SerializeField] protected CharacterInventory _characterInventory;
-
+    [SerializeField] protected CharacterInventorySlotManager _characterInventorySlotManager;
     [SerializeField] protected Image _image;
-    public Button SlotButton { get; set; }
-    protected string _path;
-    protected virtual void Awake()
+    [SerializeField] protected Button _slotButton;
+    [SerializeField] protected Text _text;
+
+    protected Character _character;
+
+    public void SetInteractabletSlotButton(bool b)
     {
-        SlotButton = GetComponent<Button>();
+        _slotButton.interactable = b;
+    }
+
+    public void ChangeCharacter(Character character)
+    {
+        _character = character;
     }
 }
