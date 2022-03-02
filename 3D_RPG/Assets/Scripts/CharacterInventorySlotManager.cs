@@ -15,8 +15,6 @@ public class CharacterInventorySlotManager : MonoBehaviour
     private int _curCharacterCount = 0;
     private int _curInventoryPage = 1;
 
-    private Button[] _deploymentSlotButtons = new Button[MAX_PLACEMENT_SLOT];
-
     private List<Character> _characterList = new List<Character>();
 
     public Character CurSelectCharacter;
@@ -29,11 +27,6 @@ public class CharacterInventorySlotManager : MonoBehaviour
         ObtainCharacter(new Character("Archer", 1, 1, 1));
         ObtainCharacter(new Character("Gunner", 1, 1, 1));
         ObtainCharacter(new Character("Magician", 1, 1, 1));
-
-        for (int i = 0; i < MAX_PLACEMENT_SLOT; ++i)
-        {
-            _deploymentSlotButtons[i] = _placementSlot[i].GetComponent<Button>();
-        }
     }
 
     private void OnEnable()
