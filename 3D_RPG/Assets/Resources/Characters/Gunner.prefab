@@ -1907,7 +1907,7 @@ Animator:
   m_Controller: {fileID: 22100000, guid: 265b386375ce9844baec8fc286110424, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -1939,10 +1939,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rotator: {fileID: 8007428265434238721}
-  _cameraPoint: {fileID: 0}
-  _managerTransform: {fileID: 0}
   _animator: {fileID: 4488554172087661205}
-  _input: {fileID: 0}
   _stateMachine: {fileID: 750821835}
 --- !u!114 &750821835
 MonoBehaviour:

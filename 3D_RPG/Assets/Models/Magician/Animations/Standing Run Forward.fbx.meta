@@ -51,7 +51,7 @@ ModelImporter:
       loopBlendOrientation: 0
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
+      keepOriginalOrientation: 1
       keepOriginalPositionY: 1
       keepOriginalPositionXZ: 0
       heightFromFeet: 0
@@ -534,13 +534,13 @@ ModelImporter:
         length: 0
         modified: 0
     skeleton:
-    - name: arissa(Clone)
+    - name: Magician(Clone)
       parentName: 
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: arissa:Meshes
-      parentName: arissa(Clone)
+      parentName: Magician(Clone)
       position: {x: -0, y: 0, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
@@ -565,7 +565,7 @@ ModelImporter:
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: arissa:Hips
-      parentName: arissa(Clone)
+      parentName: Magician(Clone)
       position: {x: -0.0000000030042986, y: 0.9639482, z: -0.00035155087}
       rotation: {x: -0, y: -0, z: -4.6371754e-25, w: 1}
       scale: {x: 1, y: 1, z: 1}
@@ -956,7 +956,7 @@ ModelImporter:
     hasTranslationDoF: 0
     hasExtraRoot: 1
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 589a114c47148d6419134d535ea0396b, type: 3}
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 88d75a775501fea458a031970397e0e8, type: 3}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 3
   humanoidOversampling: 1

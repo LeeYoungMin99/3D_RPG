@@ -1,6 +1,6 @@
-public class CharacterData
+public class Character
 {
-    public CharacterData(string name, int hp, int atk, int def)
+    public Character(string name, int hp, int atk, int def)
     {
         Name = name;
         Level = 0;
@@ -11,13 +11,13 @@ public class CharacterData
         LevelUp();
     }
 
-    public string Name;
-    public int Level;
-    public int MaxHP;
-    public int ATK;
-    public int DEF;
+    public string Name { get; private set; }
+    public int Level { get; private set; }
+    public int MaxHP { get; private set; }
+    public int ATK { get; private set; }
+    public int DEF { get; private set; }
 
-    public bool IsDeployment = false;
+    public bool bIsDeployment = false;
 
     private int _baseHP;
     private int _baseATK;
