@@ -20,6 +20,11 @@ public class MenuButton : MonoBehaviour
         _button.onClick.AddListener(OnClick);
     }
 
+    private void OnDisable()
+    {
+        HideList();
+    }
+
     void OnClick()
     {
         if(true == _isShow)

@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class Character
 {
     public Character(string name, int hp, int atk, int def)
@@ -19,6 +21,8 @@ public class Character
 
     public bool bIsDeployment = false;
 
+    public GameObject CharacterPwan;
+
     private int _baseHP;
     private int _baseATK;
     private int _baseDEF;
@@ -30,5 +34,15 @@ public class Character
         MaxHP = Level * _baseHP;
         ATK = Level * _baseATK;
         DEF = Level * _baseDEF;
+    }
+
+    public void EnableCharacter()
+    {
+        CharacterPwan.SetActive(true);
+    }
+
+    public void DisableCharacter()
+    {
+        CharacterPwan.SetActive(false);
     }
 }

@@ -1,38 +1,49 @@
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour, IState
+public class PlayerMovement : State
 {
-    [SerializeField] private PlayerRotator _rotator;
-    [SerializeField] private Animator _animator;
-    [SerializeField] private StateMachine _stateMachine;
-
+    private PlayerRotator _rotator;
     private PlayerInput _input;
-    private Transform _cameraPoint;
-    private Transform _managerTransform;
+    private Animator _animator;
+    private Transform _cameraRoot;
+    private Transform _player;
 
     private float _moveSpeed = 5f;
 
-    private void Start()
+    protected override void Awake()
     {
-        _cameraPoint = transform.parent.Find("Camera Point");
-        _managerTransform = transform.parent;
-        _input = transform.parent.gameObject.GetComponent<PlayerInput>();
+        eStateTag = EStateTag.Movement;
+
+        base.Awake();
     }
 
-    public void Enter() { }
+    private void Start()
+    {
+        _rotator = GetComponent<PlayerRotator>();
+        _input = transform.parent.GetComponent<PlayerInput>();
+        _animator = GetComponent<Animator>();
+        _cameraRoot = transform.parent.Find("Camera Root");
+        _player = transform.parent;
+    }
 
-    void IState.Update()
+    public override void EnterState()
+    {
+
+    }
+
+    public override void UpdateState()
     {
         if (_input.InputAttack)
         {
-            _stateMachine.ChangeState((int)EStateTag.Attack);
+            _animator.SetTrigger(PlayerAnimID.IS_ATTACK);
+
             return;
         }
 
         Move();
     }
 
-    public void Exit()
+    public override void ExitState()
     {
         _animator.SetFloat(PlayerAnimID.MOVE, 0);
     }
@@ -45,19 +56,14 @@ public class PlayerMovement : MonoBehaviour, IState
 
         if (0 != _animator.GetFloat(PlayerAnimID.MOVE))
         {
-            Vector3 lookForward = new Vector3(_cameraPoint.forward.x, 0f, _cameraPoint.forward.z).normalized;
-            Vector3 lookRight = new Vector3(_cameraPoint.right.x, 0f, _cameraPoint.right.z).normalized;
+            Vector3 lookForward = new Vector3(_cameraRoot.forward.x, 0f, _cameraRoot.forward.z).normalized;
+            Vector3 lookRight = new Vector3(_cameraRoot.right.x, 0f, _cameraRoot.right.z).normalized;
             
             Vector3 moveDir = (lookForward * moveInput.y) + (lookRight * moveInput.x);
 
-            _rotator.Rotate(new Vector2(_input.InputHorizontal, _input.InputVertical), _cameraPoint);
+            _rotator.Rotate(new Vector2(_input.InputHorizontal, _input.InputVertical), _cameraRoot);
 
-            _managerTransform.position += moveDir * Time.deltaTime * _moveSpeed;
+            _player.position += moveDir * Time.deltaTime * _moveSpeed;
         }
-    }
-
-    private void LateUpdate()
-    {
-        transform.localPosition = new Vector3(0, 0, 0);
     }
 }

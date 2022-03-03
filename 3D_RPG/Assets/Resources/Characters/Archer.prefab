@@ -2101,8 +2101,8 @@ GameObject:
   - component: {fileID: 6086126883144968909}
   - component: {fileID: 186451827648262327}
   - component: {fileID: 6051990566318820667}
-  - component: {fileID: 6051990566318820666}
   - component: {fileID: 483245122}
+  - component: {fileID: 6051990566318820666}
   - component: {fileID: 8090976869959752473}
   m_Layer: 0
   m_Name: Archer
@@ -2159,6 +2159,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _body: {fileID: 6086126883144968909}
+--- !u!114 &483245122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6862804732264575095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1cb4c57473971849b4f868435965a76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &6051990566318820666
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2174,18 +2186,6 @@ MonoBehaviour:
   _rotator: {fileID: 6051990566318820667}
   _animator: {fileID: 186451827648262327}
   _stateMachine: {fileID: 483245122}
---- !u!114 &483245122
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6862804732264575095}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1cb4c57473971849b4f868435965a76, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &8090976869959752473
 MonoBehaviour:
   m_ObjectHideFlags: 0

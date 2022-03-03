@@ -4,24 +4,26 @@ using UnityEngine;
 
 public class StateMachine : MonoBehaviour
 {
-    private Dictionary<EStateTag, IState> _states = new Dictionary<EStateTag, IState>();
+    private Dictionary<EStateTag, State> _states = new Dictionary<EStateTag, State>();
 
-    private IState _curState;
+    private State _curState;
 
     private void Start()
     {
-        AddState(EStateTag.Movement, GetComponent<PlayerMovement>());
-        AddState(EStateTag.Attack, GetComponent<Attack>());
-
         ChangeState((int)EStateTag.Movement);
     }
 
     private void Update()
     {
-        _curState.Update();
+        _curState.UpdateState();
     }
 
-    public void AddState(EStateTag tag, IState state)
+    private void LateUpdate()
+    {
+        gameObject.transform.localPosition = new Vector3(0, 0, 0);
+    }
+
+    public void AddState(EStateTag tag, State state)
     {
         _states[tag] = state;
     }
@@ -33,10 +35,10 @@ public class StateMachine : MonoBehaviour
 
         Debug.Log($"{(EStateTag)tag}로 상태가 변경됨");
 
-        _curState?.Exit();
+        _curState?.ExitState();
 
         _curState = _states[(EStateTag)tag];
 
-        _curState.Enter();
+        _curState.EnterState();
     }
 }
