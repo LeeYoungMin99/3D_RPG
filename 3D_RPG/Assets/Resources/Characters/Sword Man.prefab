@@ -1796,8 +1796,8 @@ GameObject:
   - component: {fileID: 6772208477999849327}
   - component: {fileID: 800404257171571989}
   - component: {fileID: 6517006387435552022}
-  - component: {fileID: 6517006387435552009}
   - component: {fileID: 1417286945}
+  - component: {fileID: 6517006387435552009}
   - component: {fileID: 400444577954122626}
   m_Layer: 0
   m_Name: Sword Man
@@ -1857,6 +1857,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _body: {fileID: 6772208477999849327}
+--- !u!114 &1417286945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6246606029474334165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1cb4c57473971849b4f868435965a76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &6517006387435552009
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1872,18 +1884,6 @@ MonoBehaviour:
   _rotator: {fileID: 6517006387435552022}
   _animator: {fileID: 800404257171571989}
   _stateMachine: {fileID: 1417286945}
---- !u!114 &1417286945
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6246606029474334165}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1cb4c57473971849b4f868435965a76, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &400444577954122626
 MonoBehaviour:
   m_ObjectHideFlags: 0

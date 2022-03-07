@@ -1,34 +1,78 @@
+using System;
+using UnityEngine;
+
 public class Character
 {
-    public Character(string name, int hp, int atk, int def)
+    public Character(string name)
     {
         Name = name;
-        Level = 0;
-        _baseHP = hp;
-        _baseATK = atk;
-        _baseDEF = def;
 
-        LevelUp();
+        InventorySlotSprite = Resources.Load<Sprite>($"Images/Inventory Slot/{Name}");
+        PlacementSlotSprite = Resources.Load<Sprite>($"Images/Placement Slot/{Name}");
+        TagSlotSprite = Resources.Load<Sprite>($"Images/Tag Slot/{Name}");
     }
+    public delegate void OnChangeDeploy();
+
+    private GameObject _characterPwan;
+    private OnChangeDeploy _onChangeDeploy;
 
     public string Name { get; private set; }
-    public int Level { get; private set; }
-    public int MaxHP { get; private set; }
-    public int ATK { get; private set; }
-    public int DEF { get; private set; }
 
-    public bool bIsDeployment = false;
-
-    private int _baseHP;
-    private int _baseATK;
-    private int _baseDEF;
-
-    void LevelUp()
+    public OnChangeDeploy AddDelegateOnChangePlacementSlotIndex
     {
-        ++Level;
+        get
+        {
+            return _onChangeDeploy;
+        }
+        set
+        {
+            _onChangeDeploy?.Invoke();
+            _onChangeDeploy -= value;
+            _onChangeDeploy += value;
+        }
+    }
 
-        MaxHP = Level * _baseHP;
-        ATK = Level * _baseATK;
-        DEF = Level * _baseDEF;
+    public OnChangeDeploy SubtractDelegate
+    {
+        get
+        {
+            return _onChangeDeploy;
+        }
+        set
+        {
+            _onChangeDeploy -= value;
+        }
+    }
+
+    public OnChangeDeploy AddDelegate
+    {
+        get
+        {
+            return _onChangeDeploy;
+        }
+        set
+        {
+            _onChangeDeploy -= value;
+            _onChangeDeploy += value;
+        }
+    }
+
+    public Sprite InventorySlotSprite { get; private set; }
+    public Sprite PlacementSlotSprite { get; private set; }
+    public Sprite TagSlotSprite { get; private set; }
+
+    public void EnableCharacter()
+    {
+        _characterPwan.SetActive(true);
+    }
+
+    public void DisableCharacter()
+    {
+        _characterPwan.SetActive(false);
+    }
+
+    public void SetCharacterPawn(GameObject prefab)
+    {
+        _characterPwan = prefab;
     }
 }

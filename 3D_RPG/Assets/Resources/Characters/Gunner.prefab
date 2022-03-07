@@ -1868,8 +1868,8 @@ GameObject:
   - component: {fileID: 7542017446209399023}
   - component: {fileID: 4488554172087661205}
   - component: {fileID: 8007428265434238721}
-  - component: {fileID: 8007428265434238720}
   - component: {fileID: 750821835}
+  - component: {fileID: 8007428265434238720}
   - component: {fileID: 750821836}
   m_Layer: 0
   m_Name: Gunner
@@ -1926,6 +1926,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _body: {fileID: 7542017446209399023}
+--- !u!114 &750821835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7197157120795243093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1cb4c57473971849b4f868435965a76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &8007428265434238720
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1941,18 +1953,6 @@ MonoBehaviour:
   _rotator: {fileID: 8007428265434238721}
   _animator: {fileID: 4488554172087661205}
   _stateMachine: {fileID: 750821835}
---- !u!114 &750821835
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7197157120795243093}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1cb4c57473971849b4f868435965a76, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &750821836
 MonoBehaviour:
   m_ObjectHideFlags: 0

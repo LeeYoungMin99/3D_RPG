@@ -2,20 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Attack : MonoBehaviour, IState
+public class Attack : State
 {
-    [SerializeField] Animator _animator;
-
-    public void Enter()
+    public Collider collider;
+    protected override void Awake()
     {
-        _animator.SetTrigger(PlayerAnimID.IS_ATTACK);
+        stateTag = "Attack";
+
+        base.Awake();
     }
 
-    void IState.Update()
+    public override void EnterState()
+    {
+
+    }
+
+    public override void UpdateState()
     {
     }
 
-    public void Exit() 
+    public override void ExitState()
     {
     }
 }
