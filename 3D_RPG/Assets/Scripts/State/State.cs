@@ -3,7 +3,7 @@ using UnityEngine;
 public class State : MonoBehaviour
 {
     protected StateMachine _stateMachine;
-    protected string stateTag;
+    protected EStateTag stateTag;
 
     protected virtual void Awake()
     {
