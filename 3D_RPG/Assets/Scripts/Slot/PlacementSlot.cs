@@ -16,7 +16,7 @@ public class PlacementSlot : CharacterSlot
 
     public void WithdrawCharacter()
     {
-        _character.SubtractDelegate = WithdrawCharacter;
+        _character.SubtractDelegateOnChangeDeploy = WithdrawCharacter;
 
         _characterInventorySlotManager.WithdrawCharacter(_index);
 
@@ -36,6 +36,6 @@ public class PlacementSlot : CharacterSlot
 
         _image.sprite = _character.PlacementSlotSprite;
 
-        _character.AddDelegateOnChangePlacementSlotIndex = WithdrawCharacter;
+        _character.AddDelegateOnChangeDeploy = WithdrawCharacter;
     }
 }

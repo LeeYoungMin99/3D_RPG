@@ -12,7 +12,7 @@ public class PlayerMovement : State
 
     protected override void Awake()
     {
-        stateTag = "Movement";
+        stateTag = EStateTag.Movement;
 
         base.Awake();
     }

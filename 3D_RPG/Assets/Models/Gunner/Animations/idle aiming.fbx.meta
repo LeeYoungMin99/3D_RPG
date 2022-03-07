@@ -61,10 +61,10 @@ ModelImporter:
       events:
       - time: 0
         functionName: ChangeState
-        data: Attack
+        data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
-        intParameter: 0
+        intParameter: 1
         messageOptions: 0
       transformMask: []
       maskType: 3

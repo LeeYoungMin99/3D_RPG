@@ -18,7 +18,7 @@ public class Character
 
     public string Name { get; private set; }
 
-    public OnChangeDeploy AddDelegateOnChangePlacementSlotIndex
+    public OnChangeDeploy AddDelegateOnChangeDeploy
     {
         get
         {
@@ -32,7 +32,7 @@ public class Character
         }
     }
 
-    public OnChangeDeploy SubtractDelegate
+    public OnChangeDeploy SubtractDelegateOnChangeDeploy
     {
         get
         {
@@ -41,19 +41,6 @@ public class Character
         set
         {
             _onChangeDeploy -= value;
-        }
-    }
-
-    public OnChangeDeploy AddDelegate
-    {
-        get
-        {
-            return _onChangeDeploy;
-        }
-        set
-        {
-            _onChangeDeploy -= value;
-            _onChangeDeploy += value;
         }
     }
 
