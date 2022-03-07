@@ -4,16 +4,18 @@ using UnityEngine.UI;
 public class CharacterSlot : MonoBehaviour
 {
     [SerializeField] protected CharacterInventorySlotManager _characterInventorySlotManager;
-    [SerializeField] protected Image _image;
     [SerializeField] protected Button _slotButton;
+    [SerializeField] protected Image _image;
     [SerializeField] protected Text _text;
 
-    public Character Character { get; protected set; }
+    protected Character _character;
+    protected int _index;
 
     private void Awake()
     {
         _slotButton.onClick.RemoveListener(OnClick);
         _slotButton.onClick.AddListener(OnClick);
+        _index = transform.GetSiblingIndex();
     }
 
     public void SetInteractabletSlotButton(bool b)
@@ -21,10 +23,7 @@ public class CharacterSlot : MonoBehaviour
         _slotButton.interactable = b;
     }
 
-    public void ChangeCharacter(Character character)
-    {
-        Character = character;
-    }
+    public virtual void ChangeCharacter(Character character) { }
 
     protected virtual void OnClick() { }
 }

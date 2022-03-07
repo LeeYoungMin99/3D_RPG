@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class Attack : State
 {
+    public Collider collider;
     protected override void Awake()
     {
-        eStateTag = EStateTag.Attack;
+        stateTag = "Attack";
 
         base.Awake();
     }
 
     public override void EnterState()
     {
+
     }
 
     public override void UpdateState()

@@ -9,46 +9,46 @@ public class CharacterInventorySlotManager : MonoBehaviour
     [SerializeField] private PlacementSlot[] _placementSlot = new PlacementSlot[MAX_PLACEMENT_SLOT_COUNT];
     [SerializeField] private InventorySlot[] _inventorySlot = new InventorySlot[MAX_SHOW_INVENTORY_SLOT];
     [SerializeField] private CharacterTagSlot[] _characterTagSlot = new CharacterTagSlot[MAX_PLACEMENT_SLOT_COUNT];
-    [SerializeField] private GameObject _tagSlotParent;
-    [SerializeField] private Canvas _canvas;
-    [SerializeField] private int _maxInventorySize = 20;
+    [SerializeField] private GameObject _player;
+    [SerializeField] private int _maxInventorySize;
 
     private int _curCharacterCount = 0;
     private int _curInventoryPage = 1;
+    private bool _bIsClickPlacementSlot = false;
 
     private List<Character> _characterList = new List<Character>();
 
     public Character CurSelectCharacter;
-    [SerializeField] GameObject _player;
 
     private void Awake()
     {
-        _curInventoryPage = 1;
+        SortHierachyTagSlots();
 
-        ObtainCharacter(new Character("Sword Man", 1, 1, 1));
-        ObtainCharacter(new Character("Archer", 1, 1, 1));
-        ObtainCharacter(new Character("Gunner", 1, 1, 1));
-        ObtainCharacter(new Character("Magician", 1, 1, 1));
+        ObtainCharacter("Sword Man");
+        ObtainCharacter("Archer");
+        ObtainCharacter("Gunner");
+        ObtainCharacter("Magician");
     }
 
     private void OnEnable()
     {
         RefreshInventory();
 
-        _canvas.gameObject.SetActive(true);
+        _bIsClickPlacementSlot = false;
     }
 
     private void OnDisable()
     {
-        _canvas.gameObject.SetActive(false);
+        if (true == _bIsClickPlacementSlot)
+        {
+            SortHierachyTagSlots();
+        }
     }
 
     private void RefreshInventory()
     {
         int dataIndex = (_curInventoryPage - 1) * 10;
         int maxIndex = _curInventoryPage * 10;
-
-        _curCharacterCount = _characterList.Count;
 
         for (int slotIndex = 0; maxIndex > dataIndex; ++dataIndex, ++slotIndex)
         {
@@ -62,26 +62,34 @@ public class CharacterInventorySlotManager : MonoBehaviour
             }
         }
     }
-    public void ObtainCharacter(Character data)
-    {
-        _characterList.Add(data);
 
-        data.CharacterPwan = Instantiate(Resources.Load<GameObject>($"Characters/{data.Name}"), _player.transform.position, _player.transform.rotation);
-        data.CharacterPwan.SetActive(false);
-        data.CharacterPwan.transform.SetParent(_player.transform);
+    private void SortHierachyTagSlots()
+    {
+        for (int i = MAX_PLACEMENT_SLOT_COUNT; i > 0; --i)
+        {
+            _characterTagSlot[i - 1].SortHierarchy();
+        }
     }
 
-    public void WithdrawCharacter(Character data)
+    public bool ObtainCharacter(string name)
     {
-        for (int i = 0; i < 3; ++i)
+        if (_curCharacterCount >= _maxInventorySize)
         {
-            if (true == _placementSlot[i].CheckCharacterInfo(data))
-            {
-                _placementSlot[i].WithdrawCharacter();
-
-                break;
-            }
+            return false;
         }
+
+        Character character = new Character(name);
+        GameObject pawn = Instantiate(Resources.Load<GameObject>($"Characters/{name}"), _player.transform.position, _player.transform.rotation);
+
+        pawn.transform.SetParent(_player.transform);
+
+        _characterList.Add(character);
+        ++_curCharacterCount;
+
+        character.SetCharacterPawn(pawn);
+        character.DisableCharacter();
+
+        return true;
     }
 
     public void SetInteractablePlacementSlots(bool b)
@@ -92,26 +100,24 @@ public class CharacterInventorySlotManager : MonoBehaviour
         }
     }
 
-    public void SetInteractableTagSlots(bool b)
-    {
-        for (int i = 0; i < MAX_PLACEMENT_SLOT_COUNT; ++i)
-        {
-            _characterTagSlot[i].SetInteractabletSlotButton(b);
-        }
-    }
-
     public void OnClickPlacementSlot(int index)
     {
-        _characterTagSlot[index].ChangeCharacter(_placementSlot[index].Character);
+        _bIsClickPlacementSlot = true;
 
-        OnClickTagSlot();
+        _placementSlot[index].ChangeCharacter(CurSelectCharacter);
+        _characterTagSlot[index].ChangeCharacter(CurSelectCharacter);
     }
 
     public void OnClickTagSlot()
     {
         for (int i = 0; i < MAX_PLACEMENT_SLOT_COUNT; ++i)
         {
-            _characterTagSlot[i].SetIndex();
+            _characterTagSlot[i].OnChangeIndex();
         }
+    }
+
+    public void WithdrawCharacter(int index)
+    {
+        _characterTagSlot[index].WithdrawCharacter();
     }
 }

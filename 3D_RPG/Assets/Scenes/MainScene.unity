@@ -239,8 +239,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _characterInventorySlotManager: {fileID: 1395654514}
-  _image: {fileID: 75550360}
   _slotButton: {fileID: 75550359}
+  _image: {fileID: 75550360}
   _text: {fileID: 130793217}
 --- !u!114 &75550359
 MonoBehaviour:
@@ -436,8 +436,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _characterInventorySlotManager: {fileID: 1395654514}
-  _image: {fileID: 90020670}
   _slotButton: {fileID: 90020671}
+  _image: {fileID: 90020670}
   _text: {fileID: 1584080323}
 --- !u!224 &90020669
 RectTransform:
@@ -1193,8 +1193,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _characterInventorySlotManager: {fileID: 1395654514}
-  _image: {fileID: 419047818}
   _slotButton: {fileID: 419047817}
+  _image: {fileID: 419047818}
   _text: {fileID: 139947192}
 --- !u!114 &419047817
 MonoBehaviour:
@@ -1460,6 +1460,101 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &500512179
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 500512183}
+  - component: {fileID: 500512182}
+  - component: {fileID: 500512181}
+  - component: {fileID: 500512180}
+  m_Layer: 0
+  m_Name: Cube
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &500512180
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 500512179}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &500512181
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 500512179}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &500512182
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 500512179}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &500512183
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 500512179}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &555360231
 GameObject:
   m_ObjectHideFlags: 0
@@ -1688,8 +1783,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _characterInventorySlotManager: {fileID: 1395654514}
-  _image: {fileID: 611012528}
   _slotButton: {fileID: 611012527}
+  _image: {fileID: 611012528}
   _text: {fileID: 302325034}
 --- !u!114 &611012527
 MonoBehaviour:
@@ -2081,8 +2176,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _characterInventorySlotManager: {fileID: 1395654514}
-  _image: {fileID: 809415423}
   _slotButton: {fileID: 809415422}
+  _image: {fileID: 809415423}
   _text: {fileID: 83423488}
 --- !u!114 &809415422
 MonoBehaviour:
@@ -2310,7 +2405,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 1, g: 1, b: 1, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -2324,7 +2419,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 846296405}
   m_OnClick:
     m_PersistentCalls:
@@ -2380,8 +2475,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _characterInventorySlotManager: {fileID: 1395654514}
-  _image: {fileID: 846296405}
   _slotButton: {fileID: 846296404}
+  _image: {fileID: 846296405}
   _text: {fileID: 581363533}
 --- !u!1 &863693734
 GameObject:
@@ -2515,8 +2610,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _characterInventorySlotManager: {fileID: 1395654514}
-  _image: {fileID: 949001192}
   _slotButton: {fileID: 949001191}
+  _image: {fileID: 949001192}
   _text: {fileID: 362292678}
 --- !u!114 &949001191
 MonoBehaviour:
@@ -2618,7 +2713,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &994372858
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2951,7 +3046,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 1, g: 1, b: 1, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -2965,7 +3060,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1115598998}
   m_OnClick:
     m_PersistentCalls:
@@ -3021,8 +3116,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _characterInventorySlotManager: {fileID: 1395654514}
-  _image: {fileID: 1115598998}
   _slotButton: {fileID: 1115598997}
+  _image: {fileID: 1115598998}
   _text: {fileID: 271194462}
 --- !u!1 &1193908079
 GameObject:
@@ -3180,8 +3275,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _characterInventorySlotManager: {fileID: 1395654514}
-  _image: {fileID: 1267577761}
   _slotButton: {fileID: 1267577762}
+  _image: {fileID: 1267577761}
   _text: {fileID: 1794215202}
 --- !u!224 &1267577760
 RectTransform:
@@ -3475,8 +3570,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _characterInventorySlotManager: {fileID: 1395654514}
-  _image: {fileID: 1362642734}
   _slotButton: {fileID: 1362642733}
+  _image: {fileID: 1362642734}
   _text: {fileID: 1920739925}
 --- !u!114 &1362642733
 MonoBehaviour:
@@ -3613,8 +3708,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _characterInventorySlotManager: {fileID: 1395654514}
-  _image: {fileID: 1387082511}
   _slotButton: {fileID: 1387082510}
+  _image: {fileID: 1387082511}
   _text: {fileID: 1909696476}
 --- !u!114 &1387082510
 MonoBehaviour:
@@ -3759,13 +3854,11 @@ MonoBehaviour:
   - {fileID: 949001190}
   - {fileID: 419047816}
   _characterTagSlot:
-  - {fileID: 1115599000}
-  - {fileID: 1650522168}
   - {fileID: 846296407}
-  _tagSlotParent: {fileID: 1875398422}
-  _canvas: {fileID: 994372861}
-  _maxInventorySize: 20
+  - {fileID: 1650522168}
+  - {fileID: 1115599000}
   _player: {fileID: 1202595009}
+  _maxInventorySize: 20
 --- !u!1 &1403391664
 GameObject:
   m_ObjectHideFlags: 0
@@ -3901,8 +3994,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _characterInventorySlotManager: {fileID: 1395654514}
-  _image: {fileID: 1403391667}
   _slotButton: {fileID: 1403391666}
+  _image: {fileID: 1403391667}
   _text: {fileID: 1589037666}
 --- !u!1 &1472983200
 GameObject:
@@ -4193,7 +4286,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 1, g: 1, b: 1, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -4207,7 +4300,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1650522166}
   m_OnClick:
     m_PersistentCalls:
@@ -4263,8 +4356,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _characterInventorySlotManager: {fileID: 1395654514}
-  _image: {fileID: 1650522166}
   _slotButton: {fileID: 1650522165}
+  _image: {fileID: 1650522166}
   _text: {fileID: 457005956}
 --- !u!1 &1675237038
 GameObject:
@@ -4471,8 +4564,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _characterInventorySlotManager: {fileID: 1395654514}
-  _image: {fileID: 1703454058}
   _slotButton: {fileID: 1703454057}
+  _image: {fileID: 1703454058}
   _text: {fileID: 1935486035}
 --- !u!1 &1794215201
 GameObject:
@@ -5155,8 +5248,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _characterInventorySlotManager: {fileID: 1395654514}
-  _image: {fileID: 2018276803}
   _slotButton: {fileID: 2018276802}
+  _image: {fileID: 2018276803}
   _text: {fileID: 823269925}
 --- !u!114 &2018276802
 MonoBehaviour:
@@ -5293,8 +5386,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _characterInventorySlotManager: {fileID: 1395654514}
-  _image: {fileID: 2067198255}
   _slotButton: {fileID: 2067198254}
+  _image: {fileID: 2067198255}
   _text: {fileID: 863693736}
 --- !u!114 &2067198254
 MonoBehaviour:

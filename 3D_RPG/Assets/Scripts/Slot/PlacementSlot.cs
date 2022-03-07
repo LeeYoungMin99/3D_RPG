@@ -4,59 +4,38 @@ public class PlacementSlot : CharacterSlot
 {
     protected override void OnClick()
     {
-        if (true == _characterInventorySlotManager.CurSelectCharacter.bIsDeployment)
-        {
-            _characterInventorySlotManager.WithdrawCharacter(_characterInventorySlotManager.CurSelectCharacter);
-        }
-
-        Character = _characterInventorySlotManager.CurSelectCharacter;
-        _characterInventorySlotManager.CurSelectCharacter = null;
-
-        Character.bIsDeployment = true;
-
-        RefreshSlotData();
-
-        _characterInventorySlotManager.OnClickPlacementSlot(transform.GetSiblingIndex());
-
         _characterInventorySlotManager.SetInteractablePlacementSlots(false);
-    }
 
-    private void OnEnable()
-    {
-        RefreshSlotData();
-    }
+        if (_character == _characterInventorySlotManager.CurSelectCharacter)
+        {
+            return;
+        }
 
-    public bool CheckCharacterInfo(Character data)
-    {
-        if (data == Character)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        _characterInventorySlotManager.OnClickPlacementSlot(_index);
     }
 
     public void WithdrawCharacter()
     {
-        Character.bIsDeployment = false;
-        Character = null;
+        _character.SubtractDelegate = WithdrawCharacter;
 
-        RefreshSlotData();
+        _characterInventorySlotManager.WithdrawCharacter(_index);
+
+        _character = null;
+
+        _image.sprite = null;
     }
 
-    private void RefreshSlotData()
+    public override void ChangeCharacter(Character character)
     {
-        if (null != Character)
+        if (null != _character)
         {
-            _image.sprite = Resources.Load<Sprite>($"Images/Placement Slot/{Character.Name}");
-            _text.text = $"Level : {Character.Level}\nName : {Character.Name}\nHP : {Character.MaxHP}\nATK : {Character.ATK}\nDEF : {Character.DEF}";
+            WithdrawCharacter();
         }
-        else
-        {
-            _image.sprite = null;
-            _text.text = null;
-        }
+
+        _character = character;
+
+        _image.sprite = _character.PlacementSlotSprite;
+
+        _character.AddDelegateOnChangePlacementSlotIndex = WithdrawCharacter;
     }
 }

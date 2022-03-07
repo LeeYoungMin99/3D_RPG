@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class StateMachine : MonoBehaviour
 {
-    private Dictionary<EStateTag, State> _states = new Dictionary<EStateTag, State>();
+    private Dictionary<string, State> _states = new Dictionary<string, State>();
 
     private State _curState;
 
     private void Start()
     {
-        ChangeState((int)EStateTag.Movement);
+        _curState = _states["Movement"];
     }
 
     private void Update()
@@ -23,21 +23,21 @@ public class StateMachine : MonoBehaviour
         gameObject.transform.localPosition = new Vector3(0, 0, 0);
     }
 
-    public void AddState(EStateTag tag, State state)
+    public void AddState(string tag, State state)
     {
         _states[tag] = state;
     }
 
-    public void ChangeState(int tag)
+    public void ChangeState(string tag)
     {
-        if (_curState == _states[(EStateTag)tag])
+        if (_curState == _states[tag])
             return;
 
-        Debug.Log($"{(EStateTag)tag}로 상태가 변경됨");
+        Debug.Log($"{tag}로 상태가 변경됨");
 
-        _curState?.ExitState();
+        _curState.ExitState();
 
-        _curState = _states[(EStateTag)tag];
+        _curState = _states[tag];
 
         _curState.EnterState();
     }

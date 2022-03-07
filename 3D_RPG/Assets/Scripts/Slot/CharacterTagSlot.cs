@@ -3,39 +3,60 @@ using UnityEngine;
 
 public class CharacterTagSlot : CharacterSlot
 {
-    private int _index;
+    private void OnEnable()
+    {
+        if(null != _character)
+        {
+            OnChangeIndex();
+        }
+    }
 
     protected override void OnClick()
     {
-        if (Character == null)
-        {
-            return;
-        }
-
         transform.SetAsFirstSibling();
 
         _characterInventorySlotManager.OnClickTagSlot();
     }
 
-    public void SetIndex()
+    public override void ChangeCharacter(Character character)
     {
-        if (Character == null)
+        _character = character;
+
+        _image.sprite = _character.TagSlotSprite;
+    }
+
+    public void WithdrawCharacter()
+    {
+        _character.DisableCharacter();
+
+        _character = null;
+
+        _image.sprite = null;
+    }
+
+    public void SortHierarchy()
+    {
+        if(null != _character)
         {
-            return;
-        }
-
-        _index = transform.GetSiblingIndex();
-
-        _image.sprite = Resources.Load<Sprite>($"Images/Tag Slot/{Character.Name}");
-
-        if (0 == _index)
-        {
-            Character.CharacterPwan.SetActive(true);
+            transform.SetAsFirstSibling();
         }
         else
         {
-            Character.CharacterPwan.SetActive(false);
+            transform.SetAsLastSibling();
         }
     }
 
+    public void OnChangeIndex()
+    {
+        if (0 == transform.GetSiblingIndex())
+        {
+            _character.EnableCharacter();
+            SetInteractabletSlotButton(false);
+        }
+        else
+        {
+            _character.DisableCharacter();
+            SetInteractabletSlotButton(true);
+        }
+    }
 }

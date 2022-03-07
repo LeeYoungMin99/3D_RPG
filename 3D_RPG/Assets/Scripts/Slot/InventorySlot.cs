@@ -4,24 +4,26 @@ public class InventorySlot : CharacterSlot
 {
     protected override void OnClick()
     {
-        _characterInventorySlotManager.CurSelectCharacter = Character;
+        _characterInventorySlotManager.CurSelectCharacter = _character;
 
         _characterInventorySlotManager.SetInteractablePlacementSlots(true);
     }
 
-    private void OnEnable()
+    public override void ChangeCharacter(Character character)
     {
-        if (null == Character)
+        _character = character;
+
+        if (null != character)
         {
-            SetInteractabletSlotButton(false);
-            _image.sprite = null;
-            _text.text = null;
+            _image.sprite = _character.InventorySlotSprite;
+
+            SetInteractabletSlotButton(true);
         }
         else
         {
-            SetInteractabletSlotButton(true);
-            _image.sprite = Resources.Load<Sprite>($"Images/Character Slot/{Character.Name}");
-            _text.text = $"Level : {Character.Level}";
+            _image.sprite = null;
+
+            SetInteractabletSlotButton(false);
         }
     }
 }

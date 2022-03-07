@@ -3,16 +3,16 @@ using UnityEngine;
 public class PlayerMovement : State
 {
     private PlayerRotator _rotator;
+    private Transform _player;
     private PlayerInput _input;
     private Animator _animator;
     private Transform _cameraRoot;
-    private Transform _player;
 
     private float _moveSpeed = 5f;
 
     protected override void Awake()
     {
-        eStateTag = EStateTag.Movement;
+        stateTag = "Movement";
 
         base.Awake();
     }
@@ -20,10 +20,10 @@ public class PlayerMovement : State
     private void Start()
     {
         _rotator = GetComponent<PlayerRotator>();
-        _input = transform.parent.GetComponent<PlayerInput>();
+        _player = transform.parent;
+        _input = _player.GetComponent<PlayerInput>();
         _animator = GetComponent<Animator>();
         _cameraRoot = transform.parent.Find("Camera Root");
-        _player = transform.parent;
     }
 
     public override void EnterState()
