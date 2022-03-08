@@ -79,7 +79,7 @@ public class CharacterInventorySlotManager : MonoBehaviour
         }
 
         Character character = new Character(name);
-        GameObject pawn = Instantiate(Resources.Load<GameObject>($"Characters/{name}"), _player.transform.position, _player.transform.rotation);
+        GameObject pawn = Instantiate(Resources.Load<GameObject>($"Character/{name}"), _player.transform.position, _player.transform.rotation);
 
         pawn.transform.SetParent(_player.transform);
 

@@ -1,9 +1,12 @@
+using System.Collections;
 using UnityEngine;
 
 public class State : MonoBehaviour
 {
     protected StateMachine _stateMachine;
     protected EStateTag stateTag;
+
+    private static readonly Vector3 VEC_ZERO = Vector3.zero;
 
     protected virtual void Awake()
     {
@@ -13,6 +16,15 @@ public class State : MonoBehaviour
     }
 
     public virtual void EnterState() { }
+
     public virtual void UpdateState() { }
+
     public virtual void ExitState() { }
+
+    protected IEnumerator InitLocalPosition()
+    {
+        yield return new WaitForEndOfFrame();
+
+        transform.localPosition = VEC_ZERO;
+    }
 }

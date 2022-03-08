@@ -7,7 +7,7 @@ public class CameraRotator : MonoBehaviour
     [SerializeField] private Transform _cameraPoint;
     [SerializeField] private PlayerInput _input;
 
-    void Update()
+    private void Update()
     {
         Rotate();
     }

@@ -9,6 +9,7 @@ public class PlayerMovement : State
     private Transform _cameraRoot;
 
     private float _moveSpeed = 5f;
+    private float _moveInput = 0f;
 
     protected override void Awake()
     {
@@ -26,10 +27,7 @@ public class PlayerMovement : State
         _cameraRoot = transform.parent.Find("Camera Root");
     }
 
-    public override void EnterState()
-    {
-
-    }
+    public override void EnterState() { }
 
     public override void UpdateState()
     {
@@ -45,25 +43,30 @@ public class PlayerMovement : State
 
     public override void ExitState()
     {
-        _animator.SetFloat(PlayerAnimID.MOVE, 0);
+        _moveInput = 0;
+        _animator.SetFloat(PlayerAnimID.MOVE, _moveInput);
     }
 
     private void Move()
     {
         Vector2 moveInput = new Vector2(_input.InputHorizontal, _input.InputVertical);
 
-        _animator.SetFloat(PlayerAnimID.MOVE, Mathf.Clamp(moveInput.magnitude, 0f, 1f));
+        _moveInput = Mathf.Clamp(moveInput.magnitude, 0f, 1f);
 
-        if (0 != _animator.GetFloat(PlayerAnimID.MOVE))
+        _animator.SetFloat(PlayerAnimID.MOVE, _moveInput);
+
+        if (0 != _moveInput)
         {
             Vector3 lookForward = new Vector3(_cameraRoot.forward.x, 0f, _cameraRoot.forward.z).normalized;
             Vector3 lookRight = new Vector3(_cameraRoot.right.x, 0f, _cameraRoot.right.z).normalized;
-            
+
             Vector3 moveDir = (lookForward * moveInput.y) + (lookRight * moveInput.x);
 
-            _rotator.Rotate(new Vector2(_input.InputHorizontal, _input.InputVertical), _cameraRoot);
+            _rotator.Rotate(moveInput, _cameraRoot);
 
-            _player.position += moveDir * Time.deltaTime * _moveSpeed;
+            _player.position += moveDir * (Time.deltaTime * _moveSpeed);
+
+            StartCoroutine(InitLocalPosition());
         }
     }
 }

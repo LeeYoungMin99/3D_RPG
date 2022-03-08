@@ -18,11 +18,6 @@ public class StateMachine : MonoBehaviour
         _curState.UpdateState();
     }
 
-    private void LateUpdate()
-    {
-        gameObject.transform.localPosition = new Vector3(0, 0, 0);
-    }
-
     public void AddState(EStateTag tag, State state)
     {
         _states[tag] = state;

@@ -1798,7 +1798,7 @@ GameObject:
   - component: {fileID: 6517006387435552022}
   - component: {fileID: 1417286945}
   - component: {fileID: 6517006387435552009}
-  - component: {fileID: 400444577954122626}
+  - component: {fileID: 6586160897262280828}
   m_Layer: 0
   m_Name: Sword Man
   m_TagString: Player
@@ -1857,6 +1857,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _body: {fileID: 6772208477999849327}
+  _rotationSmoothTime: 0.12
 --- !u!114 &1417286945
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1881,10 +1882,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f925d3625fcd2f04686b311e42470416, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rotator: {fileID: 6517006387435552022}
-  _animator: {fileID: 800404257171571989}
-  _stateMachine: {fileID: 1417286945}
---- !u!114 &400444577954122626
+--- !u!114 &6586160897262280828
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1893,10 +1891,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 6246606029474334165}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa13b968e876e0e40a8c877e43113e21, type: 3}
+  m_Script: {fileID: 11500000, guid: 557e2ba771f5062479e979ebabe9247f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _animator: {fileID: 800404257171571989}
+  _horizontalAngle: 80
+  _radius: 3
+  _delay: 0.2
+  _targetMask:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!1 &6253517337775208411
 GameObject:
   m_ObjectHideFlags: 0
