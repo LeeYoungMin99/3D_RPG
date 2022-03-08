@@ -2,19 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RangeAttackState : AttackState
+public class TargetAttackState : AttackState
 {
-    [SerializeField] private float _radius = 1f;
-    [SerializeField] private LayerMask _targetMask;
-    [SerializeField] private int _targetCount = 16;
-
-    private Collider[] _targetColliders;
     private PlayerRotator _rotator;
     private TargetManager _targetManager;
 
     private void Start()
     {
-        _targetColliders = new Collider[_targetCount];
         _rotator = GetComponent<PlayerRotator>();
         _targetManager = transform.parent.GetComponent<TargetManager>();
     }
@@ -44,11 +38,7 @@ public class RangeAttackState : AttackState
             yield return new WaitForSeconds(_delay);
         }
 
-        int targetCount = Physics.OverlapSphereNonAlloc(_targetManager.Target.position, _radius, _targetColliders, _targetMask);
-
-        for (int i = 0; i < targetCount; ++i)
-        {
-            Debug.Log("데미지를 입히다");
-        }
+        //_targetManager.Target
+        Debug.Log("데미지를 입히다");
     }
 }
