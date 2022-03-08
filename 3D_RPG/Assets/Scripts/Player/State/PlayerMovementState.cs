@@ -1,14 +1,15 @@
 using UnityEngine;
 
-public class PlayerMovement : State
+public class PlayerMovementState : State
 {
+    [SerializeField] private float _moveSpeed = 5f;
+
     private PlayerRotator _rotator;
     private Transform _player;
     private PlayerInput _input;
     private Animator _animator;
     private Transform _cameraRoot;
 
-    private float _moveSpeed = 5f;
     private float _moveInput = 0f;
 
     protected override void Awake()
@@ -26,8 +27,6 @@ public class PlayerMovement : State
         _animator = GetComponent<Animator>();
         _cameraRoot = transform.parent.Find("Camera Root");
     }
-
-    public override void EnterState() { }
 
     public override void UpdateState()
     {
@@ -66,7 +65,7 @@ public class PlayerMovement : State
 
             _player.position += moveDir * (Time.deltaTime * _moveSpeed);
 
-            StartCoroutine(InitLocalPosition());
+            StartCoroutine(InitializeLocalPositionAtEndOfFrame());
         }
     }
 }

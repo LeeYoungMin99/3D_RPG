@@ -1,7 +1,8 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Attack : State
+public abstract class AttackState : State
 {
     protected override void Awake()
     {
@@ -9,4 +10,6 @@ public class Attack : State
 
         base.Awake();
     }
+
+    public abstract IEnumerator GiveDamage();
 }

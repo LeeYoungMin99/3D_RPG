@@ -2,28 +2,68 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SectorFormAttack : Attack
+public class SectorFormAttackState : AttackState
 {
     [Range(0f, 180f)]
     [SerializeField] private float _horizontalAngle = 0f;
     [SerializeField] private float _radius = 1f;
     [SerializeField] private float _delay = 0.2f;
     [SerializeField] private LayerMask _targetMask;
+    [SerializeField] private int _targetCount = 16;
 
+    private Collider[] _targetColliders;
     private PlayerRotator _rotator;
     private TargetManager _targetManager;
     private Vector3 _forward;
-    private readonly Collider[] _targetColliders = new Collider[16];
 
     private void Start()
     {
+        _targetColliders = new Collider[_targetCount];
         _rotator = GetComponent<PlayerRotator>();
         _targetManager = transform.parent.GetComponent<TargetManager>();
     }
 
-    private IEnumerator GiveDamage()
+    private IEnumerator GetForwardVectorFromEndOfFrame()
     {
-        yield return new WaitForSeconds(_delay);
+        yield return new WaitForEndOfFrame();
+
+        _forward = transform.forward;
+    }
+
+    public override void EnterState()
+    {
+        StartCoroutine(InitializeLocalPositionAtEndOfFrame());
+
+        if (null != _targetManager.Target)
+        {
+            StartCoroutine(_rotator.LookAtTargetAtEndOfFrame(_targetManager.Target));
+        }
+        else
+        {
+            StartCoroutine(_rotator.RotateToTargetRotationAtEndOfFrame());
+        }
+
+        StartCoroutine(GetForwardVectorFromEndOfFrame());
+
+        StartCoroutine(GiveDamage());
+    }
+
+    public override void ExitState()
+    {
+        StartCoroutine(InitializeLocalPositionAtEndOfFrame());
+        StartCoroutine(_rotator.RotateToTargetRotationAtEndOfFrame());
+    }
+
+    public override IEnumerator GiveDamage()
+    {
+        if (_delay > 0f)
+        {
+            yield return new WaitForSeconds(_delay);
+        }
+        else
+        {
+            yield return new WaitForEndOfFrame();
+        }
 
         int targetCount = Physics.OverlapSphereNonAlloc(transform.position, _radius, _targetColliders, _targetMask);
 
@@ -47,35 +87,5 @@ public class SectorFormAttack : Attack
                 Debug.Log($"데미지를 입히다");
             }
         }
-    }
-
-    private IEnumerator GetLookDir()
-    {
-        yield return new WaitForEndOfFrame();
-
-        _forward = transform.forward;
-    }
-
-    public override void EnterState()
-    {
-        StartCoroutine(GiveDamage());
-        StartCoroutine(InitLocalPosition());
-
-        if (null != _targetManager.Target)
-        {
-            StartCoroutine(_rotator.LookatTarget(_targetManager.Target));
-        }
-        else
-        {
-            StartCoroutine(_rotator.RotateToTargetRotation());
-        }
-
-        StartCoroutine(GetLookDir());
-    }
-
-    public override void ExitState()
-    {
-        StartCoroutine(InitLocalPosition());
-        StartCoroutine(_rotator.RotateToTargetRotation());
     }
 }

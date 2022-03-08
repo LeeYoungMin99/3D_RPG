@@ -1900,6 +1900,7 @@ MonoBehaviour:
   _targetMask:
     serializedVersion: 2
     m_Bits: 8
+  _targetCount: 32
 --- !u!1 &6253517337775208411
 GameObject:
   m_ObjectHideFlags: 0

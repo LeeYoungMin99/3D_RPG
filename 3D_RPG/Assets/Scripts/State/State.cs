@@ -21,7 +21,7 @@ public class State : MonoBehaviour
 
     public virtual void ExitState() { }
 
-    protected IEnumerator InitLocalPosition()
+    protected IEnumerator InitializeLocalPositionAtEndOfFrame()
     {
         yield return new WaitForEndOfFrame();
 

@@ -1105,7 +1105,7 @@ GameObject:
   - component: {fileID: 3411091490113904240}
   - component: {fileID: 1245801145}
   - component: {fileID: 3411091490113904239}
-  - component: {fileID: 1245801146}
+  - component: {fileID: 8528830248201494597}
   m_Layer: 0
   m_Name: Magician
   m_TagString: Player
@@ -1161,6 +1161,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _body: {fileID: 2801722468663444169}
+  _rotationSmoothTime: 0.12
 --- !u!114 &1245801145
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1185,10 +1186,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f925d3625fcd2f04686b311e42470416, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rotator: {fileID: 3411091490113904240}
-  _animator: {fileID: 8070902883347306675}
-  _stateMachine: {fileID: 1245801145}
---- !u!114 &1245801146
+  _moveSpeed: 5
+--- !u!114 &8528830248201494597
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1197,10 +1196,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 3290555801220552819}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa13b968e876e0e40a8c877e43113e21, type: 3}
+  m_Script: {fileID: 11500000, guid: a4cb18da56aeb26498dabc29f7a4abba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _animator: {fileID: 8070902883347306675}
+  _radius: 5
+  _delay: 0.2
+  _targetMask:
+    serializedVersion: 2
+    m_Bits: 8
+  _targetCount: 16
 --- !u!1 &3293723078095267554
 GameObject:
   m_ObjectHideFlags: 0

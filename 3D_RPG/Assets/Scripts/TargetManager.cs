@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class TargetManager : MonoBehaviour
 {
-    [SerializeField] float _searchDelay = 0.25f;
-    [SerializeField] float _radius = 6f;
-    [SerializeField] LayerMask _targetMask;
+    [SerializeField] private float _searchDelay = 0.25f;
+    [SerializeField] private float _radius = 6f;
+    [SerializeField] private LayerMask _targetMask;
 
     private readonly Collider[] _targetColliders = new Collider[16];
     public Transform Target { get; private set; }
