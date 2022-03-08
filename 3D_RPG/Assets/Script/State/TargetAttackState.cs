@@ -4,15 +4,6 @@ using UnityEngine;
 
 public class TargetAttackState : AttackState
 {
-    private PlayerRotator _rotator;
-    private TargetManager _targetManager;
-
-    private void Start()
-    {
-        _rotator = GetComponent<PlayerRotator>();
-        _targetManager = transform.parent.GetComponent<TargetManager>();
-    }
-
     public override void EnterState()
     {
         StartCoroutine(InitializeLocalPositionAtEndOfFrame());
@@ -22,7 +13,7 @@ public class TargetAttackState : AttackState
             return;
         }
 
-        StartCoroutine(GiveDamage());
+        StartCoroutine(Attack());
         StartCoroutine(_rotator.LookAtTargetAtEndOfFrame(_targetManager.Target));
     }
 
@@ -31,14 +22,13 @@ public class TargetAttackState : AttackState
         StartCoroutine(_rotator.RotateToTargetRotationAtEndOfFrame());
     }
 
-    public override IEnumerator GiveDamage()
+    public override IEnumerator Attack()
     {
         if (_delay > 0f)
         {
             yield return new WaitForSeconds(_delay);
         }
 
-        //_targetManager.Target
         Debug.Log("데미지를 입히다");
     }
 }

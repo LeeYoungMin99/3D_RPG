@@ -9,14 +9,12 @@ public class RangeAttackState : AttackState
     [SerializeField] private int _targetCount = 16;
 
     private Collider[] _targetColliders;
-    private PlayerRotator _rotator;
-    private TargetManager _targetManager;
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
+
         _targetColliders = new Collider[_targetCount];
-        _rotator = GetComponent<PlayerRotator>();
-        _targetManager = transform.parent.GetComponent<TargetManager>();
     }
 
     public override void EnterState()
@@ -28,7 +26,7 @@ public class RangeAttackState : AttackState
             return;
         }
 
-        StartCoroutine(GiveDamage());
+        StartCoroutine(Attack());
         StartCoroutine(_rotator.LookAtTargetAtEndOfFrame(_targetManager.Target));
     }
 
@@ -37,7 +35,7 @@ public class RangeAttackState : AttackState
         StartCoroutine(_rotator.RotateToTargetRotationAtEndOfFrame());
     }
 
-    public override IEnumerator GiveDamage()
+    public override IEnumerator Attack()
     {
         if (_delay > 0f)
         {
