@@ -7,8 +7,8 @@ public class SectorFormAttackState : AttackState
     [Range(0f, 180f)]
     [SerializeField] private float _horizontalAngle = 0f;
     [SerializeField] private float _radius = 1f;
-    [SerializeField] private LayerMask _targetMask;
     [SerializeField] private int _targetCount = 16;
+    [SerializeField] private LayerMask _targetMask;
 
     private Collider[] _targetColliders;
     private Vector3 _forward;
@@ -80,7 +80,7 @@ public class SectorFormAttackState : AttackState
 
             if (angle <= _horizontalAngle)
             {
-                Debug.Log($"데미지를 입히다");
+                _targetColliders[i].GetComponent<Status>().TakeDamage(_status.ATK);
             }
         }
     }

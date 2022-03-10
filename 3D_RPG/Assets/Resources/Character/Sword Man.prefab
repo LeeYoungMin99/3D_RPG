@@ -1799,6 +1799,7 @@ GameObject:
   - component: {fileID: 1417286945}
   - component: {fileID: 6517006387435552009}
   - component: {fileID: 6586160897262280828}
+  - component: {fileID: -705475793059009041}
   m_Layer: 6
   m_Name: Sword Man
   m_TagString: Player
@@ -1882,6 +1883,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f925d3625fcd2f04686b311e42470416, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stateTag: 0
   _moveSpeed: 5
 --- !u!114 &6586160897262280828
 MonoBehaviour:
@@ -1895,13 +1897,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 557e2ba771f5062479e979ebabe9247f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stateTag: 1
   _delay: 0.2
   _horizontalAngle: 80
   _radius: 3
+  _targetCount: 32
   _targetMask:
     serializedVersion: 2
     m_Bits: 8
-  _targetCount: 32
+--- !u!114 &-705475793059009041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6246606029474334165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9530f4c8a4cd9b4384836ce7fae20f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxHPPerLevel: 100
+  ATKPerLevel: 100
+  _level: 1
 --- !u!1 &6253517337775208411
 GameObject:
   m_ObjectHideFlags: 0

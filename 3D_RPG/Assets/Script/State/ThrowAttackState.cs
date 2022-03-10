@@ -21,7 +21,7 @@ public class ThrowAttackState : AttackState
         {
             _thrownObjectPool[i] = Instantiate(_thrownObjectPrefab.gameObject, _startPosition.position, transform.rotation);
             _thrownObjects[i] = _thrownObjectPool[i].GetComponent<ThrownObject>();
-            _thrownObjects[i].SetSpeed(_thrownObjectSpeed);
+            _thrownObjects[i].Speed = _thrownObjectSpeed;
             _thrownObjectPool[i].SetActive(false);
         }
     }
@@ -64,8 +64,9 @@ public class ThrowAttackState : AttackState
         }
 
         _thrownObjectPool[index].transform.position = _startPosition.position;
-        _thrownObjects[index].SetTarget(_targetManager.Target);
+        _thrownObjects[index].Target = _targetManager.Target;
+        _thrownObjects[index].Damage = _status.ATK;
 
-        _thrownObjectPool[index].SetActive(true);
+       _thrownObjectPool[index].SetActive(true);
     }
 }

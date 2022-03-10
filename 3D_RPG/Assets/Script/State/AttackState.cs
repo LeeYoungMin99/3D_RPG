@@ -8,18 +8,13 @@ public abstract class AttackState : State
 
     protected PlayerRotator _rotator;
     protected TargetManager _targetManager;
-
-    protected override void Awake()
-    {
-        stateTag = EStateTag.Attack;
-
-        base.Awake();
-    }
+    protected Status _status;
 
     protected virtual void Start()
     {
         _rotator = GetComponent<PlayerRotator>();
         _targetManager = transform.parent.GetComponent<TargetManager>();
+        _status = GetComponent<Status>();
     }
 
     public abstract IEnumerator Attack();

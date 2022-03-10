@@ -4,36 +4,28 @@ using UnityEngine;
 
 public class ThrownObject : MonoBehaviour
 {
-    private Transform _target;
     private Rigidbody _rigidbody;
-    private float _speed;
+
+    public Transform Target { private get; set; }
+    public float Speed { private get; set; }
+    public float Damage { private get; set; }
 
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        transform.LookAt(_target);
-        Vector3 newVel = transform.forward * _speed;
+        transform.LookAt(Target);
+        Vector3 newVel = transform.forward * Speed;
         _rigidbody.velocity = newVel;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("데미지를 입히다");
+        other.GetComponent<Status>().TakeDamage(Damage);
 
         gameObject.SetActive(false);
-    }
-
-    public void SetTarget(Transform target)
-    {
-        _target = target;
-    }
-
-    public void SetSpeed(float speed)
-    {
-        _speed = speed;
     }
 }

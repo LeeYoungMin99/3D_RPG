@@ -2103,6 +2103,7 @@ GameObject:
   - component: {fileID: 483245122}
   - component: {fileID: 6051990566318820666}
   - component: {fileID: 4301681061851301602}
+  - component: {fileID: 843449178694083144}
   m_Layer: 6
   m_Name: Archer
   m_TagString: Player
@@ -2183,6 +2184,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f925d3625fcd2f04686b311e42470416, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stateTag: 0
   _moveSpeed: 5
 --- !u!114 &4301681061851301602
 MonoBehaviour:
@@ -2196,10 +2198,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2bdb158e1d4f8a4ab75f9a135b6606e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stateTag: 1
   _delay: 0.8
   _thrownObjectPrefab: {fileID: 6288576191892379852, guid: 543ee1734d8ba5b4aa4a65c9f0829bd9, type: 3}
   _thrownObjectSpeed: 10
   _startPosition: {fileID: 8777146058740980392}
+--- !u!114 &843449178694083144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6862804732264575095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9530f4c8a4cd9b4384836ce7fae20f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxHPPerLevel: 100
+  ATKPerLevel: 100
+  _level: 1
 --- !u!1 &6864901452008522361
 GameObject:
   m_ObjectHideFlags: 0

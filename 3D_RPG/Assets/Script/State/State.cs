@@ -3,8 +3,9 @@ using UnityEngine;
 
 public class State : MonoBehaviour
 {
+    [SerializeField] protected EStateTag stateTag;
+
     protected StateMachine _stateMachine;
-    protected EStateTag stateTag;
 
     private static readonly Vector3 VEC_ZERO = Vector3.zero;
 

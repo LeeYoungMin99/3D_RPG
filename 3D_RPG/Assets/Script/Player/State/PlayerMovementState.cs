@@ -12,13 +12,6 @@ public class PlayerMovementState : State
 
     private float _moveInput = 0f;
 
-    protected override void Awake()
-    {
-        stateTag = EStateTag.Movement;
-
-        base.Awake();
-    }
-
     private void Start()
     {
         _rotator = GetComponent<PlayerRotator>();
