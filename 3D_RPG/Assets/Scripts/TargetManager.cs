@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class TargetManager : MonoBehaviour
@@ -13,9 +11,11 @@ public class TargetManager : MonoBehaviour
 
     private readonly Collider[] _targetColliders = new Collider[16];
     private Coroutine _coroutineSearchTarget;
+
+    public Transform Target;
+
     public Transform EnemyTarget { get; private set; }
     public Transform NPCTarget { get; private set; }
-    public Transform Target;
 
     private void OnEnable()
     {

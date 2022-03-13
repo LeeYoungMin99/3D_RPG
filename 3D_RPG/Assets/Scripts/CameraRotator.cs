@@ -39,7 +39,7 @@ public class CameraRotator : MonoBehaviour
         transform.rotation = Quaternion.Euler(x, camAngle.y + mouseDelta.x, camAngle.z);
     }
 
-    public void RotateAutoMoveCameraAngle()
+    public void RotateCameraAngleForAutoMove()
     {
         float _targetRotation = Mathf.Atan2(0, 1) * Mathf.Rad2Deg + _player.eulerAngles.y;
         float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity, _rotationSmoothTime);

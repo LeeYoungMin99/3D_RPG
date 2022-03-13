@@ -1892,6 +1892,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stateTag: 0
   _moveSpeed: 5
+  _autoAttackDistance: 2.5
 --- !u!114 &6586160897262280828
 MonoBehaviour:
   m_ObjectHideFlags: 0

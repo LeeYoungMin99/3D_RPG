@@ -1,11 +1,8 @@
-using System.Collections.Generic;
-using UnityEngine;
-
 public class CharacterTagSlot : CharacterSlot
 {
     private void OnEnable()
     {
-        if(null != _character)
+        if (null != _character)
         {
             OnChangeIndex();
         }
@@ -36,7 +33,7 @@ public class CharacterTagSlot : CharacterSlot
 
     public void SortHierarchy()
     {
-        if(null != _character)
+        if (null != _character)
         {
             transform.SetAsFirstSibling();
         }
@@ -55,7 +52,7 @@ public class CharacterTagSlot : CharacterSlot
         }
         else
         {
-            _character.DisableCharacter();
+            _character?.DisableCharacter();
             SetInteractabletSlotButton(true);
         }
     }
