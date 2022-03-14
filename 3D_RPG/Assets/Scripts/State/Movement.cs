@@ -32,7 +32,7 @@ public class Movement : State
         _navMeshAgent = GetComponent<NavMeshAgent>();
     }
 
-    protected void Move(Transform transform, Vector2 moveInput, float animationParameterValue)
+    protected virtual void Move(Transform transform, Vector2 moveInput, float animationParameterValue)
     {
         _animator.SetFloat(PlayerAnimID.MOVE, animationParameterValue);
 

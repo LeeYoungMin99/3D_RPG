@@ -15,7 +15,14 @@ public class Status : MonoBehaviour
     public float ATK { get; private set; }
     public float MaxHP { get; private set; }
     public float CurHP { get; private set; }
-    
+
+    private void Start()
+    {
+        --_level;
+
+        LevelUp();
+    }
+
     private void LevelUp()
     {
         ++_level;

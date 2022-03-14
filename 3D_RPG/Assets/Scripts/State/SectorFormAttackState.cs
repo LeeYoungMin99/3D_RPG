@@ -82,6 +82,8 @@ public class SectorFormAttackState : AttackState
             {
                 _targetColliders[i].GetComponent<Status>().TakeDamage(_status.ATK);
             }
+
+            Debug.Log("tlqkf");
         }
     }
 }

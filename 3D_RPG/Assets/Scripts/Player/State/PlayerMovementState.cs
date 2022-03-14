@@ -43,9 +43,29 @@ public class PlayerMovementState : Movement
         }
     }
 
+    protected override void Move(Transform transform, Vector2 moveInput, float animationParameterValue)
+    {
+        _animator.SetFloat(PlayerAnimID.MOVE, animationParameterValue);
+
+        Vector3 lookForward = new Vector3(transform.forward.x, 0f, transform.forward.z).normalized;
+        Vector3 lookRight = new Vector3(transform.right.x, 0f, transform.right.z).normalized;
+
+        Vector3 moveDir = (lookForward * moveInput.y) + (lookRight * moveInput.x);
+
+        float angle = Mathf.Atan2(moveInput.x, moveInput.y);
+
+        _rotator.Rotate(angle, transform);
+
+        _player.position += moveDir * (Time.deltaTime * _moveSpeed);
+
+        StartCoroutine(InitializeLocalPositionAtEndOfFrame());
+    }
+
     protected override void MoveToNavMeshPath()
     {
-        base.MoveToNavMeshPath();
+        _navMeshAgent.isStopped = false;
+
+        Move(_cameraRoot, INPUT_MOVE_FORWARD, RUN_ANIMATION_PARAMETER_VALUE);
 
         _cameraRotator.RotateCameraAngleForAutoMove();
     }
