@@ -27,7 +27,7 @@ public class Status : MonoBehaviour
     {
         ++_level;
 
-        _curEXP = 0;
+        _curEXP -= _requiredEXP;
         _requiredEXP *= 2;
 
         ATK = ATKPerLevel * _level;

@@ -24,20 +24,12 @@ public class RangeAttackState : AttackState
 
     public override void EnterState()
     {
-        StartCoroutine(InitializeLocalPositionAtEndOfFrame());
-
         if (null == _targetManager.EnemyTarget)
         {
             return;
         }
 
         StartCoroutine(Attack());
-        StartCoroutine(_rotator.LookAtTargetAtEndOfFrame(_targetManager.EnemyTarget.position));
-    }
-
-    public override void ExitState()
-    {
-        StartCoroutine(_rotator.RotateToTargetRotationAtEndOfFrame());
     }
 
     public override IEnumerator Attack()

@@ -10,12 +10,17 @@ public class StateMachine : MonoBehaviour
 
     private void Start()
     {
-        _curState = _states[EStateTag.Movement];
+        _curState = _states[EStateTag.Idle];
     }
 
     private void Update()
     {
         _curState.UpdateState();
+    }
+
+    private void LateUpdate()
+    {
+        _curState.LateUpdateState();
     }
 
     public void AddState(EStateTag tag, State state)

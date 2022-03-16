@@ -1,43 +1,37 @@
-using System.Collections;
 using UnityEngine;
 
 public class CharacterRotator : MonoBehaviour
 {
-    [SerializeField] private Transform _body;
-    [SerializeField] private float _rotationSmoothTime = 0.12f;
+    private static readonly float THRESHOLD = 0.1f;
 
     private float _rotationVelocity;
-    private float _targetRotation = 0f;
+    private float _rotationSmoothTime = 0.06f;
 
-    private void RotateToAngle(float targetAngle)
+
+    public void RotateSmoothly(float angle)
     {
-        _body.rotation = Quaternion.Euler(0.0f, targetAngle, 0.0f);
+        if (true == float.IsNaN(angle)) return;
+        if (THRESHOLD > Mathf.Abs(angle)) return;
+
+        float rotation = angle * (Time.deltaTime / _rotationSmoothTime);
+
+        transform.eulerAngles += new Vector3(0.0f, rotation, 0.0f);
     }
 
-    public void Rotate(float Angle, Transform cameraPoint)
+    public void RotateSmoothDampAngle(float angle)
     {
-        _targetRotation = Angle * Mathf.Rad2Deg + cameraPoint.eulerAngles.y;
-        float rotation = Mathf.SmoothDampAngle(_body.eulerAngles.y, _targetRotation, ref _rotationVelocity, _rotationSmoothTime);
+        float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, angle, ref _rotationVelocity, _rotationSmoothTime);
 
-        RotateToAngle(rotation);
+        transform.rotation = Quaternion.Euler(0f, rotation, 0f);
     }
 
-    public IEnumerator RotateToTargetRotationAtEndOfFrame()
+    public void RotateImmediately(float angle)
     {
-        yield return new WaitForEndOfFrame();
+        if (THRESHOLD > Mathf.Abs(angle))
+        {
+            return;
+        }
 
-        _body.rotation = Quaternion.Euler(0.0f, _targetRotation, 0.0f);
-
-        RotateToAngle(_targetRotation);
-    }
-
-    public IEnumerator LookAtTargetAtEndOfFrame(Vector3 target)
-    {
-        yield return new WaitForEndOfFrame();
-
-        Vector3 targetDir = target - transform.position;
-        _targetRotation = Mathf.Atan2(targetDir.x, targetDir.z) * Mathf.Rad2Deg;
-
-        RotateToAngle(_targetRotation);
+        transform.eulerAngles += new Vector3(0.0f, angle, 0.0f);
     }
 }

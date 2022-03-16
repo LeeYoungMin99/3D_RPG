@@ -27,16 +27,7 @@ public class ThrowAttackState : AttackState
 
     public override void EnterState()
     {
-        StartCoroutine(InitializeLocalPositionAtEndOfFrame());
-
-        if (null != _targetManager.EnemyTarget)
-        {
-            StartCoroutine(_rotator.LookAtTargetAtEndOfFrame(_targetManager.EnemyTarget.position));
-        }
-        else
-        {
-            return;
-        }
+        if (null == _targetManager.EnemyTarget) return;
 
         StartCoroutine(Attack());
 
@@ -46,11 +37,6 @@ public class ThrowAttackState : AttackState
         {
             _curIndex = 0;
         }
-    }
-
-    public override void ExitState()
-    {
-        StartCoroutine(_rotator.RotateToTargetRotationAtEndOfFrame());
     }
 
     public override IEnumerator Attack()
@@ -66,6 +52,6 @@ public class ThrowAttackState : AttackState
             yield return new WaitForSeconds(_delay);
         }
 
-       _thrownObjectPool[index].SetActive(true);
+        _thrownObjectPool[index].SetActive(true);
     }
 }

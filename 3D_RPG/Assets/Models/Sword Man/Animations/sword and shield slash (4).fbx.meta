@@ -5,7 +5,7 @@ ModelImporter:
   internalIDToNameTable:
   - first:
       74: -203655887218126122
-    second: mixamo.com
+    second: Third Combo Attack
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -33,7 +33,36 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Third Combo Attack
+      takeName: mixamo.com
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 73
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 1
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 0
   meshes:
     lODScreenPercentages: []
@@ -705,7 +734,8 @@ ModelImporter:
     - name: RightHandThumb3
       parentName: RightHandThumb2
       position: {x: 0.01842701, y: -0.01063941, z: 0.010639115}
-      rotation: {x: -2.2737362e-11, y: -0.0000000014551913, z: -0.0000000032796317, w: 1}
+      rotation: {x: -2.2737362e-11, y: -0.0000000014551913, z: -0.0000000032796317,
+        w: 1}
       scale: {x: 1.0000001, y: 0.99999994, z: 1.0000001}
     - name: RightHandThumb4
       parentName: RightHandThumb3
@@ -735,7 +765,8 @@ ModelImporter:
     - name: LeftHand
       parentName: LeftForeArm
       position: {x: -0.21589874, y: 0.0039705983, z: 0.006520048}
-      rotation: {x: -1.0510363e-18, y: -0.0000000014551915, z: -0.000000001209699, w: 1}
+      rotation: {x: -1.0510363e-18, y: -0.0000000014551915, z: -0.000000001209699,
+        w: 1}
       scale: {x: 1, y: 1.0000001, z: 1}
     - name: LeftHandPinky1
       parentName: LeftHand
@@ -765,12 +796,14 @@ ModelImporter:
     - name: LeftHandRing2
       parentName: LeftHandRing1
       position: {x: -0.040193982, y: -0.00000021845712, z: -0.0000002518551}
-      rotation: {x: 2.2737368e-11, y: -0.0000000014551915, z: -0.0000000028013163, w: 1}
+      rotation: {x: 2.2737368e-11, y: -0.0000000014551915, z: -0.0000000028013163,
+        w: 1}
       scale: {x: 0.99999994, y: 0.9999999, z: 1}
     - name: LeftHandRing3
       parentName: LeftHandRing2
       position: {x: -0.027808508, y: -0.0022793913, z: 0.0006040558}
-      rotation: {x: -2.2737368e-11, y: 0.0000000014551943, z: 0.0000000028013143, w: 1}
+      rotation: {x: -2.2737368e-11, y: 0.0000000014551943, z: 0.0000000028013143,
+        w: 1}
       scale: {x: 1.0000001, y: 1.0000001, z: 1}
     - name: LeftHandRing4
       parentName: LeftHandRing3
@@ -805,7 +838,8 @@ ModelImporter:
     - name: LeftHandIndex2
       parentName: LeftHandIndex1
       position: {x: -0.037633307, y: -0.001301641, z: -0.002901272}
-      rotation: {x: 1.13686855e-11, y: -0.0000000058211223, z: -0.0000000016294732, w: 1}
+      rotation: {x: 1.13686855e-11, y: -0.0000000058211223, z: -0.0000000016294732,
+        w: 1}
       scale: {x: 1, y: 1.0000002, z: 0.9999999}
     - name: LeftHandIndex3
       parentName: LeftHandIndex2
@@ -830,7 +864,8 @@ ModelImporter:
     - name: LeftHandThumb3
       parentName: LeftHandThumb2
       position: {x: -0.018427454, y: -0.010638835, z: 0.010638936}
-      rotation: {x: -2.273737e-11, y: -0.0000000029103826, z: 0.0000000013860245, w: 1}
+      rotation: {x: -2.273737e-11, y: -0.0000000029103826, z: 0.0000000013860245,
+        w: 1}
       scale: {x: 1.0000001, y: 0.99999994, z: 1.0000001}
     - name: LeftHandThumb4
       parentName: LeftHandThumb3
@@ -869,7 +904,8 @@ ModelImporter:
     hasTranslationDoF: 0
     hasExtraRoot: 1
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: b557ac89df7d5c749b8dbb64201d9f65, type: 3}
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: b557ac89df7d5c749b8dbb64201d9f65,
+    type: 3}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 3
   humanoidOversampling: 1

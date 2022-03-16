@@ -14,13 +14,13 @@ public class AdjustTimeScale : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetAxis("Mouse ScrollWheel") > 0f)
+        if (UnityEngine.Input.GetAxis("Mouse ScrollWheel") > 0f)
         {
             if (Time.timeScale < 1.0F)
             {
                 Time.timeScale += 0.1f;
             }
-               
+
             Time.fixedDeltaTime = 0.02F * Time.timeScale;
 
             if (textMesh != null)
@@ -29,13 +29,13 @@ public class AdjustTimeScale : MonoBehaviour
             }
           
         }
-        else if (Input.GetAxis("Mouse ScrollWheel") < 0f)
+        else if (UnityEngine.Input.GetAxis("Mouse ScrollWheel") < 0f)
         {
             if (Time.timeScale >= 0.2F)
             {
                 Time.timeScale -= 0.1f;
             }
-                
+
             Time.fixedDeltaTime = 0.02F * Time.timeScale;
 
             if (textMesh != null)

@@ -79,27 +79,27 @@ namespace UnityTemplateProjects
         Vector3 GetInputTranslationDirection()
         {
             Vector3 direction = new Vector3();
-            if (Input.GetKey(KeyCode.W))
+            if (UnityEngine.Input.GetKey(KeyCode.W))
             {
                 direction += Vector3.forward;
             }
-            if (Input.GetKey(KeyCode.S))
+            if (UnityEngine.Input.GetKey(KeyCode.S))
             {
                 direction += Vector3.back;
             }
-            if (Input.GetKey(KeyCode.A))
+            if (UnityEngine.Input.GetKey(KeyCode.A))
             {
                 direction += Vector3.left;
             }
-            if (Input.GetKey(KeyCode.D))
+            if (UnityEngine.Input.GetKey(KeyCode.D))
             {
                 direction += Vector3.right;
             }
-            if (Input.GetKey(KeyCode.Q))
+            if (UnityEngine.Input.GetKey(KeyCode.Q))
             {
                 direction += Vector3.down;
             }
-            if (Input.GetKey(KeyCode.E))
+            if (UnityEngine.Input.GetKey(KeyCode.E))
             {
                 direction += Vector3.up;
             }
@@ -109,22 +109,22 @@ namespace UnityTemplateProjects
         void Update()
         {
             // Hide and lock cursor when right mouse button pressed
-            if (Input.GetMouseButtonDown(1))
+            if (UnityEngine.Input.GetMouseButtonDown(1))
             {
                 Cursor.lockState = CursorLockMode.Locked;
             }
 
             // Unlock and show cursor when right mouse button released
-            if (Input.GetMouseButtonUp(1))
+            if (UnityEngine.Input.GetMouseButtonUp(1))
             {
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
             }
 
             // Rotation
-            if (Input.GetMouseButton(1))
+            if (UnityEngine.Input.GetMouseButton(1))
             {
-                var mouseMovement = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y") * (invertY ? 1 : -1));
+                var mouseMovement = new Vector2(UnityEngine.Input.GetAxis("Mouse X"), UnityEngine.Input.GetAxis("Mouse Y") * (invertY ? 1 : -1));
                 
                 var mouseSensitivityFactor = mouseSensitivityCurve.Evaluate(mouseMovement.magnitude);
 
@@ -136,13 +136,13 @@ namespace UnityTemplateProjects
             var translation = GetInputTranslationDirection() * Time.deltaTime;
 
             // Speed up movement when shift key held
-            if (Input.GetKey(KeyCode.LeftShift))
+            if (UnityEngine.Input.GetKey(KeyCode.LeftShift))
             {
                 translation *= 10.0f;
             }
-            
+
             // Modify movement by a boost factor (defined in Inspector and modified in play mode through the mouse scroll wheel)
-            boost += Input.mouseScrollDelta.y * 0.2f;
+            boost += UnityEngine.Input.mouseScrollDelta.y * 0.2f;
             translation *= Mathf.Pow(2.0f, boost);
 
             m_TargetCameraState.Translate(translation);

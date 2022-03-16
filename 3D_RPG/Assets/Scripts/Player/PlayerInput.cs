@@ -2,25 +2,25 @@ using UnityEngine;
 
 public class PlayerInput : MonoBehaviour
 {
-    private string _inputHorizontalName = "Horizontal";
-    private string _inputVerticalName = "Vertical";
-    private string _moveMouseHorizontalName = "Mouse X";
-    private string _moveMouseVerticalName = "Mouse Y";
-    private string _attackKeyName = "Attack";
+    private const string HORIZONTAL = "Horizontal";
+    private const string VERTOCAL = "Vertical";
+    private const string MOUSE_X = "Mouse X";
+    private const string MOUSE_Y = "Mouse Y";
+    private const string ATTACK = "Attack";
 
-    public float InputHorizontal { get; private set; }
-    public float InputVertical { get; private set; }
+    public float Horizontal { get; private set; }
+    public float Vertical { get; private set; }
     public float MoveMouseX { get; private set; }
     public float MoveMouseY { get; private set; }
-    public bool InputAttack { get; private set; }
+    public bool Attack { get; private set; }
 
     void Update()
     {
-        InputHorizontal = Input.GetAxis(_inputHorizontalName);
-        InputVertical = Input.GetAxis(_inputVerticalName);
-        MoveMouseX = Input.GetAxis(_moveMouseHorizontalName);
-        MoveMouseY = Input.GetAxis(_moveMouseVerticalName);
+        Horizontal = Input.GetAxis(HORIZONTAL);
+        Vertical = Input.GetAxis(VERTOCAL);
+        MoveMouseX = Input.GetAxis(MOUSE_X);
+        MoveMouseY = Input.GetAxis(MOUSE_Y);
 
-        InputAttack = Input.GetButton(_attackKeyName);
+        Attack = Input.GetButton(ATTACK);
     }
 }

@@ -20,34 +20,17 @@ public class SectorFormAttackState : AttackState
         _targetColliders = new Collider[_targetCount];
     }
 
-    private IEnumerator GetForwardVectorFromEndOfFrame()
-    {
-        yield return new WaitForEndOfFrame();
-
-        _forward = transform.forward;
-    }
-
     public override void EnterState()
     {
-        StartCoroutine(InitializeLocalPositionAtEndOfFrame());
-
-        if (null != _targetManager.EnemyTarget)
-        {
-            StartCoroutine(_rotator.LookAtTargetAtEndOfFrame(_targetManager.EnemyTarget.position));
-        }
-        else
-        {
-            StartCoroutine(_rotator.RotateToTargetRotationAtEndOfFrame());
-        }
-
-        StartCoroutine(GetForwardVectorFromEndOfFrame());
         StartCoroutine(Attack());
     }
 
-    public override void ExitState()
+    public override void UpdateState()
     {
-        StartCoroutine(InitializeLocalPositionAtEndOfFrame());
-        StartCoroutine(_rotator.RotateToTargetRotationAtEndOfFrame());
+        if(UnityEngine.Input.GetMouseButtonDown(0))
+        {
+            _animator.SetTrigger(CharacterAnimID.IS_ATTACK);
+        }
     }
 
     public override IEnumerator Attack()
@@ -82,8 +65,6 @@ public class SectorFormAttackState : AttackState
             {
                 _targetColliders[i].GetComponent<Status>().TakeDamage(_status.ATK);
             }
-
-            Debug.Log("tlqkf");
         }
     }
 }

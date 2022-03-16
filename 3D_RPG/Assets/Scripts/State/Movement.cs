@@ -5,136 +5,91 @@ using UnityEngine.AI;
 public class Movement : State
 {
     [SerializeField] protected float _moveSpeed = 5f;
-    [SerializeField] protected float _autoAttackDistance = 2f;
 
-    protected CharacterRotator _rotator;
-    protected Animator _animator;
+    private NavMeshAgent _navMeshAgent;
+    private Coroutine _coroutineSetNavMeshPath;
+    private float _animationBlend = 0f;
+    private float _stoppingDistance;
+
     protected TargetManager _targetManager;
-    protected NavMeshAgent _navMeshAgent;
+    protected Animator _animator;
 
-    protected Coroutine _coroutineSetNavmeshPathToEnemyTargetPosition;
+    protected const float PATH_FIND_DELAY = 0.25f;
+    protected const float IDLE_ANIMATION_PARAMETER_VALUE = 0f;
+    protected const float RUN_ANIMATION_PARAMETER_VALUE = 1f;
 
-    protected static readonly float PATH_FIND_DELAY = 0.25f;
-    protected static readonly float RUN_ANIMATION_PARAMETER_VALUE = 1f;
-    protected static readonly float IDLE_ANIMATION_PARAMETER_VALUE = 0f;
-    protected static readonly Vector2 INPUT_MOVE_FORWARD = new Vector2(0, 1);
-
-    private void OnDisable()
+    private void InitCoroutine()
     {
-        InitCoroutine();
-    }
-
-    protected virtual void Start()
-    {
-        _rotator = GetComponent<CharacterRotator>();
-        _animator = GetComponent<Animator>();
-        _targetManager = GetComponent<TargetManager>();
-        _navMeshAgent = GetComponent<NavMeshAgent>();
-    }
-
-    protected virtual void Move(Transform transform, Vector2 moveInput, float animationParameterValue)
-    {
-        _animator.SetFloat(PlayerAnimID.MOVE, animationParameterValue);
-
-        Vector3 lookForward = new Vector3(transform.forward.x, 0f, transform.forward.z).normalized;
-        Vector3 lookRight = new Vector3(transform.right.x, 0f, transform.right.z).normalized;
-
-        Vector3 moveDir = (lookForward * moveInput.y) + (lookRight * moveInput.x);
-
-        float angle = Mathf.Atan2(moveInput.x, moveInput.y);
-
-        _rotator.Rotate(angle, transform);
-
-        transform.position += moveDir * (Time.deltaTime * _moveSpeed);
-
-        StartCoroutine(InitializeLocalPositionAtEndOfFrame());
-    }
-
-    protected bool CheckNavMeshStop(float stoppingDistance)
-    {
-        if (stoppingDistance > _navMeshAgent.remainingDistance)
+        if (null != _coroutineSetNavMeshPath)
         {
-            return true;
+            StopCoroutine(_coroutineSetNavMeshPath);
         }
-        else
+
+        _coroutineSetNavMeshPath = null;
+    }
+
+    private IEnumerator SetNavMeshPath()
+    {
+        while (true == enabled && null != _targetManager.Target)
         {
-            return false;
-        }
-    }
-
-    protected virtual void MoveToNavMeshPath()
-    {
-        _navMeshAgent.isStopped = false;
-
-        Move(transform, INPUT_MOVE_FORWARD, RUN_ANIMATION_PARAMETER_VALUE);
-    }
-
-    protected void StopNavMesh()
-    {
-        _navMeshAgent.isStopped = true;
-
-        _animator.SetFloat(PlayerAnimID.MOVE, IDLE_ANIMATION_PARAMETER_VALUE);
-
-        _navMeshAgent.ResetPath();
-    }
-
-    protected IEnumerator SetNavmeshPathToEnemyTargetPosition()
-    {
-        while (true == enabled)
-        {
-            if (null == _targetManager.EnemyTarget || null != _targetManager.Target)
-            {
-                StopNavMesh();
-
-                InitCoroutine();
-            }
-            else
-            {
-                _navMeshAgent.SetDestination(_targetManager.EnemyTarget.position);
-            }
+            _navMeshAgent.SetDestination(_targetManager.Target.position);
 
             yield return new WaitForSeconds(PATH_FIND_DELAY);
         }
     }
 
-    protected void InitCoroutine()
+    protected virtual void Start()
     {
-        if (null != _coroutineSetNavmeshPathToEnemyTargetPosition)
-        {
-            StopCoroutine(_coroutineSetNavmeshPathToEnemyTargetPosition);
+        _animator = GetComponent<Animator>();
+        _targetManager = GetComponent<TargetManager>();
+        _navMeshAgent = GetComponent<NavMeshAgent>();
 
-            _coroutineSetNavmeshPathToEnemyTargetPosition = null;
-        }
+        _stoppingDistance = _navMeshAgent.stoppingDistance;
+    }
+
+    protected void OnDisable()
+    {
+        InitCoroutine();
     }
 
     public override void UpdateState()
     {
-        if (null != _targetManager.EnemyTarget)
+        if (null == _targetManager.Target)
         {
-            if (null == _coroutineSetNavmeshPathToEnemyTargetPosition)
-            {
-                _coroutineSetNavmeshPathToEnemyTargetPosition = StartCoroutine(SetNavmeshPathToEnemyTargetPosition());
+            BlendAnimation(IDLE_ANIMATION_PARAMETER_VALUE);
+            _navMeshAgent.ResetPath();
+            InitCoroutine();
 
-                _navMeshAgent.isStopped = false;
-
-                return;
-            }
-
-            MoveToNavMeshPath();
-
-            if (true == CheckNavMeshStop(_autoAttackDistance))
-            {
-                _animator.SetTrigger(PlayerAnimID.IS_ATTACK);
-
-                StopNavMesh();
-            }
+            return;
         }
+
+        if (null == _coroutineSetNavMeshPath)
+        {
+            _coroutineSetNavMeshPath = StartCoroutine(SetNavMeshPath());
+            return;
+        }
+
+        if (_stoppingDistance >= _navMeshAgent.remainingDistance)
+        {
+            _animator.SetTrigger(CharacterAnimID.IS_ATTACK);
+
+            return;
+        }
+
+        BlendAnimation(RUN_ANIMATION_PARAMETER_VALUE);
     }
 
     public override void ExitState()
     {
-        StopNavMesh();
+        _navMeshAgent.ResetPath();
 
         InitCoroutine();
+    }
+
+    protected void BlendAnimation(float curValue)
+    {
+        _animationBlend = Mathf.Lerp(_animationBlend, curValue, Time.deltaTime * 10f);
+
+        _animator.SetFloat(CharacterAnimID.MOVE, _animationBlend);
     }
 }

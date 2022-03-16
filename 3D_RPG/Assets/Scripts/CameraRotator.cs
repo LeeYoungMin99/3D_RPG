@@ -4,46 +4,53 @@ using UnityEngine;
 
 public class CameraRotator : MonoBehaviour
 {
-    [SerializeField] private Transform _player;
     [SerializeField] private PlayerInput _input;
-    [SerializeField] private float _rotationSmoothTime = 0.12f;
 
     private float _rotationVelocity;
+    private float _topClamp = 70f;
+    private float _bottomClamp = -30f;
+    private float _cinemachineTargetYaw;
+    private float _cinemachineTargetPitch;
 
-    private void Update()
+    public GameObject CinemachineCameraTarget;
+    public bool LockCameraPosition = false;
+
+    private const float THRESHOLD = 0.01f;
+    private const float SMOOTH_TIME = 0.01f;
+    
+
+    private void LateUpdate()
     {
-        Rotate();
+        RotateCamera();
     }
 
-    private void RotateToAngle(float targetAngle)
+    private void RotateCamera()
     {
-        transform.rotation = Quaternion.Euler(0.0f, targetAngle, 0.0f);
-    }
+        Vector2 mouseMove = new Vector2(_input.MoveMouseX, _input.MoveMouseY);
 
-    private void Rotate()
-    {
-        Vector2 mouseDelta = new Vector2(_input.MoveMouseX, _input.MoveMouseY);
-        Vector3 camAngle = transform.rotation.eulerAngles;
-
-        float x = camAngle.x - mouseDelta.y;
-
-        if (x < 180f)
+        if (false == LockCameraPosition)
         {
-            x = Mathf.Clamp(x, -1f, 70f);
-        }
-        else
-        {
-            x = Mathf.Clamp(x, 340f, 361f);
+            _cinemachineTargetYaw += mouseMove.x;
+            _cinemachineTargetPitch -= mouseMove.y;
         }
 
-        transform.rotation = Quaternion.Euler(x, camAngle.y + mouseDelta.x, camAngle.z);
+        _cinemachineTargetYaw = ClampAngle(_cinemachineTargetYaw, float.MinValue, float.MaxValue);
+        _cinemachineTargetPitch = ClampAngle(_cinemachineTargetPitch, _bottomClamp, _topClamp);
+
+        CinemachineCameraTarget.transform.rotation = Quaternion.Euler(_cinemachineTargetPitch, _cinemachineTargetYaw, 0.0f);
     }
 
-    public void RotateCameraAngleForAutoMove()
+    private float ClampAngle(float angle, float lfMin, float lfMax)
     {
-        float _targetRotation = Mathf.Atan2(0, 1) * Mathf.Rad2Deg + _player.eulerAngles.y;
-        float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity, _rotationSmoothTime);
+        if (angle < -360f)
+        {
+            angle += 360f;
+        }
+        else if (angle > 360f)
+        {
+            angle -= 360f;
+        }
 
-        RotateToAngle(rotation);
+        return Mathf.Clamp(angle, lfMin, lfMax);
     }
 }
