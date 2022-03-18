@@ -6,7 +6,6 @@ public class CameraRotator : MonoBehaviour
 {
     [SerializeField] private PlayerInput _input;
 
-    private float _rotationVelocity;
     private float _topClamp = 70f;
     private float _bottomClamp = -30f;
     private float _cinemachineTargetYaw;
@@ -14,10 +13,6 @@ public class CameraRotator : MonoBehaviour
 
     public GameObject CinemachineCameraTarget;
     public bool LockCameraPosition = false;
-
-    private const float THRESHOLD = 0.01f;
-    private const float SMOOTH_TIME = 0.01f;
-    
 
     private void LateUpdate()
     {

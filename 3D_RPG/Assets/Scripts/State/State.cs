@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 public class State : MonoBehaviour
@@ -12,6 +11,7 @@ public class State : MonoBehaviour
         _stateMachine = GetComponent<StateMachine>();
 
         _stateMachine.AddState(stateTag, this);
+
     }
 
     public virtual void EnterState() { }

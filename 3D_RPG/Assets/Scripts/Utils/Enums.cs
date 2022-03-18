@@ -8,5 +8,5 @@ public enum EStateTag
     FirstComboAttack,
     SecondComboAttack,
     ThirdComboAttack,
-
+    Skill,
 }

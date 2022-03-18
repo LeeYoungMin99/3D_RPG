@@ -4,42 +4,21 @@ using UnityEngine;
 
 public class TargetAttackState : AttackState
 {
-    [SerializeField] LineRenderer _effect;
-    [SerializeField] float _effectLifeTime = 0.2f;
-    [SerializeField] Transform _effectStartPosition;
-
-    private IEnumerator AttackEffect(Vector3 target)
-    {
-        _effect.enabled = true;
-
-        _effect.SetPosition(0, _effectStartPosition.position);
-        _effect.SetPosition(1, target);
-
-        yield return new WaitForSeconds(_effectLifeTime);
-
-        _effect.enabled = false;
-    }
-
     public override void EnterState()
     {
-        if (null == _targetManager.EnemyTarget)
-        {
-            return;
-        }
+        if (null == _targetManager.EnemyTarget) return;
+
+        base.EnterState();
 
         StartCoroutine(Attack());
     }
 
-    public override IEnumerator Attack()
+    protected override IEnumerator Attack()
     {
         if (_delay > 0f)
         {
             yield return new WaitForSeconds(_delay);
         }
-
-        Vector3 target = _targetManager.EnemyTarget.position;
-
-        StartCoroutine(AttackEffect(target));
 
         _targetManager.EnemyTarget.GetComponent<Status>().TakeDamage(_status.ATK);
     }

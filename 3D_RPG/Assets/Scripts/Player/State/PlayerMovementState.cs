@@ -20,7 +20,14 @@ public class PlayerMovementState : Movement
     {
         if (true == _input.Attack)
         {
-            _animator.SetTrigger(CharacterAnimID.IS_ATTACK);
+            _animator.SetTrigger(CharacterAnimID.IS_ATTACKING);
+
+            return;
+        }
+
+        if (true == _input.Skill && true == _canUseSkill)
+        {
+            _animator.SetTrigger(CharacterAnimID.USE_SKILL);
 
             return;
         }
@@ -29,20 +36,23 @@ public class PlayerMovementState : Movement
 
         if (ZERO_VECTOR2 != input)
         {
+            _navMeshAgent.isStopped = true;
+
             Rotate(input);
             Move(input);
-
-            return;
         }
-
-        base.UpdateState();
+        else
+        {
+            _navMeshAgent.isStopped = false;
+            base.UpdateState();
+        }
     }
 
     private void Rotate(Vector2 input)
     {
         float targetRotation = Mathf.Atan2(input.x, input.y) * Mathf.Rad2Deg + _mainCamera.transform.eulerAngles.y;
 
-        _rotator.RotateSmoothDampAngle(targetRotation);
+        _rotator.RotateSmoothly(targetRotation);
     }
 
     private void Move(Vector2 input)
@@ -53,30 +63,4 @@ public class PlayerMovementState : Movement
 
         BlendAnimation(input.magnitude);
     }
-
-    //protected void MoveAutomatically()
-    //{
-    //    Vector3 targetPosition = target.position;
-    //    targetPosition.y = 0f;
-    //    
-    //    Vector3 myPosition = transform.position;
-    //    myPosition.y = 0f;
-    //    
-    //    Vector3 targetDir = (targetPosition - myPosition).normalized;
-    //    
-    //    Vector3 cross = Vector3.Cross(transform.forward, targetDir);
-    //    
-    //    float dot = Vector3.Dot(transform.forward, targetDir);
-    //    float angle = Mathf.Acos(dot) * Mathf.Rad2Deg;
-    //    
-    //    if (0f > cross.y)
-    //    {
-    //        angle *= -1;
-    //    }
-    //    
-    //    Move(new Vector2(1, 0));
-    //    
-    //    _animator.SetFloat(PlayerAnimID.MOVE, 1f);
-    //    _rotator.RotateSmoothly(angle);
-    //}
 }

@@ -32,7 +32,7 @@ public class RangeAttackState : AttackState
         StartCoroutine(Attack());
     }
 
-    public override IEnumerator Attack()
+    protected override IEnumerator Attack()
     {
         Vector3 target = _targetManager.EnemyTarget.position;
 

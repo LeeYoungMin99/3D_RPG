@@ -5,13 +5,12 @@ using UnityEngine;
 public class SectorFormAttackState : AttackState
 {
     [Range(0f, 180f)]
-    [SerializeField] private float _horizontalAngle = 0f;
+    [SerializeField] private float _hitAngle = 0f;
     [SerializeField] private float _radius = 1f;
     [SerializeField] private int _targetCount = 16;
     [SerializeField] private LayerMask _targetMask;
 
     private Collider[] _targetColliders;
-    private Vector3 _forward;
 
     protected override void Start()
     {
@@ -20,48 +19,24 @@ public class SectorFormAttackState : AttackState
         _targetColliders = new Collider[_targetCount];
     }
 
-    public override void EnterState()
+    protected override IEnumerator Attack()
     {
-        StartCoroutine(Attack());
-    }
-
-    public override void UpdateState()
-    {
-        if(UnityEngine.Input.GetMouseButtonDown(0))
-        {
-            _animator.SetTrigger(CharacterAnimID.IS_ATTACK);
-        }
-    }
-
-    public override IEnumerator Attack()
-    {
-        if (_delay > 0f)
-        {
-            yield return new WaitForSeconds(_delay);
-        }
-        else
-        {
-            yield return new WaitForEndOfFrame();
-        }
+        if (_delay > 0f) yield return new WaitForSeconds(_delay);
 
         int targetCount = Physics.OverlapSphereNonAlloc(transform.position, _radius, _targetColliders, _targetMask);
 
-        Vector3 targetDir;
+        Vector3 targetPosition;
+        Vector3 myPosition = transform.position;
+        myPosition.y = 0f;
 
         for (int i = 0; i < targetCount; ++i)
         {
-            Vector3 targetPosition = _targetColliders[i].transform.position;
-            targetPosition = new Vector3(targetPosition.x, 0f, targetPosition.z);
+            targetPosition = _targetColliders[i].transform.position;
+            targetPosition.y = 0f;
 
-            Vector3 myPosition = new Vector3(transform.position.x, 0f, transform.position.z);
+            float angle = Mathf.Abs(CalculateAngle(myPosition, targetPosition));
 
-            targetDir = (targetPosition - myPosition).normalized;
-
-            float dot = Vector3.Dot(targetDir, _forward);
-
-            float angle = Mathf.Acos(dot) * Mathf.Rad2Deg;
-
-            if (angle <= _horizontalAngle)
+            if (angle <= _hitAngle)
             {
                 _targetColliders[i].GetComponent<Status>().TakeDamage(_status.ATK);
             }

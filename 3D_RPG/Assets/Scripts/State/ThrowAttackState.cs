@@ -39,7 +39,7 @@ public class ThrowAttackState : AttackState
         }
     }
 
-    public override IEnumerator Attack()
+    protected override IEnumerator Attack()
     {
         int index = _curIndex;
 
