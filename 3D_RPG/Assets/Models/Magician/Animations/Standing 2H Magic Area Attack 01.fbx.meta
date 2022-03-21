@@ -5,7 +5,7 @@ ModelImporter:
   internalIDToNameTable:
   - first:
       74: -203655887218126122
-    second: mixamo.com
+    second: Magician Skill
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -33,7 +33,43 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Magician Skill
+      takeName: mixamo.com
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 89
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 1
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 1
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events:
+      - time: 0
+        functionName: ChangeState
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 4
+        messageOptions: 0
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 0
   meshes:
     lODScreenPercentages: []
@@ -663,7 +699,8 @@ ModelImporter:
     - name: arissa:RightHandPinky3
       parentName: arissa:RightHandPinky2
       position: {x: 0.027224878, y: -0.00064054, z: 0.00023157}
-      rotation: {x: -0.000000011641532, y: 0.0000000027284845, z: -0.0000000020691007, w: 1}
+      rotation: {x: -0.000000011641532, y: 0.0000000027284845, z: -0.0000000020691007,
+        w: 1}
       scale: {x: 1, y: 1, z: 0.99999994}
     - name: arissa:RightHandPinky4
       parentName: arissa:RightHandPinky3
@@ -713,7 +750,8 @@ ModelImporter:
     - name: arissa:RightHandIndex3
       parentName: arissa:RightHandIndex2
       position: {x: 0.02873717, y: -0.00136415, z: 0}
-      rotation: {x: 1.7763568e-15, y: -0.0000000018189892, z: -0.000000003092282, w: 1}
+      rotation: {x: 1.7763568e-15, y: -0.0000000018189892, z: -0.000000003092282,
+        w: 1}
       scale: {x: 1, y: 1, z: 0.99999994}
     - name: arissa:RightHandIndex4
       parentName: arissa:RightHandIndex3
@@ -853,7 +891,8 @@ ModelImporter:
     - name: arissa:LeftHandIndex2
       parentName: arissa:LeftHandIndex1
       position: {x: -0.037340887, y: 0, z: 0.00051251997}
-      rotation: {x: -0.000000011641533, y: 3.6379777e-10, z: -0.0000000014551915, w: 1}
+      rotation: {x: -0.000000011641533, y: 3.6379777e-10, z: -0.0000000014551915,
+        w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: arissa:LeftHandIndex3
       parentName: arissa:LeftHandIndex2
@@ -883,7 +922,8 @@ ModelImporter:
     - name: arissa:LeftHandThumb3
       parentName: arissa:LeftHandThumb2
       position: {x: -0.02827938, y: -0.00457375, z: 0.01702996}
-      rotation: {x: -0.000000017462295, y: 0.0000000043655732, z: -0.000000014915711, w: 1}
+      rotation: {x: -0.000000017462295, y: 0.0000000043655732, z: -0.000000014915711,
+        w: 1}
       scale: {x: 1.0000001, y: 1.0000001, z: 0.99999994}
     - name: arissa:LeftHandThumb4
       parentName: arissa:LeftHandThumb3
@@ -927,7 +967,8 @@ ModelImporter:
     hasTranslationDoF: 0
     hasExtraRoot: 1
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 88d75a775501fea458a031970397e0e8, type: 3}
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 88d75a775501fea458a031970397e0e8,
+    type: 3}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 3
   humanoidOversampling: 1

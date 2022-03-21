@@ -6,11 +6,13 @@ using UnityEngine.AI;
 public class Movement : State
 {
     [SerializeField] protected float _moveSpeed = 5f;
+    [SerializeField] private float _stoppingDistance = 3f;
     [SerializeField] protected bool _hasSkill = true;
 
+    private GameObject _mainCamera;
+    private CharacterRotator _rotator;
     private Coroutine _coroutineSetNavMeshPath;
     private float _animationBlend = 0f;
-    private float _stoppingDistance;
 
     protected NavMeshAgent _navMeshAgent;
     protected TargetManager _targetManager;
@@ -20,6 +22,62 @@ public class Movement : State
     protected const float PATH_FIND_DELAY = 0.25f;
     protected const float IDLE_ANIMATION_PARAMETER_VALUE = 0f;
     protected const float RUN_ANIMATION_PARAMETER_VALUE = 1f;
+
+    private static readonly Vector2 ZERO_VECTOR2 = Vector2.zero;
+
+    private void Start()
+    {
+        _animator = GetComponent<Animator>();
+        _targetManager = GetComponent<TargetManager>();
+        _navMeshAgent = GetComponent<NavMeshAgent>();
+
+        if (true == _hasSkill)
+        {
+            AttackState[] attackStates = GetComponents<AttackState>();
+
+            foreach (AttackState attackState in attackStates)
+            {
+                if (true == attackState.IsSkill)
+                {
+                    attackState.OnCooldownElapsed -= ElapseCooldown;
+                    attackState.OnCooldownElapsed += ElapseCooldown;
+
+                    _animator.SetBool(CharacterAnimID.IS_COOLDOWN, false);
+
+                    _canUseSkill = true;
+
+                    break;
+                }
+            }
+        }
+        else
+        {
+            _canUseSkill = false;
+            _animator.SetBool(CharacterAnimID.IS_COOLDOWN, true);
+        }
+
+        if (true == _isPlayableCharacter)
+        {
+            _rotator = GetComponent<CharacterRotator>();
+            _mainCamera = GameObject.Find("Field").transform.Find("Main Camera").gameObject;
+        }
+    }
+
+    private void Rotate(Vector2 input)
+    {
+        float targetRotation = Mathf.Atan2(input.x, input.y) * Mathf.Rad2Deg + _mainCamera.transform.eulerAngles.y;
+
+        _rotator.RotateSmoothly(targetRotation);
+    }
+
+    private void Move(Vector2 input)
+    {
+        Vector3 moveDir = transform.forward * Mathf.Abs(input.magnitude);
+
+        transform.position += moveDir * (Time.deltaTime * _moveSpeed);
+
+        BlendAnimation(input.magnitude);
+    }
 
     private void InitCoroutine()
     {
@@ -52,48 +110,17 @@ public class Movement : State
         }
     }
 
-    public void ElapseCooldown(object sender, EventArgs args)
+    private void ElapseCooldown(object sender, EventArgs args)
     {
         _canUseSkill = true;
     }
 
-    protected virtual void Start()
-    {
-        _animator = GetComponent<Animator>();
-        _targetManager = GetComponent<TargetManager>();
-        _navMeshAgent = GetComponent<NavMeshAgent>();
-
-        _stoppingDistance = _navMeshAgent.stoppingDistance;
-
-        if (true == _hasSkill)
-        {
-            AttackState[] attackStates = GetComponents<AttackState>();
-
-            foreach (AttackState attackState in attackStates)
-            {
-                if (true == attackState.IsSkill)
-                {
-                    attackState.OnCooldownElapsed -= ElapseCooldown;
-                    attackState.OnCooldownElapsed += ElapseCooldown;
-
-                    _animator.SetBool(CharacterAnimID.IS_COOLDOWN, false);
-                    break;
-                }
-            }
-        }
-        else
-        {
-            _canUseSkill = false;
-            _animator.SetBool(CharacterAnimID.IS_COOLDOWN, true);
-        }
-    }
-
-    protected void OnDisable()
+    private void OnDisable()
     {
         InitCoroutine();
     }
 
-    protected void BlendAnimation(float curValue)
+    private void BlendAnimation(float curValue)
     {
         _animationBlend = Mathf.Lerp(_animationBlend, curValue, Time.deltaTime * 10f);
 
@@ -102,6 +129,42 @@ public class Movement : State
 
     public override void UpdateState()
     {
+        if (true == _isPlayableCharacter)
+        {
+            if (true == _input.Attack)
+            {
+                _animator.SetTrigger(CharacterAnimID.IS_ATTACKING);
+
+                return;
+            }
+
+            if (true == _input.Skill && true == _canUseSkill && null != _targetManager.EnemyTarget)
+            {
+                _animator.SetTrigger(CharacterAnimID.USE_SKILL);
+
+                return;
+            }
+
+            Vector2 input = new Vector2(_input.Horizontal, _input.Vertical);
+
+            if (ZERO_VECTOR2 != input)
+            {
+                _navMeshAgent.isStopped = true;
+
+                Rotate(input);
+                Move(input);
+
+                return;
+            }
+
+            if (false == _isAuto)
+            {
+                _navMeshAgent.isStopped = true;
+                BlendAnimation(IDLE_ANIMATION_PARAMETER_VALUE);
+                return;
+            }
+        }
+
         if (null == _targetManager.Target && null == _targetManager.EnemyTarget)
         {
             BlendAnimation(IDLE_ANIMATION_PARAMETER_VALUE);
@@ -124,6 +187,8 @@ public class Movement : State
 
             _canUseSkill = false;
 
+            _navMeshAgent.isStopped = true;
+
             return;
         }
 
@@ -131,9 +196,12 @@ public class Movement : State
         {
             _animator.SetTrigger(CharacterAnimID.IS_ATTACKING);
 
+            _navMeshAgent.isStopped = true;
+
             return;
         }
 
+        _navMeshAgent.isStopped = false;
         BlendAnimation(RUN_ANIMATION_PARAMETER_VALUE);
     }
 

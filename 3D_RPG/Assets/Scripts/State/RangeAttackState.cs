@@ -36,10 +36,7 @@ public class RangeAttackState : AttackState
     {
         Vector3 target = _targetManager.EnemyTarget.position;
 
-        if (_delay > 0f)
-        {
-            yield return new WaitForSeconds(_delay);
-        }
+        if (_attackDelayTime > 0f) yield return new WaitForSeconds(_attackDelayTime);
 
         _effect.transform.position = target;
         _effect.Play();

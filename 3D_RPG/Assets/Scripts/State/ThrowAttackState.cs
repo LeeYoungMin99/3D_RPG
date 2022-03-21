@@ -4,54 +4,72 @@ using UnityEngine;
 public class ThrowAttackState : AttackState
 {
     [SerializeField] private ThrownObject _thrownObjectPrefab;
-    [SerializeField] private float _thrownObjectSpeed = 20f;
     [SerializeField] private Transform _startPosition;
+    [SerializeField] private int _maxShotCount = 1;
+    [SerializeField] private int _countPerShot = 1;
+    [Range(0f, 0.5f)]
+    [SerializeField] private float _intervalTime = 0.5f;
 
-    private const int OBJECT_COUNT = 4;
-    private GameObject[] _thrownObjectPool = new GameObject[OBJECT_COUNT];
-    private ThrownObject[] _thrownObjects = new ThrownObject[OBJECT_COUNT];
+    private GameObject[] _thrownObjectPool;
+    private ThrownObject[] _thrownObjects;
+    private int _objectPoolCount;
     private int _curIndex = 0;
+    private int _curShotCount = 0;
 
     protected override void Start()
     {
         base.Start();
 
-        for (int i = 0; i < OBJECT_COUNT; ++i)
+        _objectPoolCount = _maxShotCount * _countPerShot * 2;
+
+        _thrownObjectPool = new GameObject[_objectPoolCount];
+        _thrownObjects = new ThrownObject[_objectPoolCount];
+
+        GameObject thrownObjects = new GameObject("Thrown Objects");
+        thrownObjects.transform.SetParent(GameObject.Find("Field").transform);
+
+        for (int i = 0; i < _objectPoolCount; ++i)
         {
             _thrownObjectPool[i] = Instantiate(_thrownObjectPrefab.gameObject, _startPosition.position, transform.rotation);
+            _thrownObjectPool[i].transform.SetParent(thrownObjects.transform);
             _thrownObjects[i] = _thrownObjectPool[i].GetComponent<ThrownObject>();
-            _thrownObjects[i].Speed = _thrownObjectSpeed;
-            _thrownObjectPool[i].SetActive(false);
-        }
-    }
-
-    public override void EnterState()
-    {
-        if (null == _targetManager.EnemyTarget) return;
-
-        StartCoroutine(Attack());
-
-        ++_curIndex;
-
-        if (_curIndex >= OBJECT_COUNT)
-        {
-            _curIndex = 0;
+            _thrownObjects[i].Owner = _startPosition;
+            _thrownObjects[i].TargetLayer = _targetManager.EnemyTargetLayer;
         }
     }
 
     protected override IEnumerator Attack()
     {
-        int index = _curIndex;
+        if (_attackDelayTime > 0f) yield return new WaitForSeconds(_attackDelayTime);
 
-        _thrownObjectPool[index].transform.position = _startPosition.position;
-        _thrownObjects[index].Target = _targetManager.EnemyTarget;
-        _thrownObjects[index].Damage = _status.ATK;
+        StartCoroutine(Shot());
+    }
 
-        if (_delay > 0f)
+    private IEnumerator Shot()
+    {
+        while (_maxShotCount > _curShotCount)
         {
-            yield return new WaitForSeconds(_delay);
+            for (int i = 0; i < _countPerShot; ++i)
+            {
+                _thrownObjectPool[_curIndex].transform.position = _startPosition.position;
+                _thrownObjects[_curIndex].Target = _targetManager.EnemyTarget;
+                _thrownObjects[_curIndex].Damage = _status.ATK / (_maxShotCount * _countPerShot);
+
+                _thrownObjectPool[_curIndex].SetActive(true);
+
+                ++_curIndex;
+
+                if (_objectPoolCount <= _curIndex)
+                {
+                    _curIndex = 0;
+                }
+            }
+
+            ++_curShotCount;
+
+            yield return new WaitForSeconds(_intervalTime);
         }
 
-        _thrownObjectPool[index].SetActive(true);
+        _curShotCount = 0;
     }
 }

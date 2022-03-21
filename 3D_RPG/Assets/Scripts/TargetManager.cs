@@ -16,6 +16,7 @@ public class TargetManager : MonoBehaviour
 
     public Transform EnemyTarget { get; private set; }
     public Transform NPCTarget { get; private set; }
+    public LayerMask EnemyTargetLayer { get { return _enemyTargetMask; } }
 
     private void OnEnable()
     {

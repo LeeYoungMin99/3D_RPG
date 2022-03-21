@@ -30,7 +30,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Skill
-  m_Speed: 1
+  m_Speed: 1.5553
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 2576666432527979107}
@@ -284,7 +284,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Second Combo Attack
-  m_Speed: 1
+  m_Speed: 0.8886
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 4623852433799606013}
@@ -432,7 +432,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Third Combo Attack
-  m_Speed: 1
+  m_Speed: 1.2886
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 2042965089029764505}

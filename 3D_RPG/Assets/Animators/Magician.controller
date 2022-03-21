@@ -43,7 +43,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -203655887218126122, guid: 21aa7916753eae641ba606d804a017b1,
+  m_Motion: {fileID: -203655887218126122, guid: 80f00f21158e3084c91b9b6d9ff9fe43,
     type: 3}
   m_Tag: 
   m_SpeedParameter: 
@@ -108,7 +108,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: First Combo Attack
-  m_Speed: 1
+  m_Speed: 1.5333
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 7847432109990905306}
@@ -122,7 +122,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -203655887218126122, guid: 24544c02071806e44b5cebd81198b9f9,
+  m_Motion: {fileID: -203655887218126122, guid: ff81644f64eaf6743b8414ec50c6e848,
     type: 3}
   m_Tag: 
   m_SpeedParameter: 
@@ -284,7 +284,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Second Combo Attack
-  m_Speed: 1
+  m_Speed: 1.2666
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 4623852433799606013}
@@ -298,7 +298,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -203655887218126122, guid: 2f4802d74d155804bae23e62564ee080,
+  m_Motion: {fileID: -203655887218126122, guid: 00ccc450aa06f3148b92c154a2703d13,
     type: 3}
   m_Tag: 
   m_SpeedParameter: 
@@ -319,7 +319,7 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0
+  m_TransitionDuration: 0.2
   m_TransitionOffset: 0
   m_ExitTime: 1
   m_HasExitTime: 1
@@ -391,7 +391,7 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0
+  m_TransitionDuration: 0.2
   m_TransitionOffset: 0
   m_ExitTime: 1
   m_HasExitTime: 1
@@ -418,7 +418,7 @@ AnimatorStateTransition:
   serializedVersion: 3
   m_TransitionDuration: 0.16
   m_TransitionOffset: 0
-  m_ExitTime: 0.64
+  m_ExitTime: 0.6
   m_HasExitTime: 1
   m_HasFixedDuration: 0
   m_InterruptionSource: 0
@@ -432,7 +432,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Third Combo Attack
-  m_Speed: 1
+  m_Speed: 1.4446
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 2042965089029764505}
@@ -445,10 +445,10 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -203655887218126122, guid: 966e1d50de477e447acb3216fb8dcc01,
+  m_Motion: {fileID: -203655887218126122, guid: 4dc5a6dd06a8f9a45aedea5639214f98,
     type: 3}
   m_Tag: 
-  m_SpeedParameter: 
+  m_SpeedParameter: Move
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
@@ -469,9 +469,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.16
+  m_TransitionDuration: 0.15999997
   m_TransitionOffset: 0
-  m_ExitTime: 0.64
+  m_ExitTime: 0.56
   m_HasExitTime: 1
   m_HasFixedDuration: 0
   m_InterruptionSource: 0

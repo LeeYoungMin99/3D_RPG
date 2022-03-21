@@ -7,7 +7,7 @@ public abstract class AttackState : State
     [Header("Combo")]
     [SerializeField] protected bool _isCombo = false;
     [Range(0f, 1f)]
-    [SerializeField] protected float _impossibleComboInputTime = 0f;
+    [SerializeField] protected float _impossibleComboInputAnimationNormalizedTime = 0f;
 
     [Header("Skill")]
     [SerializeField] protected bool _isSkill = false;
@@ -15,8 +15,8 @@ public abstract class AttackState : State
     [SerializeField] protected float _cooldown = 0f;
 
     [Header("Attack Setting")]
-    [Range(0f, 1f)]
-    [SerializeField] protected float _delay = 0.2f;
+    [Range(0f, 3f)]
+    [SerializeField] protected float _attackDelayTime = 0.2f;
 
     protected CharacterRotator _rotator;
     protected TargetManager _targetManager;
@@ -60,7 +60,7 @@ public abstract class AttackState : State
             return false;
         }
 
-        if (_impossibleComboInputTime > _animator.GetCurrentAnimatorStateInfo(0).normalizedTime)
+        if (_impossibleComboInputAnimationNormalizedTime > _animator.GetCurrentAnimatorStateInfo(0).normalizedTime)
         {
             return false;
         }
@@ -105,6 +105,21 @@ public abstract class AttackState : State
     public override void UpdateState()
     {
         if (false == CheckComboPossible()) return;
+
+        if (true == _isPlayableCharacter)
+        {
+            if (true == _input.Attack)
+            {
+                _animator.SetTrigger(CharacterAnimID.IS_ATTACKING);
+
+                return;
+            }
+
+            if (false == _isAuto)
+            {
+                return;
+            }
+        }
 
         if (null != _targetManager.EnemyTarget)
         {

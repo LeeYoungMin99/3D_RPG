@@ -21,7 +21,7 @@ public class SectorFormAttackState : AttackState
 
     protected override IEnumerator Attack()
     {
-        if (_delay > 0f) yield return new WaitForSeconds(_delay);
+        if (_attackDelayTime > 0f) yield return new WaitForSeconds(_attackDelayTime);
 
         int targetCount = Physics.OverlapSphereNonAlloc(transform.position, _radius, _targetColliders, _targetMask);
 

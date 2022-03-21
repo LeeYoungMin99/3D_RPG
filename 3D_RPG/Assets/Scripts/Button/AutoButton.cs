@@ -4,15 +4,6 @@ using UnityEngine.UI;
 
 public class AutoButton : MonoBehaviour
 {
-    [SerializeField] private Button _button;
-    [SerializeField] private Text _text;
-
-    private bool _isAuto = false;
-
-    public event EventHandler<AutoButtonEventArgs> OnClickEvent;
-
-    public bool IsAuto { get { return _isAuto; } }
-
     public class AutoButtonEventArgs : EventArgs
     {
         public bool CurAuto;
@@ -22,6 +13,15 @@ public class AutoButton : MonoBehaviour
             CurAuto = b;
         }
     }
+
+    [SerializeField] private Button _button;
+    [SerializeField] private Text _text;
+
+    private bool _isAuto = false;
+
+    public event EventHandler<AutoButtonEventArgs> OnClickEvent;
+
+    public bool IsAuto { get { return _isAuto; } }
 
     private void Awake()
     {

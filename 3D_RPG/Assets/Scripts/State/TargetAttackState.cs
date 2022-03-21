@@ -15,10 +15,7 @@ public class TargetAttackState : AttackState
 
     protected override IEnumerator Attack()
     {
-        if (_delay > 0f)
-        {
-            yield return new WaitForSeconds(_delay);
-        }
+        if (_attackDelayTime > 0f) yield return new WaitForSeconds(_attackDelayTime);
 
         _targetManager.EnemyTarget.GetComponent<Status>().TakeDamage(_status.ATK);
     }

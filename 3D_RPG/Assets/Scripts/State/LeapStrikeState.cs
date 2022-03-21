@@ -35,7 +35,7 @@ public class LeapStrikeState : TargetAttackState
 
         _elapsedTime += Time.deltaTime;
 
-        float clampElapsedTime = Mathf.Clamp(_elapsedTime / _delay, 0f, 0.8f);
+        float clampElapsedTime = Mathf.Clamp(_elapsedTime / _attackDelayTime, 0f, 0.8f);
 
         transform.position = Vector3.Lerp(_startPosition, _targetPosition, clampElapsedTime);
 
