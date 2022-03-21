@@ -1,16 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerSectorFormAttack : SectorFormAttackState
 {
     private PlayerInput _input;
+    private bool _isAuto = false;
 
     protected override void Start()
     {
         base.Start();
 
-        _input = GetComponent<PlayerInput>();
+        _input = transform.parent.GetComponent<PlayerInput>();
+
+        AutoButton autoButton = GameObject.Find("Auto Button").GetComponent<AutoButton>();
+        _isAuto = autoButton.IsAuto;
+        autoButton.OnClickEvent -= SetAuto;
+        autoButton.OnClickEvent += SetAuto;
     }
 
     public override void UpdateState()
@@ -24,6 +28,14 @@ public class PlayerSectorFormAttack : SectorFormAttackState
             return;
         }
 
-        base.UpdateState();
+        if (true == _isAuto)
+        {
+            base.UpdateState();
+        }
+    }
+
+    private void SetAuto(object sender, AutoButton.AutoButtonEventArgs args)
+    {
+        _isAuto = args.CurAuto;
     }
 }

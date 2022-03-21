@@ -9,7 +9,7 @@ public class MenuButton : MonoBehaviour
     [SerializeField] private List<Button> _buttons = new List<Button>();
     [SerializeField] private Button _button;
 
-    private bool _isShow = true;
+    private bool _isShowing = true;
 
     private void Start()
     {
@@ -24,9 +24,9 @@ public class MenuButton : MonoBehaviour
         HideList();
     }
 
-    void OnClick()
+    private void OnClick()
     {
-        if(true == _isShow)
+        if (true == _isShowing)
         {
             HideList();
         }
@@ -36,9 +36,9 @@ public class MenuButton : MonoBehaviour
         }
     }
 
-    public void ShowList()
+    private void ShowList()
     {
-        _isShow = true;
+        _isShowing = true;
 
         foreach (Button button in _buttons)
         {
@@ -46,9 +46,9 @@ public class MenuButton : MonoBehaviour
         }
     }
 
-    public void HideList()
+    private void HideList()
     {
-        _isShow = false;
+        _isShowing = false;
 
         foreach (Button button in _buttons)
         {

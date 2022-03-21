@@ -6,7 +6,7 @@ public abstract class AttackState : State
 {
     [Header("Combo")]
     [SerializeField] protected bool _isCombo = false;
-    [Range(0f, 30f)]
+    [Range(0f, 1f)]
     [SerializeField] protected float _impossibleComboInputTime = 0f;
 
     [Header("Skill")]
@@ -15,6 +15,7 @@ public abstract class AttackState : State
     [SerializeField] protected float _cooldown = 0f;
 
     [Header("Attack Setting")]
+    [Range(0f, 1f)]
     [SerializeField] protected float _delay = 0.2f;
 
     protected CharacterRotator _rotator;

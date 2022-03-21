@@ -43,6 +43,8 @@ public class Status : MonoBehaviour
 
     public void TakeDamage(float Damage)
     {
+        if (0f >= CurHP) return;
+
         CurHP -= Damage;
 
         if (0f >= CurHP)

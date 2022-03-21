@@ -48,10 +48,10 @@ ModelImporter:
       hasAdditiveReferencePose: 0
       loopTime: 1
       loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
       loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
+      keepOriginalOrientation: 1
       keepOriginalPositionY: 1
       keepOriginalPositionXZ: 0
       heightFromFeet: 0
@@ -692,7 +692,8 @@ ModelImporter:
     - name: arissa:RightHandPinky3
       parentName: arissa:RightHandPinky2
       position: {x: 0.027224878, y: -0.00064054, z: 0.00023157}
-      rotation: {x: -0.000000011641532, y: 0.0000000027284845, z: -0.0000000020691007, w: 1}
+      rotation: {x: -0.000000011641532, y: 0.0000000027284845, z: -0.0000000020691007,
+        w: 1}
       scale: {x: 1, y: 1, z: 0.99999994}
     - name: arissa:RightHandPinky4
       parentName: arissa:RightHandPinky3
@@ -742,7 +743,8 @@ ModelImporter:
     - name: arissa:RightHandIndex3
       parentName: arissa:RightHandIndex2
       position: {x: 0.02873717, y: -0.00136415, z: 0}
-      rotation: {x: 1.7763568e-15, y: -0.0000000018189892, z: -0.000000003092282, w: 1}
+      rotation: {x: 1.7763568e-15, y: -0.0000000018189892, z: -0.000000003092282,
+        w: 1}
       scale: {x: 1, y: 1, z: 0.99999994}
     - name: arissa:RightHandIndex4
       parentName: arissa:RightHandIndex3
@@ -882,7 +884,8 @@ ModelImporter:
     - name: arissa:LeftHandIndex2
       parentName: arissa:LeftHandIndex1
       position: {x: -0.037340887, y: 0, z: 0.00051251997}
-      rotation: {x: -0.000000011641533, y: 3.6379777e-10, z: -0.0000000014551915, w: 1}
+      rotation: {x: -0.000000011641533, y: 3.6379777e-10, z: -0.0000000014551915,
+        w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: arissa:LeftHandIndex3
       parentName: arissa:LeftHandIndex2
@@ -912,7 +915,8 @@ ModelImporter:
     - name: arissa:LeftHandThumb3
       parentName: arissa:LeftHandThumb2
       position: {x: -0.02827938, y: -0.00457375, z: 0.01702996}
-      rotation: {x: -0.000000017462295, y: 0.0000000043655732, z: -0.000000014915711, w: 1}
+      rotation: {x: -0.000000017462295, y: 0.0000000043655732, z: -0.000000014915711,
+        w: 1}
       scale: {x: 1.0000001, y: 1.0000001, z: 0.99999994}
     - name: arissa:LeftHandThumb4
       parentName: arissa:LeftHandThumb3
@@ -956,7 +960,8 @@ ModelImporter:
     hasTranslationDoF: 0
     hasExtraRoot: 1
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 589a114c47148d6419134d535ea0396b, type: 3}
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 589a114c47148d6419134d535ea0396b,
+    type: 3}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 3
   humanoidOversampling: 1

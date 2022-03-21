@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class LeapStrikeState : TargetAttackState
 {
+    private Transform _target;
+
     private Vector3 _startPosition;
     private Vector3 _targetPosition;
 
@@ -20,14 +22,15 @@ public class LeapStrikeState : TargetAttackState
 
         _elapsedTime = 0f;
         _startPosition = transform.position;
-        _targetPosition = _targetManager.EnemyTarget.position;
+        _target = _targetManager.EnemyTarget;
+        _targetPosition = _target.position;
     }
 
     public override void UpdateState()
     {
-        if (null != _targetManager.EnemyTarget)
+        if (null != _target)
         {
-            _targetPosition = _targetManager.EnemyTarget.position;
+            _targetPosition = _target.position;
         }
 
         _elapsedTime += Time.deltaTime;

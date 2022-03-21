@@ -1103,11 +1103,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2801722468663444169}
   - component: {fileID: 8070902883347306675}
-  - component: {fileID: 3411091490113904240}
-  - component: {fileID: 1245801145}
-  - component: {fileID: 3411091490113904239}
-  - component: {fileID: 8528830248201494597}
-  - component: {fileID: -3707231968534572639}
   m_Layer: 6
   m_Name: Magician
   m_TagString: Player
@@ -1141,7 +1136,7 @@ Animator:
   m_GameObject: {fileID: 3290555801220552819}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 88d75a775501fea458a031970397e0e8, type: 3}
-  m_Controller: {fileID: 22100000, guid: a28340f5dd33b5243933438a576d3fe6, type: 2}
+  m_Controller: {fileID: 9100000, guid: 76a935e277980864d89559df4507681d, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -1150,82 +1145,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &3411091490113904240
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3290555801220552819}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09ea48f97f458d84a9bece39b39a7dd0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _body: {fileID: 2801722468663444169}
-  _rotationSmoothTime: 0.12
---- !u!114 &1245801145
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3290555801220552819}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1cb4c57473971849b4f868435965a76, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &3411091490113904239
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3290555801220552819}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f925d3625fcd2f04686b311e42470416, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stateTag: 0
-  _moveSpeed: 5
-  _autoAttackDistance: 15
---- !u!114 &8528830248201494597
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3290555801220552819}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4cb18da56aeb26498dabc29f7a4abba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stateTag: 1
-  _delay: 0.2
-  _radius: 5
-  _targetMask:
-    serializedVersion: 2
-    m_Bits: 8
-  _targetCount: 16
-  _effect: {fileID: 198656289721292014, guid: 64891a0eb28db934898420d80ca07cb3, type: 3}
---- !u!114 &-3707231968534572639
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3290555801220552819}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9530f4c8a4cd9b4384836ce7fae20f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MaxHPPerLevel: 100
-  ATKPerLevel: 100
-  _level: 1
 --- !u!1 &3293723078095267554
 GameObject:
   m_ObjectHideFlags: 0
