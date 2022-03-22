@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 4911711477882759644}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.1}
+  m_LocalScale: {x: 0.2, y: 0.3, z: 0.1}
   m_Children: []
   m_Father: {fileID: 6898287128389814520}
   m_RootOrder: 0
@@ -746,7 +746,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 0.8519943
+      value: 0.5
       mode: 0
       spread: 0
       speed:
@@ -4989,6 +4989,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 198207014375249716, guid: 64891a0eb28db934898420d80ca07cb3,
         type: 3}
+      propertyPath: lengthInSec
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198207014375249716, guid: 64891a0eb28db934898420d80ca07cb3,
+        type: 3}
       propertyPath: playOnAwake
       value: 1
       objectReference: {fileID: 0}
@@ -4996,6 +5001,11 @@ PrefabInstance:
         type: 3}
       propertyPath: simulationSpeed
       value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 198263872644927810, guid: 64891a0eb28db934898420d80ca07cb3,
+        type: 3}
+      propertyPath: lengthInSec
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 198263872644927810, guid: 64891a0eb28db934898420d80ca07cb3,
         type: 3}
@@ -5014,6 +5024,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 198656289721292014, guid: 64891a0eb28db934898420d80ca07cb3,
         type: 3}
+      propertyPath: lengthInSec
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198656289721292014, guid: 64891a0eb28db934898420d80ca07cb3,
+        type: 3}
       propertyPath: playOnAwake
       value: 1
       objectReference: {fileID: 0}
@@ -5021,6 +5036,11 @@ PrefabInstance:
         type: 3}
       propertyPath: simulationSpeed
       value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 198698117513318312, guid: 64891a0eb28db934898420d80ca07cb3,
+        type: 3}
+      propertyPath: lengthInSec
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 198698117513318312, guid: 64891a0eb28db934898420d80ca07cb3,
         type: 3}

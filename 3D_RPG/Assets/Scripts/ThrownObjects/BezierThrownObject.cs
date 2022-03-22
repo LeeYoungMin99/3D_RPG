@@ -71,9 +71,7 @@ public class BezierThrownObject : ThrownObject
     {
         if (other.gameObject == Target.gameObject)
         {
-            other.GetComponent<Status>().TakeDamage(Damage);
-
-            StartCoroutine(DisableObjectAfterDuration());
+            other.GetComponent<CharacterStatus>().TakeDamage(Damage);
         }
     }
 }

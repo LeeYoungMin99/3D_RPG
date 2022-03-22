@@ -16,9 +16,9 @@ public class CharacterInventorySlotManager : MonoBehaviour
     private int _curInventoryPage = 1;
     private bool _bIsClickPlacementSlot = false;
 
-    private List<Character> _characterList = new List<Character>();
+    private List<CharacterData> _characterList = new List<CharacterData>();
 
-    public Character CurSelectCharacter;
+    public CharacterData CurSelectCharacter;
 
     private void Awake()
     {
@@ -26,7 +26,6 @@ public class CharacterInventorySlotManager : MonoBehaviour
 
         ObtainCharacter("Sword Man");
         ObtainCharacter("Archer");
-        ObtainCharacter("Gunner");
         ObtainCharacter("Magician");
     }
 
@@ -78,7 +77,7 @@ public class CharacterInventorySlotManager : MonoBehaviour
             return false;
         }
 
-        Character character = new Character(name);
+        CharacterData character = new CharacterData(name);
         GameObject pawn = Instantiate(Resources.Load<GameObject>($"Character/{name}"), _player.transform.position, _player.transform.rotation);
 
         pawn.transform.SetParent(_player.transform);

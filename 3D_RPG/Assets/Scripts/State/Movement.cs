@@ -14,9 +14,8 @@ public class Movement : State
     private Coroutine _coroutineSetNavMeshPath;
     private float _animationBlend = 0f;
 
-    protected NavMeshAgent _navMeshAgent;
-    protected TargetManager _targetManager;
     protected Animator _animator;
+    protected NavMeshAgent _navMeshAgent;
     protected bool _canUseSkill = true;
 
     protected const float PATH_FIND_DELAY = 0.25f;
@@ -28,7 +27,6 @@ public class Movement : State
     private void Start()
     {
         _animator = GetComponent<Animator>();
-        _targetManager = GetComponent<TargetManager>();
         _navMeshAgent = GetComponent<NavMeshAgent>();
 
         if (true == _hasSkill)
@@ -93,13 +91,13 @@ public class Movement : State
     {
         while (true == enabled)
         {
-            if (null != _targetManager.Target)
-            {
-                _navMeshAgent.SetDestination(_targetManager.Target.position);
-            }
-            else if (null != _targetManager.EnemyTarget)
+            if (null != _targetManager.EnemyTarget)
             {
                 _navMeshAgent.SetDestination(_targetManager.EnemyTarget.position);
+            }
+            else if (null != _targetManager.Target)
+            {
+                _navMeshAgent.SetDestination(_targetManager.Target.position);
             }
             else
             {
@@ -131,21 +129,21 @@ public class Movement : State
     {
         if (true == _isPlayableCharacter)
         {
-            if (true == _input.Attack)
+            if (true == _playerInput.Attack)
             {
                 _animator.SetTrigger(CharacterAnimID.IS_ATTACKING);
 
                 return;
             }
 
-            if (true == _input.Skill && true == _canUseSkill && null != _targetManager.EnemyTarget)
+            if (true == _playerInput.Skill && true == _canUseSkill && null != _targetManager.EnemyTarget)
             {
                 _animator.SetTrigger(CharacterAnimID.USE_SKILL);
 
                 return;
             }
 
-            Vector2 input = new Vector2(_input.Horizontal, _input.Vertical);
+            Vector2 input = new Vector2(_playerInput.Horizontal, _playerInput.Vertical);
 
             if (ZERO_VECTOR2 != input)
             {
@@ -160,7 +158,9 @@ public class Movement : State
             if (false == _isAuto)
             {
                 _navMeshAgent.isStopped = true;
+
                 BlendAnimation(IDLE_ANIMATION_PARAMETER_VALUE);
+
                 return;
             }
         }
@@ -208,6 +208,7 @@ public class Movement : State
     public override void ExitState()
     {
         _animator.SetFloat(CharacterAnimID.MOVE, IDLE_ANIMATION_PARAMETER_VALUE);
+        _animationBlend = 0f;
 
         _navMeshAgent.ResetPath();
 

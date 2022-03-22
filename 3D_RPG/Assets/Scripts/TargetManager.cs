@@ -1,83 +1,66 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class TargetManager : MonoBehaviour
 {
-    [SerializeField] private float _searchDelay = 0.25f;
-    [SerializeField] private float _enemySearchRadius = 6f;
-    [SerializeField] private float _NPCSearchRadius = 3f;
-    [SerializeField] private LayerMask _enemyTargetMask;
-    [SerializeField] private LayerMask _NPCTargetMask;
+    [Header("Target Enemy Setting")]
+    [SerializeField] protected float _searchDelay = 0.25f;
+    [SerializeField] protected float _enemySearchRadius = 15f;
+    [SerializeField] protected LayerMask _enemyTargetLayer;
 
-    private readonly Collider[] _targetColliders = new Collider[16];
-    private Coroutine _coroutineSearchTarget;
+    protected readonly Collider[] _targetColliders = new Collider[16];
+    protected Coroutine _coroutineSearchTarget;
 
     public Transform Target;
 
-    public Transform EnemyTarget { get; private set; }
-    public Transform NPCTarget { get; private set; }
-    public LayerMask EnemyTargetLayer { get { return _enemyTargetMask; } }
-
-    private void OnEnable()
-    {
-        _coroutineSearchTarget = StartCoroutine(SearchTarget());
-    }
+    public Transform EnemyTarget { get; protected set; }
+    public LayerMask EnemyTargetLayer { get { return _enemyTargetLayer; } }
 
     private void OnDisable()
     {
         StopCoroutine(_coroutineSearchTarget);
     }
 
-    private IEnumerator SearchTarget()
+    protected virtual void OnEnable()
+    {
+        _coroutineSearchTarget = StartCoroutine(SearchTarget());
+    }
+
+    protected virtual IEnumerator SearchTarget()
     {
         while (true == enabled)
         {
-            int enemyTargetCount = Physics.OverlapSphereNonAlloc(transform.position, _enemySearchRadius, _targetColliders, _enemyTargetMask);
-
-            float minDistance = 500f;
-            float distance;
-
-            if (0 != enemyTargetCount)
-            {
-                for (int i = 0; i < enemyTargetCount; ++i)
-                {
-                    distance = Vector3.Distance(_targetColliders[i].transform.position, transform.position);
-
-                    if (minDistance > distance)
-                    {
-                        minDistance = distance;
-
-                        EnemyTarget = _targetColliders[i].transform;
-                    }
-                }
-            }
-            else
-            {
-                EnemyTarget = null;
-            }
-
-            int NPCTargetCount = Physics.OverlapSphereNonAlloc(transform.position, _NPCSearchRadius, _targetColliders, _NPCTargetMask);
-
-            if (0 != NPCTargetCount)
-            {
-                for (int i = 0; i < enemyTargetCount; ++i)
-                {
-                    distance = Vector3.Distance(_targetColliders[i].transform.position, transform.position);
-
-                    if (minDistance > distance)
-                    {
-                        minDistance = distance;
-
-                        NPCTarget = _targetColliders[i].transform;
-                    }
-                }
-            }
-            else
-            {
-                NPCTarget = null;
-            }
+            EnemyTarget = SearchTargetHelper(_enemySearchRadius, _enemyTargetLayer);
 
             yield return new WaitForSeconds(_searchDelay);
         }
+    }
+
+    protected Transform SearchTargetHelper(float searchRadius, LayerMask targetLayer)
+    {
+        int targetCount = Physics.OverlapSphereNonAlloc(transform.position, searchRadius, _targetColliders, targetLayer);
+
+        float minDistance = float.MaxValue;
+        float distance;
+
+        Transform target = null;
+
+        if (0 != targetCount)
+        {
+            for (int i = 0; i < targetCount; ++i)
+            {
+                distance = Vector3.Distance(_targetColliders[i].transform.position, transform.position);
+
+                if (minDistance > distance)
+                {
+                    minDistance = distance;
+
+                    target = _targetColliders[i].transform;
+                }
+            }
+        }
+
+        return target;
     }
 }

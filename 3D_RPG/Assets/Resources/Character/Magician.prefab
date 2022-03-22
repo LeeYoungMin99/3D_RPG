@@ -949,7 +949,7 @@ GameObject:
   - component: {fileID: 9085973306097438199}
   - component: {fileID: 2929516255725422616}
   - component: {fileID: 2623015086755852517}
-  - component: {fileID: 2929516255725422631}
+  - component: {fileID: 2687446234274543933}
   - component: {fileID: 2929516255725422618}
   - component: {fileID: 5410549889871513715}
   - component: {fileID: 8211673995113798030}
@@ -1063,7 +1063,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09ea48f97f458d84a9bece39b39a7dd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2929516255725422631
+--- !u!114 &2687446234274543933
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1077,14 +1077,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _searchDelay: 0.25
   _enemySearchRadius: 15
-  _NPCSearchRadius: 3
-  _enemyTargetMask:
+  _enemyTargetLayer:
     serializedVersion: 2
     m_Bits: 8
+  Target: {fileID: 0}
+  _NPCSearchRadius: 5
   _NPCTargetMask:
     serializedVersion: 2
     m_Bits: 128
-  Target: {fileID: 0}
+  enemyHealthBar: {fileID: 0}
 --- !u!114 &2929516255725422618
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1194,12 +1195,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2929516255725422630}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9530f4c8a4cd9b4384836ce7fae20f6, type: 3}
+  m_Script: {fileID: 11500000, guid: 4c6696996ebfca84cbee6f0c5cd8fdfa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHPPerLevel: 100
-  ATKPerLevel: 1
   _level: 1
+  MaxHPPerLevel: 100
+  ATKPerLevel: 999
 --- !u!1 &2946838018874163921
 GameObject:
   m_ObjectHideFlags: 0

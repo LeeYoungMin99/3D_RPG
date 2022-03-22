@@ -14,8 +14,6 @@ public class CharacterRotator : MonoBehaviour
 
     public void RotateImmediately(float angle)
     {
-        if (true == float.IsNaN(angle)) return;
-
         transform.eulerAngles += new Vector3(0.0f, angle, 0.0f);
     }
 }

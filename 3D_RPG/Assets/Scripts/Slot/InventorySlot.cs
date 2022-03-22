@@ -9,7 +9,7 @@ public class InventorySlot : CharacterSlot
         _characterInventorySlotManager.SetInteractablePlacementSlots(true);
     }
 
-    public override void ChangeCharacter(Character character)
+    public override void ChangeCharacter(CharacterData character)
     {
         _character = character;
 

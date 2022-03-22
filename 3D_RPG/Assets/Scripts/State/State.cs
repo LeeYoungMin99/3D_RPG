@@ -5,7 +5,8 @@ public class State : MonoBehaviour
     [SerializeField] protected EStateTag stateTag;
 
     protected StateMachine _stateMachine;
-    protected PlayerInput _input;
+    protected PlayerInput _playerInput;
+    protected TargetManager _targetManager;
     protected bool _isPlayableCharacter = false;
     protected bool _isAuto = false;
 
@@ -20,20 +21,25 @@ public class State : MonoBehaviour
 
         _stateMachine.AddState(stateTag, this);
 
-        _input = transform.parent.GetComponent<PlayerInput>();
+        _playerInput = transform.parent.GetComponent<PlayerInput>();
 
-        if (null != _input)
+        if (null != _playerInput)
         {
             _isPlayableCharacter = true;
 
             AutoButton autoButton = GameObject.Find("Auto Button").GetComponent<AutoButton>();
-            _isAuto = autoButton.IsAuto;
             autoButton.OnClickEvent -= SetAuto;
             autoButton.OnClickEvent += SetAuto;
+
+            _isAuto = autoButton.IsAuto;
+
+            _targetManager = GetComponent<PlayerTargetManager>();
         }
         else
         {
             _isPlayableCharacter = false;
+
+            _targetManager = GetComponent<TargetManager>();
         }
     }
 

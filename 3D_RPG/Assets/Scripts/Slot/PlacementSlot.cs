@@ -25,7 +25,7 @@ public class PlacementSlot : CharacterSlot
         _image.sprite = null;
     }
 
-    public override void ChangeCharacter(Character character)
+    public override void ChangeCharacter(CharacterData character)
     {
         if (null != _character)
         {

@@ -39,6 +39,8 @@ public abstract class ThrownObject : MonoBehaviour
 
     protected IEnumerator DisableObjectAfterDuration()
     {
+        yield return new WaitForEndOfFrame();
+
         _collider.enabled = false;
 
         if (0f != _explosionEffectDuration)
@@ -74,5 +76,7 @@ public abstract class ThrownObject : MonoBehaviour
         {
             _explosionEffect.gameObject.SetActive(true);
         }
+
+        StartCoroutine(DisableObjectAfterDuration());
     }
 }

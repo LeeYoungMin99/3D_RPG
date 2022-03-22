@@ -8,7 +8,7 @@ public class CharacterSlot : MonoBehaviour
     [SerializeField] protected Image _image;
     [SerializeField] protected Text _text;
 
-    protected Character _character;
+    protected CharacterData _character;
     protected int _index;
 
     private void Awake()
@@ -23,7 +23,7 @@ public class CharacterSlot : MonoBehaviour
         _slotButton.interactable = b;
     }
 
-    public virtual void ChangeCharacter(Character character) { }
+    public virtual void ChangeCharacter(CharacterData character) { }
 
     protected virtual void OnClick() { }
 }

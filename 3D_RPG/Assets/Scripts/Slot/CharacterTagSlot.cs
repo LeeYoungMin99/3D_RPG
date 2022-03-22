@@ -15,7 +15,7 @@ public class CharacterTagSlot : CharacterSlot
         _characterInventorySlotManager.OnClickTagSlot();
     }
 
-    public override void ChangeCharacter(Character character)
+    public override void ChangeCharacter(CharacterData character)
     {
         _character = character;
 

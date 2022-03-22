@@ -45,7 +45,7 @@ public class RangeAttackState : AttackState
 
         for (int i = 0; i < targetCount; ++i)
         {
-            _targetColliders[i].GetComponent<Status>().TakeDamage(_status.ATK);
+            _targetColliders[i].GetComponent<CharacterStatus>().TakeDamage(_status.ATK);
         }
     }
 }

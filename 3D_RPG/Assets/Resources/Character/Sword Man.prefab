@@ -1779,7 +1779,7 @@ GameObject:
   - component: {fileID: 4474287828151054493}
   - component: {fileID: 7541200629904815474}
   - component: {fileID: 7234702763362356623}
-  - component: {fileID: 7541200629904815437}
+  - component: {fileID: 8636637151207226928}
   - component: {fileID: 7541200629904815472}
   - component: {fileID: 7541200629904815433}
   - component: {fileID: 7541200629904815434}
@@ -1793,7 +1793,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7200247174311833590
 Transform:
   m_ObjectHideFlags: 0
@@ -1897,7 +1897,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09ea48f97f458d84a9bece39b39a7dd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &7541200629904815437
+--- !u!114 &8636637151207226928
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1911,14 +1911,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _searchDelay: 0.25
   _enemySearchRadius: 15
-  _NPCSearchRadius: 3
-  _enemyTargetMask:
+  _enemyTargetLayer:
     serializedVersion: 2
     m_Bits: 8
+  Target: {fileID: 0}
+  _NPCSearchRadius: 5
   _NPCTargetMask:
     serializedVersion: 2
     m_Bits: 128
-  Target: {fileID: 0}
 --- !u!114 &7541200629904815472
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1945,6 +1945,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stateTag: 0
   _moveSpeed: 5
+  _stoppingDistance: 3
   _hasSkill: 1
 --- !u!114 &7541200629904815434
 MonoBehaviour:
@@ -1965,11 +1966,14 @@ MonoBehaviour:
   _cooldown: 0
   _attackDelayTime: 0.6
   _hitAngle: 80
-  _radius: 1
+  _radius: 2.5
   _targetCount: 16
   _targetMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
+  _hasArcLineRenderer: 1
+  _arcLineRenderer: {fileID: 1756928250594173229, guid: 2458a7c9d935c5d48a2bfdb906a4a357,
+    type: 3}
 --- !u!114 &7541200629904815435
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1989,11 +1993,14 @@ MonoBehaviour:
   _cooldown: 0
   _attackDelayTime: 0.525
   _hitAngle: 60
-  _radius: 1
+  _radius: 2.5
   _targetCount: 16
   _targetMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
+  _hasArcLineRenderer: 1
+  _arcLineRenderer: {fileID: 1756928250594173229, guid: 2458a7c9d935c5d48a2bfdb906a4a357,
+    type: 3}
 --- !u!114 &7541200629904815473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2018,6 +2025,9 @@ MonoBehaviour:
   _targetMask:
     serializedVersion: 2
     m_Bits: 8
+  _hasArcLineRenderer: 1
+  _arcLineRenderer: {fileID: 1756928250594173229, guid: 2458a7c9d935c5d48a2bfdb906a4a357,
+    type: 3}
 --- !u!114 &7541200629904815477
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2045,12 +2055,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 7541200629904815436}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9530f4c8a4cd9b4384836ce7fae20f6, type: 3}
+  m_Script: {fileID: 11500000, guid: 4c6696996ebfca84cbee6f0c5cd8fdfa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHPPerLevel: 100
-  ATKPerLevel: 1
   _level: 1
+  MaxHPPerLevel: 100
+  ATKPerLevel: 999
 --- !u!1 &7556804811343677250
 GameObject:
   m_ObjectHideFlags: 0

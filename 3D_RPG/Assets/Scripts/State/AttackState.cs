@@ -19,8 +19,7 @@ public abstract class AttackState : State
     [SerializeField] protected float _attackDelayTime = 0.2f;
 
     protected CharacterRotator _rotator;
-    protected TargetManager _targetManager;
-    protected Status _status;
+    protected CharacterStatus _status;
     protected Animator _animator;
 
     public event EventHandler<EventArgs> OnCooldownElapsed;
@@ -30,8 +29,7 @@ public abstract class AttackState : State
     protected virtual void Start()
     {
         _rotator = GetComponent<CharacterRotator>();
-        _targetManager = GetComponent<TargetManager>();
-        _status = GetComponent<Status>();
+        _status = GetComponent<CharacterStatus>();
         _animator = GetComponent<Animator>();
     }
 
@@ -39,7 +37,7 @@ public abstract class AttackState : State
     {
         Vector3 targetDir = (targetPosition - myPosition).normalized;
 
-        float dot = Vector3.Dot(targetDir, transform.forward);
+        float dot = Mathf.Clamp(Vector3.Dot(targetDir, transform.forward), -1f, 1f);
 
         float angle = Mathf.Acos(dot) * Mathf.Rad2Deg;
 
@@ -108,7 +106,7 @@ public abstract class AttackState : State
 
         if (true == _isPlayableCharacter)
         {
-            if (true == _input.Attack)
+            if (true == _playerInput.Attack)
             {
                 _animator.SetTrigger(CharacterAnimID.IS_ATTACKING);
 
