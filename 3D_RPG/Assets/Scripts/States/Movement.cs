@@ -11,6 +11,7 @@ public class Movement : State
 
     private GameObject _mainCamera;
     private CharacterRotator _rotator;
+    private Rigidbody _rigidbody;
     private Coroutine _coroutineSetNavMeshPath;
     private float _animationBlend = 0f;
 
@@ -26,6 +27,7 @@ public class Movement : State
 
     private void Start()
     {
+        _rigidbody = GetComponent<Rigidbody>();
         _animator = GetComponent<Animator>();
         _navMeshAgent = GetComponent<NavMeshAgent>();
 
@@ -123,6 +125,16 @@ public class Movement : State
         _animationBlend = Mathf.Lerp(_animationBlend, curValue, Time.deltaTime * 10f);
 
         _animator.SetFloat(CharacterAnimID.MOVE, _animationBlend);
+    }
+
+    public void ChangeRootMotionSettings()
+    {
+        _animator.applyRootMotion = !_animator.applyRootMotion;
+
+        if(false == _animator.applyRootMotion)
+        {
+            _rigidbody.velocity = Vector3.zero;
+        }
     }
 
     public override void UpdateState()

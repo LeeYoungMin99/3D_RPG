@@ -970,7 +970,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2929516255725422630}
-  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -979,7 +979,7 @@ Transform:
   - {fileID: 2952345083972885799}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &8434195347499288806
 Animator:
   serializedVersion: 3
@@ -1085,7 +1085,6 @@ MonoBehaviour:
   _NPCTargetMask:
     serializedVersion: 2
     m_Bits: 128
-  enemyHealthBar: {fileID: 0}
 --- !u!114 &2929516255725422618
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1132,12 +1131,13 @@ MonoBehaviour:
   _isSkill: 0
   _cooldown: 0
   _attackDelayTime: 0.55
-  _thrownObjectPrefab: {fileID: 8091234875309664494, guid: 463b2553be16bb840948a28e20cd3ba9,
+  _projectileObjectPrefab: {fileID: 8091234875309664494, guid: 463b2553be16bb840948a28e20cd3ba9,
     type: 3}
   _startPosition: {fileID: 1588508555}
   _maxShotCount: 1
   _countPerShot: 1
   _intervalTime: 0.1
+  _isSplit: 0
 --- !u!114 &4102091188671940813
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1156,12 +1156,13 @@ MonoBehaviour:
   _isSkill: 0
   _cooldown: 0
   _attackDelayTime: 0.27
-  _thrownObjectPrefab: {fileID: 8091234875309664494, guid: 463b2553be16bb840948a28e20cd3ba9,
+  _projectileObjectPrefab: {fileID: 8091234875309664494, guid: 463b2553be16bb840948a28e20cd3ba9,
     type: 3}
   _startPosition: {fileID: 1542431240}
   _maxShotCount: 1
   _countPerShot: 1
   _intervalTime: 0.1
+  _isSplit: 0
 --- !u!114 &1543461715954884362
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1180,12 +1181,13 @@ MonoBehaviour:
   _isSkill: 0
   _cooldown: 0
   _attackDelayTime: 0.525
-  _thrownObjectPrefab: {fileID: 5595577157275477798, guid: b6e36a1938649a64680d59038f44f172,
+  _projectileObjectPrefab: {fileID: 5595577157275477798, guid: b6e36a1938649a64680d59038f44f172,
     type: 3}
   _startPosition: {fileID: 1152281914}
   _maxShotCount: 8
   _countPerShot: 3
   _intervalTime: 0.1
+  _isSplit: 1
 --- !u!114 &2929516255725422622
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1200,7 +1202,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _level: 1
   MaxHPPerLevel: 100
-  ATKPerLevel: 999
+  ATKPerLevel: 10
 --- !u!1 &2946838018874163921
 GameObject:
   m_ObjectHideFlags: 0

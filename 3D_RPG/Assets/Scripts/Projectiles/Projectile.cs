@@ -1,9 +1,11 @@
 using System.Collections;
 using UnityEngine;
 
-public abstract class ThrownObject : MonoBehaviour
+public abstract class Projectile : MonoBehaviour
 {
     [Header("Particle")]
+    [Tooltip("If there is no effect, there is no need to add it.")]
+    [SerializeField] protected TrailRenderer _trailRenderer;
     [Tooltip("If there is no effect, there is no need to add it.")]
     [SerializeField] protected ParticleSystem _flyingEffect;
     [Tooltip("If there is no effect, there is no need to add it.")]
@@ -12,6 +14,7 @@ public abstract class ThrownObject : MonoBehaviour
     [SerializeField] protected Collider _collider;
 
     protected float _explosionEffectDuration = 0f;
+    protected bool _hasTrailRenderer = false;
     protected bool _hasFlyingEffect = false;
     protected bool _hasExplosionEffect = false;
 
@@ -24,6 +27,11 @@ public abstract class ThrownObject : MonoBehaviour
 
     private void Awake()
     {
+        if (null != _trailRenderer)
+        {
+            _hasTrailRenderer = true;
+        }
+
         if (null != _flyingEffect)
         {
             _hasFlyingEffect = true;
@@ -37,46 +45,55 @@ public abstract class ThrownObject : MonoBehaviour
         }
     }
 
+    protected virtual void OnEnable()
+    {
+        SetTrailRendererDisplay(true);
+        SetFlyingEffectDisplay(true);
+        SetExplosionEffectDisplay(false);
+    }
+
     protected IEnumerator DisableObjectAfterDuration()
     {
         yield return new WaitForEndOfFrame();
 
         _collider.enabled = false;
 
-        if (0f != _explosionEffectDuration)
-        {
-            yield return new WaitForSeconds(_explosionEffectDuration);
-        }
+        if (0f != _explosionEffectDuration) yield return new WaitForSeconds(_explosionEffectDuration);
 
         gameObject.SetActive(false);
         _collider.enabled = true;
     }
 
-    protected void EnableFlyingEffect()
+    protected void SetTrailRendererDisplay(bool b)
     {
-        if (true == _hasFlyingEffect)
-        {
-            _flyingEffect.gameObject.SetActive(true);
-        }
+        if (false == _hasTrailRenderer) return;
 
-        if (true == _hasExplosionEffect)
-        {
-            _explosionEffect.gameObject.SetActive(false);
-        }
+        _trailRenderer.enabled = b;
     }
 
-    protected void EnableExplosionEffect()
+    protected void SetFlyingEffectDisplay(bool b)
     {
-        if (true == _hasFlyingEffect)
-        {
-            _flyingEffect.gameObject.SetActive(false);
-        }
+        if (false == _hasFlyingEffect) return;
 
+        _flyingEffect.gameObject.SetActive(b);
+    }
+
+    protected void SetExplosionEffectDisplay(bool b)
+    {
         if (true == _hasExplosionEffect)
         {
-            _explosionEffect.gameObject.SetActive(true);
+            _explosionEffect.gameObject.SetActive(b);
         }
 
-        StartCoroutine(DisableObjectAfterDuration());
+        if (false == b) return;
+
+        if (false == _hasExplosionEffect)
+        {
+            gameObject.SetActive(false);
+        }
+        else
+        {
+            StartCoroutine(DisableObjectAfterDuration());
+        }
     }
 }

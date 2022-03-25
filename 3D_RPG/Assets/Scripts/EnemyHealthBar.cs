@@ -16,7 +16,6 @@ public class EnemyHealthBar : MonoBehaviour
 
     public PlayerTargetManager PlayerTargetManager { private get; set; }
 
-
     private void LateUpdate()
     {
         if (true == _hasTarget)
@@ -39,7 +38,7 @@ public class EnemyHealthBar : MonoBehaviour
         }
     }
 
-    private void SetDisplayUI(bool b)
+    private void SetUIDisplay(bool b)
     {
         _healthBarBackground.SetActive(b);
         _textBackground.SetActive(b);
@@ -53,7 +52,7 @@ public class EnemyHealthBar : MonoBehaviour
 
             _tagetStatus = PlayerTargetManager.EnemyTarget.GetComponent<CharacterStatus>();
 
-            SetDisplayUI(true);
+            SetUIDisplay(true);
         }
         else
         {
@@ -61,7 +60,7 @@ public class EnemyHealthBar : MonoBehaviour
 
             _tagetStatus = null;
 
-            SetDisplayUI(false);
+            SetUIDisplay(false);
         }
     }
 }
