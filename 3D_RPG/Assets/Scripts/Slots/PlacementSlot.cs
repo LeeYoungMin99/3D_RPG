@@ -1,41 +1,69 @@
+using System;
 using UnityEngine;
 
 public class PlacementSlot : CharacterSlot
 {
-    protected override void OnClick()
+    private CharacterData _selectedCharacterData;
+
+    public event EventHandler<OnSlotClickEventArgs> PlacementSlotClickEvent;
+
+    private void OnDisable()
     {
-        _characterInventorySlotManager.SetInteractablePlacementSlots(false);
+        _selectedCharacterData = null;
 
-        if (_character == _characterInventorySlotManager.CurSelectCharacter)
-        {
-            return;
-        }
-
-        _characterInventorySlotManager.OnClickPlacementSlot(_index);
+        _slotButton.interactable = false;
     }
 
-    public void WithdrawCharacter()
+    private void ChangeCharacterData(CharacterData characterData)
     {
-        _character.SubtractDelegateOnChangeDeploy = WithdrawCharacter;
+        _characterData = characterData;
 
-        _characterInventorySlotManager.WithdrawCharacter(_index);
+        _image.sprite = characterData.PlacementSlotSprite;
+    }
 
-        _character = null;
+    private void SetSelectedCharacterData(object sender, OnSlotClickEventArgs args)
+    {
+        _selectedCharacterData = args._characterData;
+
+        _eventArgs = args;
+
+        _slotButton.interactable = true;
+    }
+
+    private void CheckTheSameCharacterData(object sender, EventArgs args)
+    {
+        if (_selectedCharacterData != _characterData) return;
+
+        _characterData = null;
 
         _image.sprite = null;
+
+        PlacementSlotClickEvent?.Invoke(sender, null);
     }
 
-    public override void ChangeCharacter(CharacterData character)
+    private void DisableClick(object sender, EventArgs args)
     {
-        if (null != _character)
-        {
-            WithdrawCharacter();
-        }
+        _slotButton.interactable = false;
+    }
 
-        _character = character;
+    protected override void Awake()
+    {
+        base.Awake();
 
-        _image.sprite = _character.PlacementSlotSprite;
+        _characterInventorySlotManager.InventorySlotClickEvent -= SetSelectedCharacterData;
+        _characterInventorySlotManager.InventorySlotClickEvent += SetSelectedCharacterData;
 
-        _character.AddDelegateOnChangeDeploy = WithdrawCharacter;
+        _characterInventorySlotManager.PlacementSlotClickEvent -= DisableClick;
+        _characterInventorySlotManager.PlacementSlotClickEvent += DisableClick;
+
+        _characterInventorySlotManager.PlacementSlotClickEvent -= CheckTheSameCharacterData;
+        _characterInventorySlotManager.PlacementSlotClickEvent += CheckTheSameCharacterData;
+    }
+
+    protected override void OnClick()
+    {
+        PlacementSlotClickEvent?.Invoke(this, _eventArgs);
+
+        ChangeCharacterData(_selectedCharacterData);
     }
 }

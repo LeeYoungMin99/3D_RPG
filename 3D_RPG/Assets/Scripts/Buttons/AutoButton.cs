@@ -4,22 +4,13 @@ using UnityEngine.UI;
 
 public class AutoButton : MonoBehaviour
 {
-    public class AutoButtonEventArgs : EventArgs
-    {
-        public bool CurAuto;
-
-        public AutoButtonEventArgs(bool b)
-        {
-            CurAuto = b;
-        }
-    }
-
     [SerializeField] private Button _button;
     [SerializeField] private Text _text;
 
     private bool _isAuto = false;
+    private AutoButtonEventArgs _autoButtonEventArgs = new AutoButtonEventArgs();
 
-    public event EventHandler<AutoButtonEventArgs> OnClickEvent;
+    public event EventHandler<AutoButtonEventArgs> OnAutoButtonClickEvent;
 
     public bool IsAuto { get { return _isAuto; } }
 
@@ -33,7 +24,9 @@ public class AutoButton : MonoBehaviour
     {
         _isAuto = !_isAuto;
 
-        OnClickEvent?.Invoke(this, new AutoButtonEventArgs(_isAuto));
+        _autoButtonEventArgs.CurAuto = _isAuto;
+
+        OnAutoButtonClickEvent?.Invoke(this, _autoButtonEventArgs);
 
         if (true == _isAuto)
         {

@@ -1945,7 +1945,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stateTag: 0
   _moveSpeed: 5
-  _stoppingDistance: 3
+  _stoppingDistance: 2
   _hasSkill: 1
 --- !u!114 &7541200629904815434
 MonoBehaviour:
@@ -1956,17 +1956,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 7541200629904815436}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 557e2ba771f5062479e979ebabe9247f, type: 3}
+  m_Script: {fileID: 11500000, guid: add34d5bcc0b1424db3821fca03fccd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   stateTag: 1
   _isCombo: 1
-  _impossibleComboInputAnimationNormalizedTime: 0
+  _impossibleComboInputAnimationNormalizedTime: 0.4
   _isSkill: 0
   _cooldown: 0
   _attackDelayTime: 0.6
-  _hitAngle: 80
-  _radius: 2.5
+  _hitAngle: 60
+  _radius: 2
   _targetCount: 16
   _targetMask:
     serializedVersion: 2
@@ -1982,17 +1982,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 7541200629904815436}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 557e2ba771f5062479e979ebabe9247f, type: 3}
+  m_Script: {fileID: 11500000, guid: add34d5bcc0b1424db3821fca03fccd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   stateTag: 2
   _isCombo: 1
-  _impossibleComboInputAnimationNormalizedTime: 0
+  _impossibleComboInputAnimationNormalizedTime: 0.4
   _isSkill: 0
   _cooldown: 0
-  _attackDelayTime: 0.525
+  _attackDelayTime: 0.5
   _hitAngle: 60
-  _radius: 2.5
+  _radius: 2
   _targetCount: 16
   _targetMask:
     serializedVersion: 2
@@ -2008,7 +2008,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7541200629904815436}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 557e2ba771f5062479e979ebabe9247f, type: 3}
+  m_Script: {fileID: 11500000, guid: add34d5bcc0b1424db3821fca03fccd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   stateTag: 3
@@ -2016,9 +2016,9 @@ MonoBehaviour:
   _impossibleComboInputAnimationNormalizedTime: 0
   _isSkill: 0
   _cooldown: 0
-  _attackDelayTime: 0.84
+  _attackDelayTime: 0.66
   _hitAngle: 40
-  _radius: 2.5
+  _radius: 2
   _targetCount: 16
   _targetMask:
     serializedVersion: 2
@@ -2034,7 +2034,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7541200629904815436}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a126131016c84724bb02e561d959a041, type: 3}
+  m_Script: {fileID: 11500000, guid: e5db6501a39564c499b9e19b830cdb59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   stateTag: 4
@@ -2042,7 +2042,7 @@ MonoBehaviour:
   _impossibleComboInputAnimationNormalizedTime: 0
   _isSkill: 1
   _cooldown: 8
-  _attackDelayTime: 0.72
+  _attackDelayTime: 0.6
 --- !u!114 &7541200629904815476
 MonoBehaviour:
   m_ObjectHideFlags: 0

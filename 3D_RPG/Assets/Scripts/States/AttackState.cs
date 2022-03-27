@@ -53,15 +53,9 @@ public abstract class AttackState : State
 
     protected bool CheckComboPossible()
     {
-        if (false == _isCombo)
-        {
-            return false;
-        }
+        if (false == _isCombo) return false;
 
-        if (_impossibleComboInputAnimationNormalizedTime > _animator.GetCurrentAnimatorStateInfo(0).normalizedTime)
-        {
-            return false;
-        }
+        if (_impossibleComboInputAnimationNormalizedTime > _animator.GetCurrentAnimatorStateInfo(0).normalizedTime) return false;
 
         return true;
     }
@@ -113,10 +107,7 @@ public abstract class AttackState : State
                 return;
             }
 
-            if (false == _isAuto)
-            {
-                return;
-            }
+            if (false == _isAuto) return;
         }
 
         if (null != _targetManager.EnemyTarget)

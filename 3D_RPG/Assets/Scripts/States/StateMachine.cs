@@ -3,8 +3,7 @@ using UnityEngine;
 
 public class StateMachine : MonoBehaviour
 {
-    private static EnumComparer _enumComparer = new EnumComparer();
-    private Dictionary<EStateTag, State> _states = new Dictionary<EStateTag, State>(_enumComparer);
+    private Dictionary<EStateTag, State> _states = new Dictionary<EStateTag, State>(new EnumComparer());
 
     private State _curState;
 
@@ -30,8 +29,7 @@ public class StateMachine : MonoBehaviour
 
     public void ChangeState(int tag)
     {
-        if (_curState == _states[(EStateTag)tag])
-            return;
+        if (_curState == _states[(EStateTag)tag]) return;
 
         Debug.Log($"{tag}로 상태가 변경됨");
 

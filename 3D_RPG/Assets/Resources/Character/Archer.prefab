@@ -220,7 +220,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stateTag: 0
   _moveSpeed: 5
-  _stoppingDistance: 15
+  _stoppingDistance: 11
   _hasSkill: 1
 --- !u!114 &3534404298812963864
 MonoBehaviour:

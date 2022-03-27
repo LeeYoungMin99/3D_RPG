@@ -1,29 +1,62 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class InventorySlot : CharacterSlot
 {
-    protected override void OnClick()
+    private List<CharacterData> _characterDatas = new List<CharacterData>();
+    private int _characterDatasCount = 0;
+
+    public event EventHandler<OnSlotClickEventArgs> InventorySlotClickEvent;
+
+    private void OnEnable()
     {
-        _characterInventorySlotManager.CurSelectCharacter = _character;
-
-        _characterInventorySlotManager.SetInteractablePlacementSlots(true);
-    }
-
-    public override void ChangeCharacter(CharacterData character)
-    {
-        _character = character;
-
-        if (null != character)
-        {
-            _image.sprite = _character.InventorySlotSprite;
-
-            SetInteractabletSlotButton(true);
-        }
-        else
+        if (0 == _characterDatasCount)
         {
             _image.sprite = null;
 
-            SetInteractabletSlotButton(false);
+            _slotButton.interactable = false;
         }
+        else
+        {
+            SetCharacterData(_characterDatas[0]);
+
+            if (true == _characterData.CheckDeath())
+            {
+                _slotButton.interactable = false;
+            }
+            else
+            {
+                _slotButton.interactable = true;
+            }
+        }
+    }
+
+    private void SetCharacterData(CharacterData characterData)
+    {
+        _characterData = characterData;
+
+        _image.sprite = _characterData.InventorySlotSprite;
+    }
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        _eventArgs = new OnSlotClickEventArgs();
+    }
+
+    protected override void OnClick()
+    {
+        _eventArgs._characterData = _characterData;
+
+        InventorySlotClickEvent?.Invoke(this, _eventArgs);
+    }
+
+    public void AddCharacterData(CharacterData characterData)
+    {
+        _characterDatas.Add(characterData);
+
+        ++_characterDatasCount;
     }
 }

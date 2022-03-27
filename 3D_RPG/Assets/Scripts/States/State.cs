@@ -10,7 +10,7 @@ public class State : MonoBehaviour
     protected bool _isPlayableCharacter = false;
     protected bool _isAuto = false;
 
-    private void SetAuto(object sender, AutoButton.AutoButtonEventArgs args)
+    private void SetAuto(object sender, AutoButtonEventArgs args)
     {
         _isAuto = args.CurAuto;
     }
@@ -28,8 +28,8 @@ public class State : MonoBehaviour
             _isPlayableCharacter = true;
 
             AutoButton autoButton = GameObject.Find("Auto Button").GetComponent<AutoButton>();
-            autoButton.OnClickEvent -= SetAuto;
-            autoButton.OnClickEvent += SetAuto;
+            autoButton.OnAutoButtonClickEvent -= SetAuto;
+            autoButton.OnAutoButtonClickEvent += SetAuto;
 
             _isAuto = autoButton.IsAuto;
 

@@ -9,4 +9,12 @@ public enum EStateTag
     SecondComboAttack,
     ThirdComboAttack,
     Skill,
+    Death = 16,
+}
+
+public enum ESlotTag
+{
+    InventorySlot,
+    PlacementSlot,
+    TagSlot,
 }

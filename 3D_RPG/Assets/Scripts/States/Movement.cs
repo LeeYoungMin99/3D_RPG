@@ -118,6 +118,8 @@ public class Movement : State
     private void OnDisable()
     {
         InitCoroutine();
+
+        _animationBlend = 0f;
     }
 
     private void BlendAnimation(float curValue)
@@ -131,7 +133,7 @@ public class Movement : State
     {
         _animator.applyRootMotion = !_animator.applyRootMotion;
 
-        if(false == _animator.applyRootMotion)
+        if (false == _animator.applyRootMotion)
         {
             _rigidbody.velocity = Vector3.zero;
         }
@@ -151,6 +153,8 @@ public class Movement : State
             if (true == _playerInput.Skill && true == _canUseSkill && null != _targetManager.EnemyTarget)
             {
                 _animator.SetTrigger(CharacterAnimID.USE_SKILL);
+
+                _canUseSkill = false;
 
                 return;
             }

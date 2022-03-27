@@ -5,9 +5,11 @@ public class ProjectileAttack : AttackState
 {
     [SerializeField] private Projectile _projectileObjectPrefab;
     [SerializeField] private Transform _startPosition;
+    [Range(1, 30)]
     [SerializeField] private int _maxShotCount = 1;
+    [Range(1, 30)]
     [SerializeField] private int _countPerShot = 1;
-    [Range(0f, 0.5f)]
+    [Range(0f, 2f)]
     [SerializeField] private float _intervalTime = 0.5f;
     [Header("Damage Split")]
     [SerializeField] private bool _isSplit = true;
