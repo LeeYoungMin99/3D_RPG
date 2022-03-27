@@ -1,9 +1,15 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TagSlot : CharacterSlot
 {
+    [SerializeField] private Slider _healthBar;
+    [SerializeField] private Slider _experienceBar;
+    [SerializeField] private Text _levelText;
+    [SerializeField] private Text _nameText;
+
     public event EventHandler<OnSlotClickEventArgs> TagSlotClickEvent;
 
     private void OnEnable()
@@ -22,9 +28,9 @@ public class TagSlot : CharacterSlot
         }
     }
 
-    private void SetAsLastSibling(object sender, EventArgs args)
+    private void SetAsFirstSibling(object sender, EventArgs args)
     {
-        transform.SetAsLastSibling();
+        transform.SetAsFirstSibling();
     }
 
     private void DisableCharacterPawn(object sender, EventArgs args)
@@ -50,12 +56,20 @@ public class TagSlot : CharacterSlot
         args.CharacterData.SetPawnPosition(_characterData.PawnPosition);
     }
 
+    private void SetUI(object sender, DataChangeEventArgs args)
+    {
+        _healthBar.value = args.NormalizedCurHP;
+        _experienceBar.value = args.CurExperience;
+        _levelText.text = $"Lv.{args.Level}";
+        _nameText.text = $"{args.Name}";
+    }
+
     protected override void Awake()
     {
         base.Awake();
 
-        _characterInventorySlotManager.PlacementSlotClickEvent -= SetAsLastSibling;
-        _characterInventorySlotManager.PlacementSlotClickEvent += SetAsLastSibling;
+        _characterInventorySlotManager.PlacementSlotClickEvent -= SetAsFirstSibling;
+        _characterInventorySlotManager.PlacementSlotClickEvent += SetAsFirstSibling;
 
         _characterInventorySlotManager.PlacementSlotClickEvent -= DisableCharacterPawn;
         _characterInventorySlotManager.PlacementSlotClickEvent += DisableCharacterPawn;
@@ -90,6 +104,11 @@ public class TagSlot : CharacterSlot
 
     public void SetCharacterData(object sender, OnSlotClickEventArgs args)
     {
+        if (null != _characterData)
+        {
+            _characterData.CharacterStatus.OnChangeDataEvent -= SetUI;
+        }
+
         if (null == args)
         {
             _characterData = null;
@@ -99,6 +118,9 @@ public class TagSlot : CharacterSlot
             _eventArgs = null;
 
             _slotButton.interactable = false;
+
+            _healthBar.gameObject.SetActive(false);
+            _experienceBar.gameObject.SetActive(false);
         }
         else
         {
@@ -109,6 +131,14 @@ public class TagSlot : CharacterSlot
             _eventArgs = args;
 
             _slotButton.interactable = true;
+
+            _characterData.CharacterStatus.OnChangeDataEvent -= SetUI;
+            _characterData.CharacterStatus.OnChangeDataEvent += SetUI;
+
+            _healthBar.gameObject.SetActive(true);
+            _experienceBar.gameObject.SetActive(true);
+
+            _characterData.CharacterStatus.CallChangeDataEvent();
         }
     }
 }

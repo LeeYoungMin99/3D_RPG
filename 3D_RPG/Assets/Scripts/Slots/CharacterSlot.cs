@@ -6,7 +6,6 @@ public abstract class CharacterSlot : MonoBehaviour
     [SerializeField] protected CharacterInventorySlotManager _characterInventorySlotManager;
     [SerializeField] protected Button _slotButton;
     [SerializeField] protected Image _image;
-    [SerializeField] protected Text _text;
 
     protected CharacterData _characterData;
     protected OnSlotClickEventArgs _eventArgs;

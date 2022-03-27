@@ -6,25 +6,23 @@ public class CharacterData
     private GameObject _characterPawn;
     private CharacterStatus _characterStatus;
 
-    public string Name { get; private set; }
     public Sprite InventorySlotSprite { get; private set; }
     public Sprite PlacementSlotSprite { get; private set; }
     public Sprite TagSlotSprite { get; private set; }
 
     public bool PawnActive { get { return _characterPawn.activeSelf; } }
     public Vector3 PawnPosition { get { return _characterPawn.transform.position; } }
+    public CharacterStatus CharacterStatus { get { return _characterStatus; } }
 
     public CharacterData(string name, GameObject pawn)
     {
-        Name = name;
-
         _characterPawn = pawn;
 
         _characterStatus = pawn.GetComponent<CharacterStatus>();
 
-        InventorySlotSprite = Resources.Load<Sprite>($"Images/Inventory Slot/{Name}");
-        PlacementSlotSprite = Resources.Load<Sprite>($"Images/Placement Slot/{Name}");
-        TagSlotSprite = Resources.Load<Sprite>($"Images/Tag Slot/{Name}");
+        InventorySlotSprite = Resources.Load<Sprite>($"Images/Inventory Slot/{name}");
+        PlacementSlotSprite = Resources.Load<Sprite>($"Images/Placement Slot/{name}");
+        TagSlotSprite = Resources.Load<Sprite>($"Images/Tag Slot/{name}");
     }
 
     public void SetCharacterPawnActive(bool b)

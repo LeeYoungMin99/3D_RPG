@@ -13,15 +13,23 @@ public class CharacterStatus : MonoBehaviour
     private int _curExperience = 0;
     private int _requiredEXP = 2;
     private float _curHP = 1f;
-    private DeathEventArgs _eventArgs = new DeathEventArgs();
+    private DeathEventArgs _deathEventArgs = new DeathEventArgs();
+    private DataChangeEventArgs _dataChangeEventArgs = new DataChangeEventArgs();
 
     public event EventHandler<DeathEventArgs> OnDeathEvent;
+    public event EventHandler<DataChangeEventArgs> OnChangeDataEvent;
 
     public int Level { get { return _level; } }
     public float ATK { get; private set; }
     public float MaxHP { get; private set; }
-    public float CurHP { get { return _curHP; } }
-    public int Experience { set { _eventArgs.Experience = value; } }
+    public float CurHP { get { return _curHP / MaxHP; } }
+    public float CurExperience { get { return (float)_curExperience / (float)_requiredEXP; } }
+    public int Experience { set { _deathEventArgs.Experience = value; } }
+
+    private void OnEnable()
+    {
+        CallChangeDataEvent();
+    }
 
     private void Start()
     {
@@ -48,6 +56,8 @@ public class CharacterStatus : MonoBehaviour
         MaxHP = MaxHPPerLevel * _level;
 
         _curHP = MaxHP;
+
+        CallChangeDataEvent();
     }
 
     private void Death()
@@ -55,9 +65,24 @@ public class CharacterStatus : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    public void CallChangeDataEvent()
+    {
+        _dataChangeEventArgs.Name = gameObject.name;
+        _dataChangeEventArgs.Level = _level;
+        _dataChangeEventArgs.ATK = ATK;
+        _dataChangeEventArgs.NormalizedCurHP = CurHP;
+        _dataChangeEventArgs.MaxHP = MaxHP;
+        _dataChangeEventArgs.CurHP = _curHP;
+        _dataChangeEventArgs.CurExperience = CurExperience;
+
+        OnChangeDataEvent?.Invoke(this, _dataChangeEventArgs);
+    }
+
     public void Init()
     {
         _curHP = MaxHP;
+
+        OnChangeDataEvent?.Invoke(this, _dataChangeEventArgs);
     }
 
     public void TakeDamage(float Damage, EventHandler<DeathEventArgs> killEvent)
@@ -65,6 +90,8 @@ public class CharacterStatus : MonoBehaviour
         if (0f >= _curHP) return;
 
         _curHP -= Damage;
+
+        CallChangeDataEvent();
 
         if (0f >= _curHP)
         {
@@ -75,7 +102,7 @@ public class CharacterStatus : MonoBehaviour
             OnDeathEvent -= killEvent;
             OnDeathEvent += killEvent;
 
-            OnDeathEvent?.Invoke(this, _eventArgs);
+            OnDeathEvent?.Invoke(this, _deathEventArgs);
 
             return;
         }
@@ -86,6 +113,8 @@ public class CharacterStatus : MonoBehaviour
     public void GainExperience(int exp)
     {
         _curExperience += exp;
+
+        CallChangeDataEvent();
 
         if (_curExperience < _requiredEXP) return;
 

@@ -78,10 +78,9 @@ public class CharacterInventorySlotManager : MonoBehaviour
     {
         if (_curCharacterCount >= _maxInventorySize) return false;
 
+        GameObject pawn = Instantiate(Resources.Load<GameObject>($"Character/{name}"), _player.transform.position, _player.transform.rotation, _player.transform);
 
-        GameObject pawn = Instantiate(Resources.Load<GameObject>($"Character/{name}"), _player.transform.position, _player.transform.rotation);
-
-        pawn.transform.SetParent(_player.transform);
+        pawn.name = name;
 
         CharacterData character = new CharacterData(name, pawn);
 

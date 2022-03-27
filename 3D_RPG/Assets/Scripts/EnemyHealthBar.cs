@@ -20,7 +20,7 @@ public class EnemyHealthBar : MonoBehaviour
     {
         if (true == _hasTarget)
         {
-            _healthBar.value = _tagetStatus.CurHP / _tagetStatus.MaxHP;
+            _healthBar.value = _tagetStatus.CurHP;
             _levelText.text = $"Lv.{_tagetStatus.Level}";
             _nameText.text = $"{_tagetStatus.gameObject.name}";
         }

@@ -20,3 +20,14 @@ public class DeathEventArgs : EventArgs
     public GameObject GameObject;
     public int Experience;
 }
+
+public class DataChangeEventArgs : EventArgs
+{
+    public string Name;
+    public int Level;
+    public float ATK;
+    public float NormalizedCurHP;
+    public float CurHP;
+    public float MaxHP;
+    public float CurExperience;
+}

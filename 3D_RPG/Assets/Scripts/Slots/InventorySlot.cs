@@ -1,9 +1,12 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InventorySlot : CharacterSlot
 {
+    [SerializeField] private Text _levelText;
+
     private List<CharacterData> _characterDatas = new List<CharacterData>();
     private int _characterDatasCount = 0;
 
@@ -39,6 +42,11 @@ public class InventorySlot : CharacterSlot
         _image.sprite = _characterData.InventorySlotSprite;
     }
 
+    private void SetLevelText(object sender, DataChangeEventArgs args)
+    {
+        _levelText.text = $"Lv.{args.Level}";
+    }
+
     protected override void Awake()
     {
         base.Awake();
@@ -56,6 +64,9 @@ public class InventorySlot : CharacterSlot
     public void AddCharacterData(CharacterData characterData)
     {
         _characterDatas.Add(characterData);
+
+        characterData.CharacterStatus.OnChangeDataEvent -= SetLevelText;
+        characterData.CharacterStatus.OnChangeDataEvent += SetLevelText;
 
         ++_characterDatasCount;
     }
