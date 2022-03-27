@@ -12,7 +12,7 @@ public class MultipleProjectile : StraightProjectile
         SetFlyingEffectDisplay(false);
         SetExplosionEffectDisplay(true);
 
-        other.GetComponent<CharacterStatus>().TakeDamage(Damage);
+        other.GetComponent<CharacterStatus>().TakeDamage(Damage, GainExperience);
     }
 
     protected override void OnEnable()

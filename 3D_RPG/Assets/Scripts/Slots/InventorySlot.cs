@@ -48,7 +48,7 @@ public class InventorySlot : CharacterSlot
 
     protected override void OnClick()
     {
-        _eventArgs._characterData = _characterData;
+        _eventArgs.CharacterData = _characterData;
 
         InventorySlotClickEvent?.Invoke(this, _eventArgs);
     }

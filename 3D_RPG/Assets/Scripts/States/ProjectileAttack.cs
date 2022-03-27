@@ -20,7 +20,7 @@ public class ProjectileAttack : AttackState
     private int _curIndex = 0;
     private int _curShotCount = 0;
 
-    private const int POOL_SIZE = 2;
+    private const int OBJECT_POOL_SIZE = 2;
 
     protected override void Start()
     {
@@ -28,11 +28,11 @@ public class ProjectileAttack : AttackState
 
         _objectPoolCount = _maxShotCount * _countPerShot;
 
-        _projectileObjectPool = new GameObject[_objectPoolCount * POOL_SIZE];
-        _projectileObjects = new Projectile[_objectPoolCount * POOL_SIZE];
+        _projectileObjectPool = new GameObject[_objectPoolCount * OBJECT_POOL_SIZE];
+        _projectileObjects = new Projectile[_objectPoolCount * OBJECT_POOL_SIZE];
 
         int index;
-        for (int i = 0; i < POOL_SIZE; ++i)
+        for (int i = 0; i < OBJECT_POOL_SIZE; ++i)
         {
             GameObject thrownObjects = new GameObject("Projectile Objects");
             thrownObjects.transform.SetParent(GameObject.Find("Field").transform);
@@ -41,15 +41,15 @@ public class ProjectileAttack : AttackState
             {
                 index = i * _objectPoolCount + j;
 
-                _projectileObjectPool[index] = Instantiate(_projectileObjectPrefab.gameObject, _startPosition.position, transform.rotation);
-                _projectileObjectPool[index].transform.SetParent(thrownObjects.transform);
+                _projectileObjectPool[index] = Instantiate(_projectileObjectPrefab.gameObject, _startPosition.position, transform.rotation, thrownObjects.transform);
                 _projectileObjects[index] = _projectileObjectPool[index].GetComponent<Projectile>();
-                _projectileObjects[index].Owner = _startPosition;
+                _projectileObjects[index].Owner = gameObject;
+                _projectileObjects[index].StartPosition = _startPosition;
                 _projectileObjects[index].TargetLayer = _targetManager.EnemyTargetLayer;
             }
         }
 
-        _objectPoolCount *= POOL_SIZE;
+        _objectPoolCount *= OBJECT_POOL_SIZE;
     }
 
     protected override IEnumerator Attack()

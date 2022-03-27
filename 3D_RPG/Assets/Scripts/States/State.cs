@@ -45,6 +45,8 @@ public class State : MonoBehaviour
 
     public virtual void EnterState() { }
 
+    public virtual void FixedUpdateState() { }
+
     public virtual void UpdateState() { }
 
     public virtual void LateUpdateState() { }

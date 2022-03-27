@@ -8,6 +8,7 @@ public class StraightExplosionProjectile : StraightProjectile
     [SerializeField] private int _targetCount = 16;
 
     private Collider[] _targetColliders;
+    private bool _isExplode = false;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -16,6 +17,10 @@ public class StraightExplosionProjectile : StraightProjectile
 
     private void Explosion()
     {
+        if (true == _isExplode) return;
+
+        _isExplode = true;
+
         SetTrailRendererDisplay(false);
         SetFlyingEffectDisplay(false);
         SetExplosionEffectDisplay(true);
@@ -26,8 +31,15 @@ public class StraightExplosionProjectile : StraightProjectile
 
         for (int i = 0; i < targetCount; ++i)
         {
-            _targetColliders[i].GetComponent<CharacterStatus>().TakeDamage(Damage);
+            _targetColliders[i].GetComponent<CharacterStatus>().TakeDamage(Damage, GainExperience);
         }
+    }
+
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+
+        _isExplode = false;
     }
 
     protected override void Start()

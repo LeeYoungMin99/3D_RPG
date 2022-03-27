@@ -21,14 +21,14 @@ public class LeapStrike : TargetAttack
 
         _target = _targetManager.EnemyTarget;
 
-        _targetPosition = _target.position - transform.forward;
+        _targetPosition = _target.position - transform.forward * 2;
     }
 
-    public override void UpdateState()
+    public override void FixedUpdateState()
     {
         if (null != _target)
         {
-            _targetPosition = _target.position - transform.forward;
+            _targetPosition = _target.position - transform.forward * 2;
         }
 
         _elapsedTime += Time.deltaTime;
@@ -36,8 +36,6 @@ public class LeapStrike : TargetAttack
         float normalizedElapsedTime = Mathf.Clamp(_elapsedTime / _attackDelayTime, 0f, 1f);
 
         transform.position = Vector3.Lerp(_startPosition, _targetPosition, normalizedElapsedTime);
-
-        base.UpdateState();
     }
 
     public override void ExitState()

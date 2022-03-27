@@ -47,7 +47,7 @@ public class TagSlot : CharacterSlot
 
         if (false == _characterData.PawnActive) return;
 
-        args._characterData.SetPawnPosition(_characterData.PawnPosition);
+        args.CharacterData.SetPawnPosition(_characterData.PawnPosition);
     }
 
     protected override void Awake()
@@ -102,7 +102,7 @@ public class TagSlot : CharacterSlot
         }
         else
         {
-            _characterData = args._characterData;
+            _characterData = args.CharacterData;
 
             _image.sprite = _characterData.TagSlotSprite;
 

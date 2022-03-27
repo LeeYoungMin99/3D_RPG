@@ -39,17 +39,17 @@ public class BezierProjectile : Projectile
         float randomPositionX = Random.Range(-1.0f, 1.0f);
         float randomPositionY = Random.Range(-0.5f, 1.0f);
 
-        _bezierCurvePoints[0] = Owner.position;
+        _bezierCurvePoints[0] = StartPosition.position;
 
-        _bezierCurvePoints[1] = Owner.position
-            + (_maxRandomDistance * randomPositionX * Owner.right)
-            + (_maxRandomDistance * randomPositionY * Owner.up);
+        _bezierCurvePoints[1] = StartPosition.position
+            + (_maxRandomDistance * randomPositionX * StartPosition.right)
+            + (_maxRandomDistance * randomPositionY * StartPosition.up);
 
-        _bezierCurvePoints[2] = Target.position + (_maxRandomDistance * randomPositionX * Owner.right);
+        _bezierCurvePoints[2] = Target.position + (_maxRandomDistance * randomPositionX * StartPosition.right);
 
         _bezierCurvePoints[3] = Target.position + CORRECT_TARGET_POSITION_VECTOR;
 
-        transform.position = Owner.position;
+        transform.position = StartPosition.position;
     }
 
     private float CalculateBezierCurve(float a, float b, float c, float d, float normalizedElapsedTime)
@@ -64,7 +64,7 @@ public class BezierProjectile : Projectile
     {
         if (other.gameObject == Target.gameObject)
         {
-            other.GetComponent<CharacterStatus>().TakeDamage(Damage);
+            other.GetComponent<CharacterStatus>().TakeDamage(Damage, GainExperience);
         }
     }
 

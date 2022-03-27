@@ -23,7 +23,7 @@ public class PlacementSlot : CharacterSlot
 
     private void SetSelectedCharacterData(object sender, OnSlotClickEventArgs args)
     {
-        _selectedCharacterData = args._characterData;
+        _selectedCharacterData = args.CharacterData;
 
         _eventArgs = args;
 

@@ -54,7 +54,7 @@ public class CircularSectorAttack : AttackState
 
             if (angle <= _hitAngle)
             {
-                _targetColliders[i].GetComponent<CharacterStatus>().TakeDamage(_status.ATK);
+                _targetColliders[i].GetComponent<CharacterStatus>().TakeDamage(_status.ATK, GainExperience);
             }
         }
 

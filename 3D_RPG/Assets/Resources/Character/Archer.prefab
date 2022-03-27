@@ -65,6 +65,7 @@ GameObject:
   - component: {fileID: 7520654609731366321}
   - component: {fileID: 6166125284491393692}
   - component: {fileID: 7520654609731366280}
+  - component: {fileID: -3047562558976215851}
   m_Layer: 6
   m_Name: Archer
   m_TagString: Player
@@ -240,6 +241,7 @@ MonoBehaviour:
   _isSkill: 0
   _cooldown: 0
   _attackDelayTime: 0.8
+  _distance: 2
   _projectileObjectPrefab: {fileID: 3075488634409860110, guid: 2a0329618cee11440b0c1a5edde9fd28,
     type: 3}
   _startPosition: {fileID: 7696366217492013739}
@@ -265,6 +267,7 @@ MonoBehaviour:
   _isSkill: 0
   _cooldown: 0
   _attackDelayTime: 0.8
+  _distance: 2
   _projectileObjectPrefab: {fileID: 3075488634409860110, guid: 2a0329618cee11440b0c1a5edde9fd28,
     type: 3}
   _startPosition: {fileID: 7696366217492013739}
@@ -290,6 +293,7 @@ MonoBehaviour:
   _isSkill: 0
   _cooldown: 0
   _attackDelayTime: 0.8
+  _distance: 2
   _projectileObjectPrefab: {fileID: 3075488634409860110, guid: 2a0329618cee11440b0c1a5edde9fd28,
     type: 3}
   _startPosition: {fileID: 7696366217492013739}
@@ -315,6 +319,7 @@ MonoBehaviour:
   _isSkill: 1
   _cooldown: 8
   _attackDelayTime: 1.25
+  _distance: 2
   _projectileObjectPrefab: {fileID: 8727235933342742210, guid: 3eae478f4c2a5814fa7a0361f1cbf62a,
     type: 3}
   _startPosition: {fileID: 7696366217492013739}
@@ -337,6 +342,19 @@ MonoBehaviour:
   _level: 1
   MaxHPPerLevel: 100
   ATKPerLevel: 10
+--- !u!114 &-3047562558976215851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7520654609731366320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47bdc95d3a34c6348af8da1cb7db31a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stateTag: 16
 --- !u!1 &7696366216593575690
 GameObject:
   m_ObjectHideFlags: 0

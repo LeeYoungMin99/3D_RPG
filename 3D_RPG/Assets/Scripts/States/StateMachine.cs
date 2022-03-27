@@ -12,6 +12,11 @@ public class StateMachine : MonoBehaviour
         _curState = _states[EStateTag.Idle];
     }
 
+    private void FixedUpdate()
+    {
+        _curState.FixedUpdateState();
+    }
+
     private void Update()
     {
         _curState.UpdateState();

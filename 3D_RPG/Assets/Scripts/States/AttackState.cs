@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public abstract class AttackState : State
+public abstract class AttackState : State, IExperienceGainer
 {
     [Header("Combo")]
     [SerializeField] protected bool _isCombo = false;
@@ -17,12 +17,17 @@ public abstract class AttackState : State
     [Header("Attack Setting")]
     [Range(0f, 3f)]
     [SerializeField] protected float _attackDelayTime = 0.2f;
+    [Range(0f, 15f)]
+    [SerializeField] protected float _distance = 2f;
 
     protected CharacterRotator _rotator;
     protected CharacterStatus _status;
     protected Animator _animator;
+    protected Rigidbody _rigidbody;
 
     public event EventHandler<EventArgs> OnCooldownElapsed;
+
+    protected static readonly Vector3 ZERO_VECTOR3 = Vector3.zero;
 
     public bool IsSkill { get { return _isSkill; } }
 
@@ -31,6 +36,7 @@ public abstract class AttackState : State
         _rotator = GetComponent<CharacterRotator>();
         _status = GetComponent<CharacterStatus>();
         _animator = GetComponent<Animator>();
+        _rigidbody = GetComponent<Rigidbody>();
     }
 
     protected float CalculateAngle(Vector3 myPosition, Vector3 targetPosition)
@@ -110,9 +116,22 @@ public abstract class AttackState : State
             if (false == _isAuto) return;
         }
 
-        if (null != _targetManager.EnemyTarget)
-        {
-            _animator.SetTrigger(CharacterAnimID.IS_ATTACKING);
-        }
+        if (null == _targetManager.EnemyTarget) return;
+
+        float curDistance = Vector3.Distance(transform.position, _targetManager.EnemyTarget.position);
+
+        if (curDistance >= _distance) return;
+
+        _animator.SetTrigger(CharacterAnimID.IS_ATTACKING);
+    }
+
+    public override void ExitState()
+    {
+        _rigidbody.velocity = ZERO_VECTOR3;
+    }
+
+    public void GainExperience(object sender, DeathEventArgs args)
+    {
+        _status.GainExperience(args.Experience);
     }
 }

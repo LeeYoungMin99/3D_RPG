@@ -1,7 +1,8 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
-public abstract class Projectile : MonoBehaviour
+public abstract class Projectile : MonoBehaviour, IExperienceGainer
 {
     [Header("Particle")]
     [Tooltip("If there is no effect, there is no need to add it.")]
@@ -18,7 +19,8 @@ public abstract class Projectile : MonoBehaviour
     protected bool _hasFlyingEffect = false;
     protected bool _hasExplosionEffect = false;
 
-    public Transform Owner { protected get; set; }
+    public GameObject Owner { protected get; set; }
+    public Transform StartPosition { protected get; set; }
     public Transform Target { protected get; set; }
     public LayerMask TargetLayer { protected get; set; }
     public float Damage { protected get; set; }
@@ -95,5 +97,10 @@ public abstract class Projectile : MonoBehaviour
         {
             StartCoroutine(DisableObjectAfterDuration());
         }
+    }
+
+    public void GainExperience(object sender, DeathEventArgs args)
+    {
+        Owner.GetComponent<CharacterStatus>().GainExperience(args.Experience);
     }
 }
