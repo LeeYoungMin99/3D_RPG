@@ -7,7 +7,6 @@ public class Movement : State
 {
     [SerializeField] protected float _moveSpeed = 5f;
     [SerializeField] private float _stoppingDistance = 3f;
-    [SerializeField] protected bool _hasSkill = true;
 
     private GameObject _mainCamera;
     private CharacterRotator _rotator;
@@ -25,42 +24,36 @@ public class Movement : State
 
     private static readonly Vector2 ZERO_VECTOR2 = Vector2.zero;
 
-    private void Start()
+    protected override void Awake()
     {
+        base.Awake();
+
         _rigidbody = GetComponent<Rigidbody>();
         _animator = GetComponent<Animator>();
         _navMeshAgent = GetComponent<NavMeshAgent>();
 
-        if (true == _hasSkill)
+        AttackState[] attackStates = GetComponents<AttackState>();
+
+        _canUseSkill = false;
+        _animator.SetBool(CharacterAnimID.IS_COOLDOWN, true);
+
+        foreach (AttackState attackState in attackStates)
         {
-            AttackState[] attackStates = GetComponents<AttackState>();
+            if (false == attackState.IsSkill) continue;
 
-            foreach (AttackState attackState in attackStates)
-            {
-                if (true == attackState.IsSkill)
-                {
-                    attackState.OnCooldownElapsed -= ElapseCooldown;
-                    attackState.OnCooldownElapsed += ElapseCooldown;
+            attackState.OnCooldownTimeElapsedEvent -= ElapseCooldown;
+            attackState.OnCooldownTimeElapsedEvent += ElapseCooldown;
 
-                    _animator.SetBool(CharacterAnimID.IS_COOLDOWN, false);
+            _canUseSkill = true;
+            _animator.SetBool(CharacterAnimID.IS_COOLDOWN, false);
 
-                    _canUseSkill = true;
-
-                    break;
-                }
-            }
-        }
-        else
-        {
-            _canUseSkill = false;
-            _animator.SetBool(CharacterAnimID.IS_COOLDOWN, true);
+            break;
         }
 
-        if (true == _isPlayableCharacter)
-        {
-            _rotator = GetComponent<CharacterRotator>();
-            _mainCamera = GameObject.Find("Field").transform.Find("Main Camera").gameObject;
-        }
+        if (false == _isPlayableCharacter) return;
+
+        _rotator = GetComponent<CharacterRotator>();
+        _mainCamera = GameObject.Find("Field").transform.Find("Main Camera").gameObject;
     }
 
     private void Rotate(Vector2 input)

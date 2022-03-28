@@ -31,7 +31,7 @@ public class CharacterStatus : MonoBehaviour
         CallChangeDataEvent();
     }
 
-    private void Start()
+    private void Awake()
     {
         _animator = GetComponent<Animator>();
 

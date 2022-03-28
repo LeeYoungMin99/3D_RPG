@@ -16,9 +16,9 @@ public class RangeAttack : AttackState
 
     private static readonly Vector3 CORRECT_TARGET_POSITION_VECTOR = new Vector3(0f,0.3f,0f);
 
-    protected override void Start()
+    protected override void Awake()
     {
-        base.Start();
+        base.Awake();
 
         _targetColliders = new Collider[_targetCount];
 

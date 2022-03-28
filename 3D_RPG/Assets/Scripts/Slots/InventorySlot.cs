@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class InventorySlot : CharacterSlot
 {
+    [Header("Inventory Slot Setting")] 
     [SerializeField] private Text _levelText;
 
     private List<CharacterData> _characterDatas = new List<CharacterData>();

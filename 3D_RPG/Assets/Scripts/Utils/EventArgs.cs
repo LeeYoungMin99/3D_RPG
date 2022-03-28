@@ -31,3 +31,9 @@ public class DataChangeEventArgs : EventArgs
     public float MaxHP;
     public float CurExperience;
 }
+
+public class SkillEventArgs : EventArgs
+{
+    public CharacterData CharacterData;
+    public float CooldownTime;
+}

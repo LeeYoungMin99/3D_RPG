@@ -12,7 +12,8 @@ public abstract class AttackState : State, IExperienceGainer
     [Header("Skill")]
     [SerializeField] protected bool _isSkill = false;
     [Range(0f, 30f)]
-    [SerializeField] protected float _cooldown = 0f;
+    [SerializeField] protected float _cooldownTime = 0f;
+    [SerializeField] protected Sprite _skillIcon;
 
     [Header("Attack Setting")]
     [Range(0f, 3f)]
@@ -20,19 +21,25 @@ public abstract class AttackState : State, IExperienceGainer
     [Range(0f, 15f)]
     [SerializeField] protected float _distance = 2f;
 
+    private SkillEventArgs _eventArgs = new SkillEventArgs();
+
     protected CharacterRotator _rotator;
     protected CharacterStatus _status;
     protected Animator _animator;
     protected Rigidbody _rigidbody;
+    protected Transform _target;
 
-    public event EventHandler<EventArgs> OnCooldownElapsed;
+    public event EventHandler<EventArgs> OnCooldownTimeElapsedEvent;
+    public event EventHandler<SkillEventArgs> UseSkillEvent;
 
     protected static readonly Vector3 ZERO_VECTOR3 = Vector3.zero;
 
     public bool IsSkill { get { return _isSkill; } }
 
-    protected virtual void Start()
+    protected override void Awake()
     {
+        base.Awake();
+
         _rotator = GetComponent<CharacterRotator>();
         _status = GetComponent<CharacterStatus>();
         _animator = GetComponent<Animator>();
@@ -66,12 +73,15 @@ public abstract class AttackState : State, IExperienceGainer
         return true;
     }
 
-    protected IEnumerator CheckCooldown()
+    protected IEnumerator StartCooldown()
     {
-        yield return new WaitForSeconds(_cooldown);
+        _eventArgs.CooldownTime = _cooldownTime;
+        UseSkillEvent?.Invoke(this, _eventArgs);
+
+        yield return new WaitForSeconds(_cooldownTime);
 
         _animator.SetBool(CharacterAnimID.IS_COOLDOWN, false);
-        OnCooldownElapsed?.Invoke(this, EventArgs.Empty);
+        OnCooldownTimeElapsedEvent?.Invoke(this, EventArgs.Empty);
     }
 
     protected abstract IEnumerator Attack();
@@ -80,7 +90,7 @@ public abstract class AttackState : State, IExperienceGainer
     {
         if (true == _isSkill)
         {
-            StartCoroutine(CheckCooldown());
+            StartCoroutine(StartCooldown());
 
             _animator.SetBool(CharacterAnimID.IS_COOLDOWN, true);
         }
@@ -128,6 +138,11 @@ public abstract class AttackState : State, IExperienceGainer
     public override void ExitState()
     {
         _rigidbody.velocity = ZERO_VECTOR3;
+    }
+
+    public void UseSkill()
+    {
+        _animator.SetTrigger(CharacterAnimID.USE_SKILL);
     }
 
     public void GainExperience(object sender, DeathEventArgs args)

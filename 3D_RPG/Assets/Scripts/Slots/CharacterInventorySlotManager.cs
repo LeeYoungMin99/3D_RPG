@@ -11,6 +11,7 @@ public class CharacterInventorySlotManager : MonoBehaviour
     [SerializeField] private int _maxInventorySize;
 
     private int _curCharacterCount = 0;
+    private bool _isClickedPlacementSlot = false;
 
     public event EventHandler<OnSlotClickEventArgs> InventorySlotClickEvent;
     public event EventHandler<OnSlotClickEventArgs> TagSlotClickEvent;
@@ -21,10 +22,6 @@ public class CharacterInventorySlotManager : MonoBehaviour
 
     private void Awake()
     {
-        ObtainCharacter("Sword Man");
-        ObtainCharacter("Archer");
-        ObtainCharacter("Magician");
-
         for (int i = 0; i < MAX_SHOW_INVENTORY_SLOT; ++i)
         {
             _inventorySlot[i].gameObject.SetActive(true);
@@ -36,6 +33,7 @@ public class CharacterInventorySlotManager : MonoBehaviour
         for (int i = 0; i < MAX_PLACEMENT_SLOT_COUNT; ++i)
         {
             _placementSlot[i].gameObject.SetActive(true);
+            _tagSlot[i].gameObject.SetActive(true);
 
             _placementSlot[i].PlacementSlotClickEvent -= OnClickPlacementSlot;
             _placementSlot[i].PlacementSlotClickEvent += OnClickPlacementSlot;
@@ -50,6 +48,8 @@ public class CharacterInventorySlotManager : MonoBehaviour
 
     private void OnDisable()
     {
+        if (false == _isClickedPlacementSlot) return;
+
         for (int i = 0; i < MAX_PLACEMENT_SLOT_COUNT; ++i)
         {
             if (true == _tagSlot[i].CheckCharacterDataIsNull())
@@ -57,6 +57,8 @@ public class CharacterInventorySlotManager : MonoBehaviour
                 _tagSlot[i].transform.SetAsLastSibling();
             }
         }
+
+        _isClickedPlacementSlot = false;
     }
 
     private void OnClickInventorySlot(object sender, OnSlotClickEventArgs args)
@@ -67,6 +69,8 @@ public class CharacterInventorySlotManager : MonoBehaviour
     private void OnClickPlacementSlot(object sender, EventArgs args)
     {
         PlacementSlotClickEvent?.Invoke(sender, EventArgs.Empty);
+
+        _isClickedPlacementSlot = true;
     }
 
     private void OnClickTagSlot(object sender, OnSlotClickEventArgs args)
@@ -79,7 +83,7 @@ public class CharacterInventorySlotManager : MonoBehaviour
         if (_curCharacterCount >= _maxInventorySize) return false;
 
         GameObject pawn = Instantiate(Resources.Load<GameObject>($"Character/{name}"), _player.transform.position, _player.transform.rotation, _player.transform);
-
+        pawn.SetActive(false);
         pawn.name = name;
 
         CharacterData character = new CharacterData(name, pawn);

@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public abstract class CharacterSlot : MonoBehaviour
 {
+    [Header("Slot Setting")]
     [SerializeField] protected CharacterInventorySlotManager _characterInventorySlotManager;
     [SerializeField] protected Button _slotButton;
     [SerializeField] protected Image _image;

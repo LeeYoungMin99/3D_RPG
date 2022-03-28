@@ -4,7 +4,6 @@ public class State : MonoBehaviour
 {
     [SerializeField] protected EStateTag stateTag;
 
-    protected StateMachine _stateMachine;
     protected PlayerInput _playerInput;
     protected TargetManager _targetManager;
     protected bool _isPlayableCharacter = false;
@@ -17,9 +16,7 @@ public class State : MonoBehaviour
 
     protected virtual void Awake()
     {
-        _stateMachine = GetComponent<StateMachine>();
-
-        _stateMachine.AddState(stateTag, this);
+        GetComponent<StateMachine>().AddState(stateTag, this);
 
         _playerInput = transform.parent.GetComponent<PlayerInput>();
 

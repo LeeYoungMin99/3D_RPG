@@ -11,17 +11,12 @@ public class MenuButton : MonoBehaviour
 
     private bool _isShowing = true;
 
-    private void Start()
+    private void Awake()
     {
         HideList();
 
         _button.onClick.RemoveListener(OnClick);
         _button.onClick.AddListener(OnClick);
-    }
-
-    private void OnDisable()
-    {
-        HideList();
     }
 
     private void OnClick()

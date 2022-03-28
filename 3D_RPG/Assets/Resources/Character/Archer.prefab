@@ -72,7 +72,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7139730611891173130
 Transform:
   m_ObjectHideFlags: 0
@@ -222,7 +222,6 @@ MonoBehaviour:
   stateTag: 0
   _moveSpeed: 5
   _stoppingDistance: 11
-  _hasSkill: 1
 --- !u!114 &3534404298812963864
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -239,7 +238,7 @@ MonoBehaviour:
   _isCombo: 1
   _impossibleComboInputAnimationNormalizedTime: 0
   _isSkill: 0
-  _cooldown: 0
+  _cooldownTime: 0
   _attackDelayTime: 0.8
   _distance: 2
   _projectileObjectPrefab: {fileID: 3075488634409860110, guid: 2a0329618cee11440b0c1a5edde9fd28,
@@ -265,7 +264,7 @@ MonoBehaviour:
   _isCombo: 1
   _impossibleComboInputAnimationNormalizedTime: 0
   _isSkill: 0
-  _cooldown: 0
+  _cooldownTime: 0
   _attackDelayTime: 0.8
   _distance: 2
   _projectileObjectPrefab: {fileID: 3075488634409860110, guid: 2a0329618cee11440b0c1a5edde9fd28,
@@ -291,7 +290,7 @@ MonoBehaviour:
   _isCombo: 1
   _impossibleComboInputAnimationNormalizedTime: 0
   _isSkill: 0
-  _cooldown: 0
+  _cooldownTime: 0
   _attackDelayTime: 0.8
   _distance: 2
   _projectileObjectPrefab: {fileID: 3075488634409860110, guid: 2a0329618cee11440b0c1a5edde9fd28,
@@ -317,7 +316,7 @@ MonoBehaviour:
   _isCombo: 0
   _impossibleComboInputAnimationNormalizedTime: 0
   _isSkill: 1
-  _cooldown: 8
+  _cooldownTime: 8
   _attackDelayTime: 1.25
   _distance: 2
   _projectileObjectPrefab: {fileID: 8727235933342742210, guid: 3eae478f4c2a5814fa7a0361f1cbf62a,

@@ -5,12 +5,16 @@ using UnityEngine.UI;
 
 public class TagSlot : CharacterSlot
 {
+    [Header("Character Status")]
     [SerializeField] private Slider _healthBar;
     [SerializeField] private Slider _experienceBar;
     [SerializeField] private Text _levelText;
     [SerializeField] private Text _nameText;
 
+    private SkillEventArgs _skillEventArgs = new SkillEventArgs();
+
     public event EventHandler<OnSlotClickEventArgs> TagSlotClickEvent;
+    public event EventHandler<SkillEventArgs> CharacterDataChangeEvent;
 
     private void OnEnable()
     {
@@ -137,6 +141,9 @@ public class TagSlot : CharacterSlot
 
             _healthBar.gameObject.SetActive(true);
             _experienceBar.gameObject.SetActive(true);
+
+            _skillEventArgs.CharacterData = _characterData;
+            CharacterDataChangeEvent?.Invoke(this, _skillEventArgs);
 
             _characterData.CharacterStatus.CallChangeDataEvent();
         }

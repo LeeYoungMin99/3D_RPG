@@ -1794,7 +1794,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7200247174311833590
 Transform:
   m_ObjectHideFlags: 0
@@ -1947,7 +1947,6 @@ MonoBehaviour:
   stateTag: 0
   _moveSpeed: 5
   _stoppingDistance: 2
-  _hasSkill: 1
 --- !u!114 &7541200629904815434
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1964,7 +1963,7 @@ MonoBehaviour:
   _isCombo: 1
   _impossibleComboInputAnimationNormalizedTime: 0.4
   _isSkill: 0
-  _cooldown: 0
+  _cooldownTime: 0
   _attackDelayTime: 0.6
   _distance: 2
   _hitAngle: 60
@@ -1991,7 +1990,7 @@ MonoBehaviour:
   _isCombo: 1
   _impossibleComboInputAnimationNormalizedTime: 0.4
   _isSkill: 0
-  _cooldown: 0
+  _cooldownTime: 0
   _attackDelayTime: 0.5
   _distance: 2
   _hitAngle: 60
@@ -2018,7 +2017,7 @@ MonoBehaviour:
   _isCombo: 0
   _impossibleComboInputAnimationNormalizedTime: 0
   _isSkill: 0
-  _cooldown: 0
+  _cooldownTime: 0
   _attackDelayTime: 0.66
   _distance: 2
   _hitAngle: 40
@@ -2045,7 +2044,7 @@ MonoBehaviour:
   _isCombo: 0
   _impossibleComboInputAnimationNormalizedTime: 0
   _isSkill: 1
-  _cooldown: 8
+  _cooldownTime: 8
   _attackDelayTime: 0.6
   _distance: 2
 --- !u!114 &7541200629904815476

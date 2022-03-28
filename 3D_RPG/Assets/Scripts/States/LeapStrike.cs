@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class LeapStrike : TargetAttack
 {
-    private Transform _target;
-
     private Vector3 _startPosition;
     private Vector3 _targetPosition;
 

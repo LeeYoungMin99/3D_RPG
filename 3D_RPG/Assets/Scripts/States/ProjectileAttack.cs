@@ -22,9 +22,9 @@ public class ProjectileAttack : AttackState
 
     private const int OBJECT_POOL_SIZE = 2;
 
-    protected override void Start()
+    protected override void Awake()
     {
-        base.Start();
+        base.Awake();
 
         _objectPoolCount = _maxShotCount * _countPerShot;
 

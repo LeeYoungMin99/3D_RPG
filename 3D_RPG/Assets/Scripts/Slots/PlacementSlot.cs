@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class PlacementSlot : CharacterSlot
 {
+    [Header("Placement Slot Setting")]
     [SerializeField] Text _statusText;
 
     private CharacterData _selectedCharacterData;
@@ -19,7 +20,7 @@ public class PlacementSlot : CharacterSlot
 
     private void ChangeCharacterData(CharacterData characterData)
     {
-        if(null != _characterData)
+        if (null != _characterData)
         {
             _characterData.CharacterStatus.OnChangeDataEvent -= SetStatusText;
         }
@@ -61,7 +62,14 @@ public class PlacementSlot : CharacterSlot
 
     private void SetStatusText(object sender, DataChangeEventArgs args)
     {
-        _statusText.text = $" Lv : {args.Level}\n ATK : {args.ATK}\n HP\n {args.MaxHP} / {args.CurHP}";
+        if (null == _characterData)
+        {
+            _statusText.text = "";
+        }
+        else
+        {
+            _statusText.text = $" Lv : {args.Level}\n ATK : {args.ATK}\n HP\n {args.MaxHP} / {args.CurHP}";
+        }
     }
 
     protected override void Awake()
