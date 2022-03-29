@@ -8,7 +8,6 @@ public class StraightExplosionProjectile : StraightProjectile
     [SerializeField] private int _targetCount = 16;
 
     private Collider[] _targetColliders;
-    private bool _isExplode = false;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -17,9 +16,7 @@ public class StraightExplosionProjectile : StraightProjectile
 
     private void Explosion()
     {
-        if (true == _isExplode) return;
-
-        _isExplode = true;
+        _isMove = false;
 
         SetTrailRendererDisplay(false);
         SetFlyingEffectDisplay(false);
@@ -35,16 +32,9 @@ public class StraightExplosionProjectile : StraightProjectile
         }
     }
 
-    protected override void OnEnable()
+    protected override void Awake()
     {
-        base.OnEnable();
-
-        _isExplode = false;
-    }
-
-    protected override void Start()
-    {
-        base.Start();
+        base.Awake();
 
         _targetColliders = new Collider[_targetCount];
     }

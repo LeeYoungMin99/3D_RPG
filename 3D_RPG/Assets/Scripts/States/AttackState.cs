@@ -16,7 +16,7 @@ public abstract class AttackState : State, IExperienceGainer
     [SerializeField] protected Sprite _skillIcon;
 
     [Header("Attack Setting")]
-    [Range(0f, 3f)]
+    [Range(0f, 10f)]
     [SerializeField] protected float _attackDelayTime = 0.2f;
     [Range(0f, 15f)]
     [SerializeField] protected float _distance = 2f;
@@ -35,6 +35,7 @@ public abstract class AttackState : State, IExperienceGainer
     protected static readonly Vector3 ZERO_VECTOR3 = Vector3.zero;
 
     public bool IsSkill { get { return _isSkill; } }
+    public bool SkillIcon { get { return _skillIcon; } }
 
     protected override void Awake()
     {

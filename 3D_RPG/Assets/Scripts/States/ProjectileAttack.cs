@@ -32,10 +32,11 @@ public class ProjectileAttack : AttackState
         _projectileObjects = new Projectile[_objectPoolCount * OBJECT_POOL_SIZE];
 
         int index;
+        Transform field = GameObject.Find("Field").transform;
         for (int i = 0; i < OBJECT_POOL_SIZE; ++i)
         {
             GameObject thrownObjects = new GameObject("Projectile Objects");
-            thrownObjects.transform.SetParent(GameObject.Find("Field").transform);
+            thrownObjects.transform.SetParent(field);
 
             for (int j = 0; j < _objectPoolCount; ++j)
             {
@@ -54,19 +55,20 @@ public class ProjectileAttack : AttackState
 
     protected override IEnumerator Attack()
     {
+        Transform target = _targetManager.EnemyTarget;
         if (_attackDelayTime > 0f) yield return new WaitForSeconds(_attackDelayTime);
 
-        StartCoroutine(Shot());
+        StartCoroutine(Shot(target));
     }
 
-    private IEnumerator Shot()
+    private IEnumerator Shot(Transform target)
     {
         while (_maxShotCount > _curShotCount)
         {
             for (int i = 0; i < _countPerShot; ++i)
             {
                 _projectileObjectPool[_curIndex].transform.position = _startPosition.position;
-                _projectileObjects[_curIndex].Target = _targetManager.EnemyTarget;
+                _projectileObjects[_curIndex].Target = target;
                 float damage = _status.ATK;
 
                 if (true == _isSplit)

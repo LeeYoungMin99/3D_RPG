@@ -10,7 +10,6 @@ public class PlayerInput : MonoBehaviour
     private const string MOUSE_Y = "Mouse Y";
     private const string ATTACK = "Attack";
     private const string SKILL = "Skill";
-    private const string CAMERA_LOCK = "Camera Lock";
 
     public float Horizontal { get; private set; }
     public float Vertical { get; private set; }
@@ -18,15 +17,13 @@ public class PlayerInput : MonoBehaviour
     public float MoveMouseY { get; private set; }
     public bool Attack { get; private set; }
     public bool Skill { get; private set; }
-    public bool CameraLock { get; private set; }
 
     private void Update()
-    {
+    { 
         Horizontal = Input.GetAxis(HORIZONTAL);
         Vertical = Input.GetAxis(VERTICAL);
         MoveMouseX = Input.GetAxis(MOUSE_X);
         MoveMouseY = Input.GetAxis(MOUSE_Y);
-        CameraLock = Input.GetButtonDown(CAMERA_LOCK);
 
         if (true == EventSystem.current.IsPointerOverGameObject()) return;
 

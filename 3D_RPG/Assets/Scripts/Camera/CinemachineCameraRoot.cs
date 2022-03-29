@@ -19,6 +19,7 @@ public class CinemachineCameraRoot : MonoBehaviour
     private void OnEnable()
     {
         _cameraRotator.CinemachineCameraTarget = transform;
+        _cameraRotator.LockCameraPosition = false;
         _cinemachineVirtualCamera.Follow = transform;
     }
 }

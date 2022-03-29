@@ -9,19 +9,22 @@ public abstract class StraightProjectile : Projectile
     [SerializeField] protected float _speed = 15f;
 
     protected Vector3 _startPosition;
+    protected bool _isMove = true;
 
     private const float CORRECT_SPEED = 40f;
 
-    protected virtual void Start()
+    protected override void Awake()
     {
-        _speed *= CORRECT_SPEED;
+        base.Awake();
 
-        _startPosition = transform.position;
+        _speed *= CORRECT_SPEED;
     }
 
     protected override void OnEnable()
     {
         base.OnEnable();
+
+        _isMove = true;
 
         _startPosition = transform.position;
 
@@ -32,11 +35,15 @@ public abstract class StraightProjectile : Projectile
 
     private void FixedUpdate()
     {
+        if (false == _isMove) return;
+
         float distanceCurrentlyFlown = Vector3.Distance(_startPosition, transform.position);
 
         if (_maximumRange <= distanceCurrentlyFlown)
         {
             GetOutOfTheMaximumRange();
+
+            _isMove = false;
         }
 
         _rigidbody.velocity = transform.forward * (_speed * Time.deltaTime);

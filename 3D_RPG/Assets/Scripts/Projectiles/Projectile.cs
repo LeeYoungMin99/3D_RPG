@@ -27,7 +27,7 @@ public abstract class Projectile : MonoBehaviour, IExperienceGainer
 
     protected static readonly Vector3 CORRECT_TARGET_POSITION_VECTOR = new Vector3(0f, 1f, 0f);
 
-    private void Awake()
+    protected virtual void Awake()
     {
         if (null != _trailRenderer)
         {
@@ -52,6 +52,8 @@ public abstract class Projectile : MonoBehaviour, IExperienceGainer
         SetTrailRendererDisplay(true);
         SetFlyingEffectDisplay(true);
         SetExplosionEffectDisplay(false);
+
+        transform.position = StartPosition.position;
     }
 
     protected IEnumerator DisableObjectAfterDuration()

@@ -9,28 +9,13 @@ public class CameraRotator : MonoBehaviour
     private Transform _cinemachineCameraTarget;
     private float _cinemachineTargetYaw;
     private float _cinemachineTargetPitch;
-
     private bool _lockCameraPosition = true;
 
-    private static readonly float _topClamp = 70f;
-    private static readonly float _bottomClamp = -30f;
+    private static readonly float TOP_CLAMP = 70f;
+    private static readonly float BOTTOM_CLAMP = -30f;
 
-    public Transform CinemachineCameraTarget 
-    { 
-        set 
-        { 
-            _cinemachineCameraTarget = value;
-            _lockCameraPosition = false;
-        } 
-    }
-
-    private void Update()
-    {
-        if (true == _input.CameraLock)
-        {
-            _lockCameraPosition = !_lockCameraPosition;
-        }
-    }
+    public Transform CinemachineCameraTarget { set { _cinemachineCameraTarget = value; } }
+    public bool LockCameraPosition { set { _lockCameraPosition = value; } }
 
     private void LateUpdate()
     {
@@ -47,7 +32,7 @@ public class CameraRotator : MonoBehaviour
         _cinemachineTargetPitch -= mouseMove.y;
 
         _cinemachineTargetYaw = ClampAngle(_cinemachineTargetYaw, float.MinValue, float.MaxValue);
-        _cinemachineTargetPitch = ClampAngle(_cinemachineTargetPitch, _bottomClamp, _topClamp);
+        _cinemachineTargetPitch = ClampAngle(_cinemachineTargetPitch, BOTTOM_CLAMP, TOP_CLAMP);
 
         _cinemachineCameraTarget.rotation = Quaternion.Euler(_cinemachineTargetPitch, _cinemachineTargetYaw, 0.0f);
     }

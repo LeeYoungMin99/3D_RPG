@@ -10,21 +10,14 @@ public class TargetManager : MonoBehaviour
     [SerializeField] protected LayerMask _enemyTargetLayer;
 
     protected readonly Collider[] _targetColliders = new Collider[16];
-    protected Coroutine _coroutineSearchTarget;
 
     public Transform Target;
-
     public Transform EnemyTarget { get; protected set; }
     public LayerMask EnemyTargetLayer { get { return _enemyTargetLayer; } }
 
-    private void OnDisable()
-    {
-        StopCoroutine(_coroutineSearchTarget);
-    }
-
     protected virtual void OnEnable()
     {
-        _coroutineSearchTarget = StartCoroutine(SearchTarget());
+        StartCoroutine(SearchTarget());
     }
 
     protected virtual IEnumerator SearchTarget()
@@ -52,12 +45,11 @@ public class TargetManager : MonoBehaviour
             {
                 distance = Vector3.Distance(_targetColliders[i].transform.position, transform.position);
 
-                if (minDistance > distance)
-                {
-                    minDistance = distance;
+                if (minDistance <= distance) continue;
 
-                    target = _targetColliders[i].transform;
-                }
+                minDistance = distance;
+
+                target = _targetColliders[i].transform;
             }
         }
 

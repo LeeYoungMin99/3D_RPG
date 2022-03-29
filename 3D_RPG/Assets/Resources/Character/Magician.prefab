@@ -955,6 +955,7 @@ GameObject:
   - component: {fileID: 8211673995113798030}
   - component: {fileID: 4102091188671940813}
   - component: {fileID: 1543461715954884362}
+  - component: {fileID: 6145585252150163263}
   - component: {fileID: 2929516255725422622}
   - component: {fileID: 1952461636690242573}
   m_Layer: 6
@@ -1127,9 +1128,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stateTag: 1
   _isCombo: 1
-  _impossibleComboInputAnimationNormalizedTime: 0
+  _impossibleComboInputAnimationNormalizedTime: 0.4
   _isSkill: 0
   _cooldownTime: 0
+  _skillIcon: {fileID: 0}
   _attackDelayTime: 0.55
   _distance: 2
   _projectileObjectPrefab: {fileID: 8091234875309664494, guid: 463b2553be16bb840948a28e20cd3ba9,
@@ -1153,11 +1155,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stateTag: 2
   _isCombo: 1
-  _impossibleComboInputAnimationNormalizedTime: 0
+  _impossibleComboInputAnimationNormalizedTime: 0.4
   _isSkill: 0
   _cooldownTime: 0
+  _skillIcon: {fileID: 0}
   _attackDelayTime: 0.27
-  _distance: 2
+  _distance: 15
   _projectileObjectPrefab: {fileID: 8091234875309664494, guid: 463b2553be16bb840948a28e20cd3ba9,
     type: 3}
   _startPosition: {fileID: 1542431240}
@@ -1182,8 +1185,9 @@ MonoBehaviour:
   _impossibleComboInputAnimationNormalizedTime: 0
   _isSkill: 0
   _cooldownTime: 0
+  _skillIcon: {fileID: 0}
   _attackDelayTime: 0.525
-  _distance: 2
+  _distance: 15
   _projectileObjectPrefab: {fileID: 5595577157275477798, guid: b6e36a1938649a64680d59038f44f172,
     type: 3}
   _startPosition: {fileID: 1152281914}
@@ -1191,6 +1195,37 @@ MonoBehaviour:
   _countPerShot: 3
   _intervalTime: 0.1
   _isSplit: 1
+--- !u!114 &6145585252150163263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2929516255725422630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a59a4ada187b9fb4988c65d8b6968b42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stateTag: 4
+  _isCombo: 0
+  _impossibleComboInputAnimationNormalizedTime: 0
+  _isSkill: 1
+  _cooldownTime: 8
+  _skillIcon: {fileID: 0}
+  _attackDelayTime: 1.2
+  _distance: 0
+  _hitRadius: 6
+  _targetCount: 16
+  _effectPrefab: {fileID: 1329845292236604, guid: 9bba9cf244c53c5439505dfc96fdd11c,
+    type: 3}
+  _objectPoolCount: 1
+  _rangeCircle: {fileID: 4476261395742995459, guid: 687916dbd76c9624b97a084261dc5c1e,
+    type: 3}
+  _dollyCamera: {fileID: 2346575503907627507, guid: d4fcc570330be3c499df5b1475bea0ab,
+    type: 3}
+  _dollyTrack: {fileID: 6022529329607253647, guid: d20602e3e9e84994cb579fec1d2e450e,
+    type: 3}
 --- !u!114 &2929516255725422622
 MonoBehaviour:
   m_ObjectHideFlags: 0

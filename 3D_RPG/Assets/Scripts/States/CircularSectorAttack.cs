@@ -45,6 +45,13 @@ public class CircularSectorAttack : AttackState
         Vector3 myPosition = transform.position;
         myPosition.y = 0f;
 
+        if (true == _hasArcLineRenderer)
+        {
+            _arcLineRenderer.SetActive(true);
+        }
+
+        if (0 == targetCount) yield break;
+
         for (int i = 0; i < targetCount; ++i)
         {
             targetPosition = _targetColliders[i].transform.position;
@@ -56,11 +63,6 @@ public class CircularSectorAttack : AttackState
             {
                 _targetColliders[i].GetComponent<CharacterStatus>().TakeDamage(_status.ATK, GainExperience);
             }
-        }
-
-        if (true == _hasArcLineRenderer)
-        {
-            _arcLineRenderer.SetActive(true);
         }
     }
 
