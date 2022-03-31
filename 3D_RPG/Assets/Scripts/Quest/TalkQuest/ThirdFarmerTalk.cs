@@ -35,6 +35,7 @@ public class ThirdFarmerTalk : Quest
     {
         base.CheckGoals(sender, args);
 
+        GameObject.Find("Field").transform.Find("Canvas").Find("Auto Button").GetComponent<AutoButton>().AutoMoveTarget = null;
         QuestManager.Instance.CurQuest = null;
     }
 }

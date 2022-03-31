@@ -99,6 +99,8 @@ public class ProjectileAttack : AttackState
 
             ++_curShotCount;
 
+            StartCoroutine(CinemachineShaker.Instance.ShakeCamera(_amplitueGain, _shakeTime));
+
             if (_intervalTime > 0f) yield return new WaitForSeconds(_intervalTime);
         }
 

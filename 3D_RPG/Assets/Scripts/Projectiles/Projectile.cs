@@ -11,6 +11,12 @@ public abstract class Projectile : MonoBehaviour, IExperienceGainer
     [SerializeField] protected ParticleSystem _flyingEffect;
     [Tooltip("If there is no effect, there is no need to add it.")]
     [SerializeField] protected ParticleSystem _explosionEffect;
+    [Header("Camera Shake")]
+    [Range(0f, 2f)]
+    [SerializeField] protected float _shakeTime = 0f;
+    [Range(0f, 10f)]
+    [SerializeField] protected float _amplitueGain = 0f;
+
     [Space(5)]
     [SerializeField] protected Collider _collider;
 

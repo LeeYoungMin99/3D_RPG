@@ -36,5 +36,4 @@ public class DialogueManager
         _dialogueWindow.SetActive(false);
         _UICanvas.enabled = true;
     }
-
 }

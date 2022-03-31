@@ -24,6 +24,8 @@ public class StraightExplosionProjectile : StraightProjectile
 
         int targetCount = Physics.OverlapSphereNonAlloc(transform.position, _hitRadius, _targetColliders, TargetLayer);
 
+        StartCoroutine(CinemachineShaker.Instance.ShakeCamera(_amplitueGain, _shakeTime));
+
         if (0 == targetCount) return;
 
         for (int i = 0; i < targetCount; ++i)

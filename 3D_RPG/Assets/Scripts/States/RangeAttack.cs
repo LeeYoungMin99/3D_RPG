@@ -63,6 +63,8 @@ public class RangeAttack : AttackState
 
         int targetCount = Physics.OverlapSphereNonAlloc(targetPosition, _hitRadius, _targetColliders, _targetLayer);
 
+        StartCoroutine(CinemachineShaker.Instance.ShakeCamera(_amplitueGain, _shakeTime));
+
         if (0 == targetCount) return;
 
         for (int i = 0; i < targetCount; ++i)

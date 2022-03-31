@@ -36,8 +36,6 @@ public class StateMachine : MonoBehaviour
     {
         if (_curState == _states[(EStateTag)tag]) return;
 
-        Debug.Log($"{(EStateTag)tag}로 상태가 변경됨");
-
         _curState.ExitState();
 
         _curState = _states[(EStateTag)tag];

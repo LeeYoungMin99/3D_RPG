@@ -8,13 +8,12 @@ public class CircularSectorAttack : AttackState
     [SerializeField] private int _hitAngle = 0;
     [SerializeField] private float _radius = 1f;
     [SerializeField] private int _targetCount = 16;
-    [SerializeField] private LayerMask _targetMask;
-
     [Header("Arc Line Render")]
     [SerializeField] private GameObject _arcLineRenderer;
 
-    private bool _hasArcLineRenderer = false;
     private Collider[] _targetColliders;
+    private LayerMask _targetLayer;
+    private bool _hasArcLineRenderer = false;
 
     protected static readonly Vector3 CORRECT_POSITION_VECTOR = new Vector3(0f, 0.3f, 0f);
 
@@ -23,6 +22,7 @@ public class CircularSectorAttack : AttackState
         base.Awake();
 
         _targetColliders = new Collider[_targetCount];
+        _targetLayer = _targetManager.EnemyTargetLayer;
 
         if (null != _arcLineRenderer)
         {
@@ -39,7 +39,7 @@ public class CircularSectorAttack : AttackState
     {
         if (_attackDelayTime > 0f) yield return new WaitForSeconds(_attackDelayTime);
 
-        int targetCount = Physics.OverlapSphereNonAlloc(transform.position, _radius, _targetColliders, _targetMask);
+        int targetCount = Physics.OverlapSphereNonAlloc(transform.position, _radius, _targetColliders, _targetLayer);
 
         Vector3 targetPosition;
         Vector3 myPosition = transform.position;
@@ -55,13 +55,14 @@ public class CircularSectorAttack : AttackState
         for (int i = 0; i < targetCount; ++i)
         {
             targetPosition = _targetColliders[i].transform.position;
-            targetPosition.y = 0f;
 
-            float angle = Mathf.Abs(CalculateAngle(myPosition, targetPosition));
+            float angle = Mathf.Abs(Utils.Instance.CalculateAngle(transform, targetPosition));
 
             if (angle <= _hitAngle)
             {
                 _targetColliders[i].GetComponent<CharacterStatus>().TakeDamage(_status.ATK, GainExperience);
+
+                StartCoroutine(CinemachineShaker.Instance.ShakeCamera(_amplitueGain, _shakeTime));
             }
         }
     }

@@ -8,7 +8,7 @@ public class ParabolaProjectile : BezierProjectile
     [SerializeField] private int _targetCount = 16;
     [Space(10f)]
     [SerializeField] private GameObject _rangeCircle;
-    
+
 
     private Collider[] _targetColliders;
 
@@ -36,8 +36,8 @@ public class ParabolaProjectile : BezierProjectile
 
         Vector3 heightVector = new Vector3(0f, _bezierCurvePointDistance, 0f);
 
-        Vector3 secondPoint = StartPosition.position 
-            + (Target.position - StartPosition.position) / 2 
+        Vector3 secondPoint = StartPosition.position
+            + (Target.position - StartPosition.position) / 2
             + heightVector;
 
         InitBezierCurvePoint(
@@ -64,6 +64,8 @@ public class ParabolaProjectile : BezierProjectile
             _rangeCircle.SetActive(false);
 
             int targetCount = Physics.OverlapSphereNonAlloc(_bezierCurvePoints[3], _hitRadius, _targetColliders, TargetLayer);
+
+            StartCoroutine(CinemachineShaker.Instance.ShakeCamera(_amplitueGain, _shakeTime));
 
             if (0 == targetCount) return;
 

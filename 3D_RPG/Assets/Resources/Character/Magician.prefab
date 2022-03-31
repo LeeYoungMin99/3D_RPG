@@ -970,7 +970,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 3
+  m_CollisionDetection: 1
 --- !u!136 &9085973306097438199
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1045,7 +1045,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stateTag: 0
   _moveSpeed: 5
-  _stoppingDistance: 15
+  _normalAttackDistance: 10
 --- !u!114 &8211673995113798030
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1061,11 +1061,13 @@ MonoBehaviour:
   _stateTag: 1
   _isCombo: 1
   _impossibleComboInputAnimationNormalizedTime: 0.4
+  _comboAttackDistance: 2
   _isSkill: 0
   _cooldownTime: 0
   _skillIcon: {fileID: 0}
+  _shakeTime: 0.2
+  _amplitueGain: 2
   _attackDelayTime: 0.55
-  _distance: 15
   _projectileObjectPrefab: {fileID: 8091234875309664494, guid: 463b2553be16bb840948a28e20cd3ba9,
     type: 3}
   _startPosition: {fileID: 1588508555}
@@ -1088,11 +1090,13 @@ MonoBehaviour:
   _stateTag: 2
   _isCombo: 1
   _impossibleComboInputAnimationNormalizedTime: 0.4
+  _comboAttackDistance: 2
   _isSkill: 0
   _cooldownTime: 0
   _skillIcon: {fileID: 0}
+  _shakeTime: 0.2
+  _amplitueGain: 2
   _attackDelayTime: 0.27
-  _distance: 15
   _projectileObjectPrefab: {fileID: 8091234875309664494, guid: 463b2553be16bb840948a28e20cd3ba9,
     type: 3}
   _startPosition: {fileID: 1542431240}
@@ -1115,11 +1119,13 @@ MonoBehaviour:
   _stateTag: 3
   _isCombo: 0
   _impossibleComboInputAnimationNormalizedTime: 0
+  _comboAttackDistance: 2
   _isSkill: 0
   _cooldownTime: 0
   _skillIcon: {fileID: 0}
+  _shakeTime: 0.2
+  _amplitueGain: 2
   _attackDelayTime: 0.525
-  _distance: 15
   _projectileObjectPrefab: {fileID: 5595577157275477798, guid: b6e36a1938649a64680d59038f44f172,
     type: 3}
   _startPosition: {fileID: 1152281914}
@@ -1142,11 +1148,13 @@ MonoBehaviour:
   _stateTag: 4
   _isCombo: 0
   _impossibleComboInputAnimationNormalizedTime: 0
+  _comboAttackDistance: 2
   _isSkill: 1
   _cooldownTime: 8
   _skillIcon: {fileID: 21300000, guid: ccc51df7e546b9c4fad88fe8ed5c793a, type: 3}
+  _shakeTime: 0.8
+  _amplitueGain: 4
   _attackDelayTime: 1.2
-  _distance: 0
   _hitRadius: 6
   _targetCount: 16
   _effectPrefab: {fileID: 1329845292236604, guid: 9bba9cf244c53c5439505dfc96fdd11c,

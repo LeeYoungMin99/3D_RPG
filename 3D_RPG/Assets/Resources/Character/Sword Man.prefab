@@ -1803,7 +1803,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 3
+  m_CollisionDetection: 1
 --- !u!136 &4474287828151054493
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1878,7 +1878,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stateTag: 0
   _moveSpeed: 5
-  _stoppingDistance: 2
+  _normalAttackDistance: 2
 --- !u!114 &7541200629904815434
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1894,17 +1894,16 @@ MonoBehaviour:
   _stateTag: 1
   _isCombo: 1
   _impossibleComboInputAnimationNormalizedTime: 0.4
+  _comboAttackDistance: 2
   _isSkill: 0
   _cooldownTime: 0
   _skillIcon: {fileID: 0}
+  _shakeTime: 0.2
+  _amplitueGain: 2
   _attackDelayTime: 0.6
-  _distance: 2
   _hitAngle: 60
-  _radius: 2
+  _radius: 3
   _targetCount: 16
-  _targetMask:
-    serializedVersion: 2
-    m_Bits: 8
   _arcLineRenderer: {fileID: 1756928250594173229, guid: 2458a7c9d935c5d48a2bfdb906a4a357,
     type: 3}
 --- !u!114 &7541200629904815435
@@ -1922,17 +1921,16 @@ MonoBehaviour:
   _stateTag: 2
   _isCombo: 1
   _impossibleComboInputAnimationNormalizedTime: 0.4
+  _comboAttackDistance: 2
   _isSkill: 0
   _cooldownTime: 0
   _skillIcon: {fileID: 0}
+  _shakeTime: 0.2
+  _amplitueGain: 2
   _attackDelayTime: 0.5
-  _distance: 2
   _hitAngle: 60
   _radius: 2
   _targetCount: 16
-  _targetMask:
-    serializedVersion: 2
-    m_Bits: 8
   _arcLineRenderer: {fileID: 1756928250594173229, guid: 2458a7c9d935c5d48a2bfdb906a4a357,
     type: 3}
 --- !u!114 &7541200629904815473
@@ -1950,17 +1948,16 @@ MonoBehaviour:
   _stateTag: 3
   _isCombo: 0
   _impossibleComboInputAnimationNormalizedTime: 0
+  _comboAttackDistance: 2
   _isSkill: 0
   _cooldownTime: 0
   _skillIcon: {fileID: 0}
+  _shakeTime: 0.2
+  _amplitueGain: 2
   _attackDelayTime: 0.66
-  _distance: 2
   _hitAngle: 40
-  _radius: 2
+  _radius: 3
   _targetCount: 16
-  _targetMask:
-    serializedVersion: 2
-    m_Bits: 8
   _arcLineRenderer: {fileID: 1756928250594173229, guid: 2458a7c9d935c5d48a2bfdb906a4a357,
     type: 3}
 --- !u!114 &7541200629904815477
@@ -1978,11 +1975,13 @@ MonoBehaviour:
   _stateTag: 4
   _isCombo: 0
   _impossibleComboInputAnimationNormalizedTime: 0
+  _comboAttackDistance: 2
   _isSkill: 1
   _cooldownTime: 8
   _skillIcon: {fileID: 21300000, guid: 779fa5928dfc0b1449a4676220f1b6e7, type: 3}
+  _shakeTime: 0.2
+  _amplitueGain: 2
   _attackDelayTime: 0.6
-  _distance: 2
 --- !u!114 &7541200629904815476
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1997,7 +1996,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _level: 1
   MaxHPPerLevel: 200
-  ATKPerLevel: 100
+  ATKPerLevel: 20
 --- !u!1 &7556804811343677250
 GameObject:
   m_ObjectHideFlags: 0

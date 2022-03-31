@@ -51,6 +51,8 @@ MonoBehaviour:
   _trailRenderer: {fileID: 9162455005615414073}
   _flyingEffect: {fileID: 8252887065535245429}
   _explosionEffect: {fileID: 8253803742058187287}
+  _shakeTime: 0.4
+  _amplitueGain: 4
   _collider: {fileID: 8091234875309664493}
   _maximumRange: 15
   _rigidbody: {fileID: 320896140652723220}

@@ -13,6 +13,8 @@ public class MultipleProjectile : StraightProjectile
         SetExplosionEffectDisplay(true);
 
         other.GetComponent<CharacterStatus>().TakeDamage(Damage, GainExperience);
+
+        StartCoroutine(CinemachineShaker.Instance.ShakeCamera(_amplitueGain, _shakeTime));
     }
 
     protected override void OnEnable()

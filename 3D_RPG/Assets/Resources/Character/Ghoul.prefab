@@ -3088,7 +3088,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 3
+  m_CollisionDetection: 1
 --- !u!136 &4033750490596033406
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3099,10 +3099,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.8
+  m_Radius: 0.5
   m_Height: 1.7
   m_Direction: 1
-  m_Center: {x: 0, y: 0.9, z: -0.5}
+  m_Center: {x: 0, y: 0.9, z: 0}
 --- !u!195 &4033750490596033376
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -3162,8 +3162,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _stateTag: 0
-  _moveSpeed: 6
-  _stoppingDistance: 3
+  _moveSpeed: 7
+  _normalAttackDistance: 3
 --- !u!114 &4033750490596033367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3179,11 +3179,13 @@ MonoBehaviour:
   _stateTag: 1
   _isCombo: 1
   _impossibleComboInputAnimationNormalizedTime: 0.4
+  _comboAttackDistance: 2
   _isSkill: 0
   _cooldownTime: 0
   _skillIcon: {fileID: 0}
+  _shakeTime: 0.4
+  _amplitueGain: 3
   _attackDelayTime: 0.45
-  _distance: 3
   _hitRadius: 1
   _targetCount: 16
   _effectPrefab: {fileID: 2140706938346890573, guid: b66b0e1cf973ef64198ca6123aebe66d,
@@ -3204,11 +3206,13 @@ MonoBehaviour:
   _stateTag: 2
   _isCombo: 1
   _impossibleComboInputAnimationNormalizedTime: 0.4
+  _comboAttackDistance: 2
   _isSkill: 0
   _cooldownTime: 0
   _skillIcon: {fileID: 0}
+  _shakeTime: 0.4
+  _amplitueGain: 3
   _attackDelayTime: 0.45
-  _distance: 3
   _hitRadius: 1
   _targetCount: 16
   _effectPrefab: {fileID: 2140706938346890573, guid: b66b0e1cf973ef64198ca6123aebe66d,
@@ -3229,11 +3233,13 @@ MonoBehaviour:
   _stateTag: 3
   _isCombo: 0
   _impossibleComboInputAnimationNormalizedTime: 0
+  _comboAttackDistance: 2
   _isSkill: 0
   _cooldownTime: 0
   _skillIcon: {fileID: 0}
+  _shakeTime: 0.5
+  _amplitueGain: 4
   _attackDelayTime: 0.45
-  _distance: 0
   _hitRadius: 1
   _targetCount: 16
   _effectPrefab: {fileID: 2140706938346890573, guid: b66b0e1cf973ef64198ca6123aebe66d,
@@ -3254,11 +3260,13 @@ MonoBehaviour:
   _stateTag: 4
   _isCombo: 0
   _impossibleComboInputAnimationNormalizedTime: 0
+  _comboAttackDistance: 2
   _isSkill: 1
   _cooldownTime: 20
   _skillIcon: {fileID: 0}
+  _shakeTime: 0
+  _amplitueGain: 0
   _attackDelayTime: 5.7
-  _distance: 0
   _projectileObjectPrefab: {fileID: 6501846024609619329, guid: b7e086868344dde4893f166601ee36ad,
     type: 3}
   _startPosition: {fileID: 8086725560674128192}

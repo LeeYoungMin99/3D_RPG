@@ -6,39 +6,37 @@ using UnityEngine.AI;
 public class Movement : State
 {
     [SerializeField] protected float _moveSpeed = 5f;
-    [SerializeField] private float _stoppingDistance = 3f;
+    [SerializeField] private float _normalAttackDistance = 3f;
 
     private GameObject _mainCamera;
     private GameObject _UICover;
     private CharacterRotator _rotator;
     private Rigidbody _rigidbody;
     private Coroutine _coroutineSetNavMeshPath;
+    private Animator _animator;
+    private NavMeshAgent _navMeshAgent;
     private float _animationBlend = 0f;
+    private bool _canUseSkill = true;
 
-    protected Animator _animator;
-    protected NavMeshAgent _navMeshAgent;
-    protected bool _canUseSkill = true;
-
-    protected const float PATH_FIND_DELAY = 0.25f;
-    protected const float IDLE_ANIMATION_PARAMETER_VALUE = 0f;
-    protected const float RUN_ANIMATION_PARAMETER_VALUE = 1f;
+    private const float PATH_FIND_DELAY = 0.25f;
+    private const float IDLE_ANIMATION_PARAMETER_VALUE = 0f;
+    private const float RUN_ANIMATION_PARAMETER_VALUE = 1f;
+    private const float STOPPING_DISTNACE = 3f;
 
     private static readonly Vector2 ZERO_VECTOR2 = Vector2.zero;
 
-    private void Rotate(Vector2 input)
+    private void RotateOnInput(Vector2 input)
     {
         float targetRotation = Mathf.Atan2(input.x, input.y) * Mathf.Rad2Deg + _mainCamera.transform.eulerAngles.y;
 
         _rotator.RotateSmoothly(targetRotation);
     }
 
-    private void Move(Vector2 input)
+    private void Move()
     {
-        Vector3 moveDir = transform.forward * Mathf.Abs(input.magnitude);
+        transform.position += transform.forward * (Time.deltaTime * _moveSpeed);
 
-        transform.position += moveDir * (Time.deltaTime * _moveSpeed);
-
-        BlendAnimation(input.magnitude);
+        BlendAnimation(RUN_ANIMATION_PARAMETER_VALUE);
     }
 
     private void InitCoroutine()
@@ -63,10 +61,9 @@ public class Movement : State
             {
                 _navMeshAgent.SetDestination(_targetManager.Target.position);
             }
-            else
-            {
-                break;
-            }
+            else break;
+
+            _navMeshAgent.isStopped = true;
 
             yield return new WaitForSeconds(PATH_FIND_DELAY);
         }
@@ -99,6 +96,9 @@ public class Movement : State
         _animator = GetComponent<Animator>();
         _navMeshAgent = GetComponent<NavMeshAgent>();
         _rotator = GetComponent<CharacterRotator>();
+
+        _navMeshAgent.updateRotation = false;
+        _navMeshAgent.isStopped = true;
 
         AttackState[] attackStates = GetComponents<AttackState>();
 
@@ -166,18 +166,14 @@ public class Movement : State
 
             if (ZERO_VECTOR2 != input)
             {
-                _navMeshAgent.isStopped = true;
-
-                Rotate(input);
-                Move(input);
+                RotateOnInput(input);
+                Move();
 
                 return;
             }
 
             if (false == _isAuto)
             {
-                _navMeshAgent.isStopped = true;
-
                 BlendAnimation(IDLE_ANIMATION_PARAMETER_VALUE);
 
                 return;
@@ -208,23 +204,31 @@ public class Movement : State
 
                 _canUseSkill = false;
 
-                _navMeshAgent.isStopped = true;
-
                 return;
             }
 
-            if (_stoppingDistance >= _navMeshAgent.remainingDistance)
+            if (_normalAttackDistance >= _navMeshAgent.remainingDistance)
             {
                 _animator.SetTrigger(CharacterAnimID.IS_ATTACKING);
-
-                _navMeshAgent.isStopped = true;
 
                 return;
             }
         }
 
-        _navMeshAgent.isStopped = false;
-        BlendAnimation(RUN_ANIMATION_PARAMETER_VALUE);
+        if (STOPPING_DISTNACE < _navMeshAgent.remainingDistance)
+        {
+            float angle = Utils.Instance.CalculateAngle(transform, _navMeshAgent.steeringTarget)
+                + transform.eulerAngles.y;
+
+            _rotator.RotateSmoothly(angle);
+            Move();
+
+            BlendAnimation(RUN_ANIMATION_PARAMETER_VALUE);
+        }
+        else
+        {
+            BlendAnimation(IDLE_ANIMATION_PARAMETER_VALUE);
+        }
     }
 
     public override void ExitState()

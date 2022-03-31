@@ -49,6 +49,8 @@ public class BezierProjectile : Projectile
             SetExplosionEffectDisplay(true);
 
             Target.GetComponent<CharacterStatus>().TakeDamage(Damage, GainExperience);
+
+            StartCoroutine(CinemachineShaker.Instance.ShakeCamera(_amplitueGain, _shakeTime));
         }
     }
 

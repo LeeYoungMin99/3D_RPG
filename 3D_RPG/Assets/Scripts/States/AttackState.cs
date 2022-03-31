@@ -8,6 +8,8 @@ public abstract class AttackState : State, IExperienceGainer
     [SerializeField] protected bool _isCombo = false;
     [Range(0f, 1f)]
     [SerializeField] protected float _impossibleComboInputAnimationNormalizedTime = 0f;
+    [Range(0f, 15f)]
+    [SerializeField] protected float _comboAttackDistance = 2f;
 
     [Header("Skill")]
     [SerializeField] protected bool _isSkill = false;
@@ -15,11 +17,15 @@ public abstract class AttackState : State, IExperienceGainer
     [SerializeField] protected float _cooldownTime = 0f;
     [SerializeField] protected Sprite _skillIcon;
 
+    [Header("Camera Shake")]
+    [Range(0f, 2f)]
+    [SerializeField] protected float _shakeTime = 0f;
+    [Range(0f, 10f)]
+    [SerializeField] protected float _amplitueGain = 0f;
+
     [Header("Attack Setting")]
     [Range(0f, 10f)]
     [SerializeField] protected float _attackDelayTime = 0.2f;
-    [Range(0f, 15f)]
-    [SerializeField] protected float _distance = 2f;
 
     private SkillEventArgs _eventArgs = new SkillEventArgs();
 
@@ -45,24 +51,6 @@ public abstract class AttackState : State, IExperienceGainer
         _status = GetComponent<CharacterStatus>();
         _animator = GetComponent<Animator>();
         _rigidbody = GetComponent<Rigidbody>();
-    }
-
-    protected float CalculateAngle(Vector3 myPosition, Vector3 targetPosition)
-    {
-        Vector3 targetDir = (targetPosition - myPosition).normalized;
-
-        float dot = Mathf.Clamp(Vector3.Dot(targetDir, transform.forward), -1f, 1f);
-
-        float angle = Mathf.Acos(dot) * Mathf.Rad2Deg;
-
-        Vector3 cross = Vector3.Cross(transform.forward, targetDir);
-
-        if (0f > cross.y)
-        {
-            angle *= -1;
-        }
-
-        return angle;
     }
 
     protected bool CheckComboPossible()
@@ -101,12 +89,8 @@ public abstract class AttackState : State, IExperienceGainer
         StartCoroutine(Attack());
 
         Vector3 targetPosition = _targetManager.EnemyTarget.position;
-        targetPosition.y = 0f;
 
-        Vector3 myPosition = transform.position;
-        myPosition.y = 0f;
-
-        float angle = CalculateAngle(myPosition, targetPosition);
+        float angle = Utils.Instance.CalculateAngle(transform, targetPosition);
 
         _rotator.RotateImmediately(angle);
     }
@@ -131,7 +115,7 @@ public abstract class AttackState : State, IExperienceGainer
 
         float curDistance = Vector3.Distance(transform.position, _targetManager.EnemyTarget.position);
 
-        if (curDistance >= _distance) return;
+        if (curDistance >= _comboAttackDistance) return;
 
         _animator.SetTrigger(CharacterAnimID.IS_ATTACKING);
     }

@@ -20,8 +20,6 @@ public class LeapStrike : TargetAttack
         _target = _targetManager.EnemyTarget;
 
         _targetPosition = _target.position - transform.forward * 2;
-
-        _rigidbody.isKinematic = true;
     }
 
     public override void FixedUpdateState()
@@ -43,7 +41,5 @@ public class LeapStrike : TargetAttack
         base.ExitState();
 
         _startPosition = _targetPosition = transform.position;
-
-        _rigidbody.isKinematic = false;
     }
 }
