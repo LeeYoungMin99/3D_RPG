@@ -21,7 +21,7 @@ public class CharacterInventoryButton : MonoBehaviour
         Time.timeScale = 0f;
 
         _playerCamera.SetActive(false);
-        _canvas.gameObject.SetActive(false);
+        _canvas.enabled = false;
 
         _characterInventory.SetActive(true);
     }

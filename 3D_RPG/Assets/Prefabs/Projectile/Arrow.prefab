@@ -99,7 +99,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _trailRenderer: {fileID: 47295478457818996}
   _flyingEffect: {fileID: 0}
-  _explosionEffect: {fileID: 0}
+  _explosionEffect: {fileID: 2266156196568179925, guid: b66b0e1cf973ef64198ca6123aebe66d,
+    type: 3}
   _collider: {fileID: 4643411176283805241}
   _maximumRange: 15
   _rigidbody: {fileID: 2428202855204146321}

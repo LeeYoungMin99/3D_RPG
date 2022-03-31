@@ -109,7 +109,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Ready To Skill 3
+  m_Name: 'Ready To Skill  '
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -158,7 +158,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Ready To Skill 2
+  m_Name: 'Ready To Skill   '
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -207,7 +207,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Skill 4
+  m_Name: 'Skill      '
   m_Speed: 0.5
   m_CycleOffset: 0
   m_Transitions:
@@ -573,7 +573,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Skill 1
+  m_Name: 'Skill   '
   m_Speed: 0.5
   m_CycleOffset: 0
   m_Transitions:
@@ -686,7 +686,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Ready To Skill 4
+  m_Name: 'Ready To Skill     '
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -852,7 +852,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Skill 3
+  m_Name: 'Skill     '
   m_Speed: 0.5
   m_CycleOffset: 0
   m_Transitions:
@@ -1073,7 +1073,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Ready To Skill 1
+  m_Name: 'Ready To Skill       '
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -1170,7 +1170,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Skill 2
+  m_Name: 'Skill  '
   m_Speed: 0.5
   m_CycleOffset: 0
   m_Transitions:

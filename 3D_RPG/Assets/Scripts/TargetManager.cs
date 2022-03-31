@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class TargetManager : MonoBehaviour
 {
-    [Header("Target Enemy Setting")]
-    [SerializeField] protected float _searchDelay = 0.25f;
-    [SerializeField] protected float _enemySearchRadius = 15f;
-    [SerializeField] protected LayerMask _enemyTargetLayer;
-
-    protected readonly Collider[] _targetColliders = new Collider[16];
+    protected LayerMask _enemyTargetLayer = 1 << 6;
 
     public Transform Target;
+
+    protected static readonly Collider[] TARGET_COLLIDERS = new Collider[16];
+
+    protected const float SEARCH_DELAY = 0.25f;
+    protected const float EMEMY_SEARCH_RADIUS = 15f;
+
     public Transform EnemyTarget { get; protected set; }
     public LayerMask EnemyTargetLayer { get { return _enemyTargetLayer; } }
 
@@ -24,15 +25,15 @@ public class TargetManager : MonoBehaviour
     {
         while (true == enabled)
         {
-            EnemyTarget = SearchTargetHelper(_enemySearchRadius, _enemyTargetLayer);
+            EnemyTarget = SearchTargetHelper(EMEMY_SEARCH_RADIUS, _enemyTargetLayer);
 
-            yield return new WaitForSeconds(_searchDelay);
+            yield return new WaitForSeconds(SEARCH_DELAY);
         }
     }
 
     protected Transform SearchTargetHelper(float searchRadius, LayerMask targetLayer)
     {
-        int targetCount = Physics.OverlapSphereNonAlloc(transform.position, searchRadius, _targetColliders, targetLayer);
+        int targetCount = Physics.OverlapSphereNonAlloc(transform.position, searchRadius, TARGET_COLLIDERS, targetLayer);
 
         float minDistance = float.MaxValue;
         float distance;
@@ -43,13 +44,13 @@ public class TargetManager : MonoBehaviour
         {
             for (int i = 0; i < targetCount; ++i)
             {
-                distance = Vector3.Distance(_targetColliders[i].transform.position, transform.position);
+                distance = Vector3.Distance(TARGET_COLLIDERS[i].transform.position, transform.position);
 
                 if (minDistance <= distance) continue;
 
                 minDistance = distance;
 
-                target = _targetColliders[i].transform;
+                target = TARGET_COLLIDERS[i].transform;
             }
         }
 

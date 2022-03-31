@@ -4867,7 +4867,7 @@ MonoBehaviour:
   _explosionEffect: {fileID: 6735809785826910236}
   _collider: {fileID: -6119688642187356201}
   _targetTime: 1
-  _maxRandomDistance: 8
+  _bezierCurvePointDistance: 5
 --- !u!135 &-6119688642187356201
 SphereCollider:
   m_ObjectHideFlags: 0

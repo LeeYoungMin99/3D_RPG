@@ -11,7 +11,7 @@ public class RangeAttack : AttackState
 
     protected Collider[] _targetColliders;
     protected GameObject[] _effectPool;
-    protected LayerMask _targetMask;
+    protected LayerMask _targetLayer;
     protected int _curIndex = 0;
 
     protected static readonly Vector3 CORRECT_TARGET_POSITION_VECTOR = new Vector3(0f, 0.3f, 0f);
@@ -24,7 +24,7 @@ public class RangeAttack : AttackState
 
         _effectPool = new GameObject[_objectPoolCount];
 
-        _targetMask = _targetManager.EnemyTargetLayer;
+        _targetLayer = _targetManager.EnemyTargetLayer;
 
         Transform field = GameObject.Find("Field").transform;
 
@@ -61,7 +61,7 @@ public class RangeAttack : AttackState
         _effectPool[_curIndex].transform.position = targetPosition + CORRECT_TARGET_POSITION_VECTOR;
         _effectPool[_curIndex].SetActive(true);
 
-        int targetCount = Physics.OverlapSphereNonAlloc(targetPosition, _hitRadius, _targetColliders, _targetMask);
+        int targetCount = Physics.OverlapSphereNonAlloc(targetPosition, _hitRadius, _targetColliders, _targetLayer);
 
         if (0 == targetCount) return;
 

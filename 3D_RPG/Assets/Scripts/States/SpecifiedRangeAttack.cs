@@ -15,12 +15,15 @@ public class SpecifiedRangeAttack : RangeAttack
     private GameObject _skillButtons;
     private bool _isClick = false;
 
+    private static readonly Vector3 HIDE_UI_POSITION_VECTOR = new Vector3(0f, -200, 0f);
+
     private void DisableDollyCamera()
     {
         _isClick = true;
 
         Time.timeScale = 1f;
 
+        _skillButtons.transform.position -= HIDE_UI_POSITION_VECTOR;
         _dollyCamera.SetActive(false);
         _cameraRotator.LockCameraPosition = false;
     }
@@ -57,7 +60,7 @@ public class SpecifiedRangeAttack : RangeAttack
                 _target.position = hit.point + CORRECT_TARGET_POSITION_VECTOR;
             }
 
-            if (true == _isAuto)
+            if (false == _isPlayableCharacter || true == _isAuto)
             {
                 _target.position = _targetManager.EnemyTarget.position + CORRECT_TARGET_POSITION_VECTOR;
 
@@ -68,7 +71,7 @@ public class SpecifiedRangeAttack : RangeAttack
                 break;
             }
 
-            if (false == _playerInput.Attack) yield return null;
+            if (false == _isPlayableCharacter || false == _playerInput.Attack) yield return null;
             else
             {
                 DisableDollyCamera();
@@ -92,6 +95,7 @@ public class SpecifiedRangeAttack : RangeAttack
 
         Time.timeScale = 0f;
 
+        _skillButtons.transform.position += HIDE_UI_POSITION_VECTOR;
         _dollyCamera.SetActive(true);
         _rangeCircle.SetActive(true);
         _cameraRotator.LockCameraPosition = true;

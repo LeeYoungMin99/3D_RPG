@@ -9,7 +9,8 @@ public class PlacementSlot : CharacterSlot
 
     private CharacterData _selectedCharacterData;
 
-    public event EventHandler<OnSlotClickEventArgs> PlacementSlotClickEvent;
+    public event EventHandler<SlotClickEventArgs> PlacementSlotClickEvent;
+    public event EventHandler<SkillEventArgs> PlacementSlotClickSkillEvent;
 
     private void OnDisable()
     {
@@ -35,7 +36,7 @@ public class PlacementSlot : CharacterSlot
         _characterData.CharacterStatus.CallChangeDataEvent();
     }
 
-    private void SetSelectedCharacterData(object sender, OnSlotClickEventArgs args)
+    private void SetSelectedCharacterData(object sender, SlotClickEventArgs args)
     {
         _selectedCharacterData = args.CharacterData;
 
@@ -53,6 +54,8 @@ public class PlacementSlot : CharacterSlot
         _image.sprite = null;
 
         PlacementSlotClickEvent?.Invoke(sender, null);
+        PlacementSlotClickSkillEvent?.Invoke(sender, null);
+
     }
 
     private void DisableClick(object sender, EventArgs args)

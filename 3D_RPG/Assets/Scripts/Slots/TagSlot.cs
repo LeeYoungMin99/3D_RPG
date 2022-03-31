@@ -13,28 +13,12 @@ public class TagSlot : CharacterSlot
 
     private SkillEventArgs _skillEventArgs = new SkillEventArgs();
 
-    public event EventHandler<OnSlotClickEventArgs> TagSlotClickEvent;
+    public event EventHandler<SlotClickEventArgs> TagSlotClickEvent;
     public event EventHandler<SkillEventArgs> CharacterDataChangeEvent;
 
-    private void OnEnable()
+    private void SetAsLastSibling(object sender, EventArgs args)
     {
-        if (true == CheckCharacterDataIsNull()) return;
-
-        if (0 != transform.GetSiblingIndex())
-        {
-            _slotButton.interactable = true;
-        }
-        else
-        {
-            _slotButton.interactable = false;
-
-            _characterData.SetCharacterPawnActive(true);
-        }
-    }
-
-    private void SetAsFirstSibling(object sender, EventArgs args)
-    {
-        transform.SetAsFirstSibling();
+        transform.SetAsLastSibling();
     }
 
     private void DisableCharacterPawn(object sender, EventArgs args)
@@ -51,7 +35,7 @@ public class TagSlot : CharacterSlot
         _slotButton.interactable = true;
     }
 
-    private void ReplacementCharacter(object sender, OnSlotClickEventArgs args)
+    private void ReplacementCharacter(object sender, SlotClickEventArgs args)
     {
         if (true == CheckCharacterDataIsNull()) return;
 
@@ -72,8 +56,8 @@ public class TagSlot : CharacterSlot
     {
         base.Awake();
 
-        _characterInventorySlotManager.PlacementSlotClickEvent -= SetAsFirstSibling;
-        _characterInventorySlotManager.PlacementSlotClickEvent += SetAsFirstSibling;
+        _characterInventorySlotManager.PlacementSlotClickEvent -= SetAsLastSibling;
+        _characterInventorySlotManager.PlacementSlotClickEvent += SetAsLastSibling;
 
         _characterInventorySlotManager.PlacementSlotClickEvent -= DisableCharacterPawn;
         _characterInventorySlotManager.PlacementSlotClickEvent += DisableCharacterPawn;
@@ -106,7 +90,7 @@ public class TagSlot : CharacterSlot
         return false;
     }
 
-    public void SetCharacterData(object sender, OnSlotClickEventArgs args)
+    public void SetCharacterData(object sender, SlotClickEventArgs args)
     {
         if (null != _characterData)
         {
@@ -146,6 +130,29 @@ public class TagSlot : CharacterSlot
             CharacterDataChangeEvent?.Invoke(this, _skillEventArgs);
 
             _characterData.CharacterStatus.CallChangeDataEvent();
+        }
+    }
+
+    public void CheckCharacterDataAndSetAsLastSibling(object sender, EventArgs args)
+    {
+        if (false == CheckCharacterDataIsNull()) return;
+
+        transform.SetAsLastSibling();
+    }
+
+    public void CheckIndex(object sender, EventArgs args)
+    {
+        if (true == CheckCharacterDataIsNull()) return;
+
+        if (0 != transform.GetSiblingIndex())
+        {
+            _slotButton.interactable = true;
+        }
+        else
+        {
+            _slotButton.interactable = false;
+
+            _characterData.SetCharacterPawnActive(true);
         }
     }
 }

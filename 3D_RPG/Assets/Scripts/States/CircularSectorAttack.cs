@@ -68,6 +68,8 @@ public class CircularSectorAttack : AttackState
 
     public override void ExitState()
     {
+        base.ExitState();
+
         if (false == _hasArcLineRenderer) return;
 
         _arcLineRenderer.SetActive(false);

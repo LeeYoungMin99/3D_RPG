@@ -7,25 +7,33 @@ public class MonsterSpawner : MonoBehaviour
 {
     [Header("Spawn Setting")]
     [SerializeField] private GameObject _monster;
+    [SerializeField] private int _monsterExperience;
+    [SerializeField] private int _monsterID;
     [Range(1, 10)]
     [SerializeField] private int _maxCount = 1;
     [Range(20f, 30f)]
     [SerializeField] private float _respawnDelay = 20f;
 
-    private GameObject[] _monsters;
-
     private void Awake()
     {
-        _monsters = new GameObject[_maxCount];
-
         for (int i = 0; i < _maxCount; ++i)
         {
-            _monsters[i] = Instantiate(_monster, transform.position + SetRandomPosition(), Quaternion.Euler(SetRandomRotation()), transform);
-            _monsters[i].name = _monster.name;
-            MonsterSpawn spawn = _monsters[i].AddComponent<MonsterSpawn>();
+            GameObject monster = Instantiate(_monster, transform);
+            monster.tag = "Enemy";
+            monster.layer = 3;
+            monster.name = _monster.name;
 
-            spawn.MonsterDeathEvent -= RespawnAfterTimeHelper;
-            spawn.MonsterDeathEvent += RespawnAfterTimeHelper;
+            SetTransform(monster);
+
+            monster.AddComponent<TargetManager>();
+            EnemyDeath death = monster.AddComponent<EnemyDeath>();
+            death.Experience = _monsterExperience;
+            death.ID = _monsterID;
+
+            monster.SetActive(true);
+
+            death.EnemyDeathEvent -= RespawnAfterTimeHelper;
+            death.EnemyDeathEvent += RespawnAfterTimeHelper;
         }
     }
 
@@ -38,25 +46,33 @@ public class MonsterSpawner : MonoBehaviour
     {
         yield return new WaitForSeconds(_respawnDelay);
 
-        args.GameObject.GetComponent<CharacterStatus>().Init();
-        args.GameObject.transform.position = transform.position + SetRandomPosition();
-        args.GameObject.transform.rotation = Quaternion.Euler(SetRandomRotation());
-        args.GameObject.SetActive(true);
+        GameObject monster = args.GameObject;
+
+        monster.GetComponent<CharacterStatus>().Init();
+
+        SetTransform(monster);
+
+        monster.SetActive(true);
+    }
+
+    private void SetTransform(GameObject monster)
+    {
+        monster.transform.localPosition = SetRandomPosition();
+        monster.transform.rotation = SetRandomRotation();
     }
 
     private Vector3 SetRandomPosition()
     {
         float x = UnityEngine.Random.Range(0f, 5f);
-        float y = UnityEngine.Random.Range(0f, 5f);
         float z = UnityEngine.Random.Range(0f, 5f);
 
-        return new Vector3(x, y, z);
+        return new Vector3(x, 0f, z);
     }
 
-    private Vector3 SetRandomRotation()
+    private Quaternion SetRandomRotation()
     {
         float y = UnityEngine.Random.Range(0f, 360f);
 
-        return new Vector3(0f, y, 0f);
+        return Quaternion.Euler(0f, y, 0f);
     }
 }

@@ -35,7 +35,7 @@ public abstract class AttackState : State, IExperienceGainer
     protected static readonly Vector3 ZERO_VECTOR3 = Vector3.zero;
 
     public bool IsSkill { get { return _isSkill; } }
-    public bool SkillIcon { get { return _skillIcon; } }
+    public Sprite SkillIcon { get { return _skillIcon; } }
 
     protected override void Awake()
     {
@@ -148,6 +148,6 @@ public abstract class AttackState : State, IExperienceGainer
 
     public void GainExperience(object sender, DeathEventArgs args)
     {
-        _status.GainExperience(args.Experience);
+        _status.ObtainExperience(args.Experience);
     }
 }

@@ -21,6 +21,6 @@ public class CharacterInventoryExitButton : MonoBehaviour
         _characterInventory.SetActive(false);
 
         _playerCamera.SetActive(true);
-        _canvas.gameObject.SetActive(true);
+        _canvas.enabled = true;
     }
 }

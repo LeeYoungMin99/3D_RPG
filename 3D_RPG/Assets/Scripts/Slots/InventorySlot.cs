@@ -11,7 +11,7 @@ public class InventorySlot : CharacterSlot
     private List<CharacterData> _characterDatas = new List<CharacterData>();
     private int _characterDatasCount = 0;
 
-    public event EventHandler<OnSlotClickEventArgs> InventorySlotClickEvent;
+    public event EventHandler<SlotClickEventArgs> InventorySlotClickEvent;
 
     private void OnEnable()
     {
@@ -52,7 +52,7 @@ public class InventorySlot : CharacterSlot
     {
         base.Awake();
 
-        _eventArgs = new OnSlotClickEventArgs();
+        _eventArgs = new SlotClickEventArgs();
     }
 
     protected override void OnClick()

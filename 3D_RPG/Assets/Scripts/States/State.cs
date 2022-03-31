@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class State : MonoBehaviour
 {
-    [SerializeField] protected EStateTag stateTag;
+    [SerializeField] protected EStateTag _stateTag;
 
     protected PlayerInput _playerInput;
     protected TargetManager _targetManager;
@@ -16,7 +16,7 @@ public class State : MonoBehaviour
 
     protected virtual void Awake()
     {
-        GetComponent<StateMachine>().AddState(stateTag, this);
+        GetComponent<StateMachine>().AddState(_stateTag, this);
 
         _playerInput = transform.parent.GetComponent<PlayerInput>();
 

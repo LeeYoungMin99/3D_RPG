@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         _slotManager.ObtainCharacter("Sword Man");
-        _slotManager.ObtainCharacter("Archer");
-        _slotManager.ObtainCharacter("Magician");
+
+        new FirstFarmerTalk();
     }
 }

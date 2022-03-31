@@ -8,13 +8,13 @@ public class CharacterInventorySlotManager : MonoBehaviour
     [SerializeField] private InventorySlot[] _inventorySlot = new InventorySlot[MAX_SHOW_INVENTORY_SLOT];
     [SerializeField] private TagSlot[] _tagSlot = new TagSlot[MAX_PLACEMENT_SLOT_COUNT];
     [SerializeField] private GameObject _player;
+    [SerializeField] private GameObject _cinemachineCameraRoot;
     [SerializeField] private int _maxInventorySize;
 
     private int _curCharacterCount = 0;
-    private bool _isClickedPlacementSlot = false;
 
-    public event EventHandler<OnSlotClickEventArgs> InventorySlotClickEvent;
-    public event EventHandler<OnSlotClickEventArgs> TagSlotClickEvent;
+    public event EventHandler<SlotClickEventArgs> InventorySlotClickEvent;
+    public event EventHandler<SlotClickEventArgs> TagSlotClickEvent;
     public event EventHandler<EventArgs> PlacementSlotClickEvent;
 
     private const int MAX_SHOW_INVENTORY_SLOT = 10;
@@ -44,24 +44,30 @@ public class CharacterInventorySlotManager : MonoBehaviour
             _tagSlot[i].TagSlotClickEvent -= OnClickTagSlot;
             _tagSlot[i].TagSlotClickEvent += OnClickTagSlot;
         }
+
+        QuestManager.Instance.QuestCompleteEvent -= ObtainCharacterReward;
+        QuestManager.Instance.QuestCompleteEvent += ObtainCharacterReward;
     }
 
-    private void OnDisable()
+    private void Start()
     {
-        if (false == _isClickedPlacementSlot) return;
-
         for (int i = 0; i < MAX_PLACEMENT_SLOT_COUNT; ++i)
         {
-            if (true == _tagSlot[i].CheckCharacterDataIsNull())
+            for (int j = 0; j < MAX_PLACEMENT_SLOT_COUNT; ++j)
             {
-                _tagSlot[i].transform.SetAsLastSibling();
+                _placementSlot[i].PlacementSlotClickEvent -= _tagSlot[j].CheckCharacterDataAndSetAsLastSibling;
+                _placementSlot[i].PlacementSlotClickEvent += _tagSlot[j].CheckCharacterDataAndSetAsLastSibling;
+            }
+
+            for (int j = 0; j < MAX_PLACEMENT_SLOT_COUNT; ++j)
+            {
+                _placementSlot[i].PlacementSlotClickEvent -= _tagSlot[j].CheckIndex;
+                _placementSlot[i].PlacementSlotClickEvent += _tagSlot[j].CheckIndex;
             }
         }
-
-        _isClickedPlacementSlot = false;
     }
 
-    private void OnClickInventorySlot(object sender, OnSlotClickEventArgs args)
+    private void OnClickInventorySlot(object sender, SlotClickEventArgs args)
     {
         InventorySlotClickEvent?.Invoke(sender, args);
     }
@@ -69,13 +75,21 @@ public class CharacterInventorySlotManager : MonoBehaviour
     private void OnClickPlacementSlot(object sender, EventArgs args)
     {
         PlacementSlotClickEvent?.Invoke(sender, EventArgs.Empty);
-
-        _isClickedPlacementSlot = true;
     }
 
-    private void OnClickTagSlot(object sender, OnSlotClickEventArgs args)
+    private void OnClickTagSlot(object sender, SlotClickEventArgs args)
     {
         TagSlotClickEvent?.Invoke(sender, args);
+    }
+
+    public void ObtainCharacterReward(object sender, QuestCompleteEventArgs args)
+    {
+        if (null == args.CharacterReward) return;
+
+        foreach (string characterReward in args.CharacterReward)
+        {
+            ObtainCharacter(characterReward);
+        }
     }
 
     public bool ObtainCharacter(string name)
@@ -83,10 +97,22 @@ public class CharacterInventorySlotManager : MonoBehaviour
         if (_curCharacterCount >= _maxInventorySize) return false;
 
         GameObject pawn = Instantiate(Resources.Load<GameObject>($"Character/{name}"), _player.transform.position, _player.transform.rotation, _player.transform);
-        pawn.SetActive(false);
         pawn.name = name;
+        pawn.layer = 6;
+        pawn.tag = "Player";
+
+        pawn.AddComponent<PlayerTargetManager>();
+        pawn.AddComponent<PlayerDeath>();
+
+        pawn.SetActive(true);
+        pawn.SetActive(false);
+
+        Instantiate(_cinemachineCameraRoot, pawn.transform);
 
         CharacterData character = new CharacterData(name, pawn);
+
+        QuestManager.Instance.QuestCompleteEvent -= character.CharacterStatus.ObtainExperienceReward;
+        QuestManager.Instance.QuestCompleteEvent += character.CharacterStatus.ObtainExperienceReward;
 
         _inventorySlot[_curCharacterCount].AddCharacterData(character);
 

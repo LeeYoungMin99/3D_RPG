@@ -983,7 +983,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 736959757406762880}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4033750490596466485}
@@ -1325,7 +1325,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 737019492478244924}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4033750490596466485}
@@ -2506,7 +2506,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 737314619445643996}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 734066058475167052}
@@ -3023,7 +3023,6 @@ GameObject:
   - component: {fileID: 4033750490596033406}
   - component: {fileID: 4033750490596033376}
   - component: {fileID: 4033750490596033378}
-  - component: {fileID: 4033750490596033380}
   - component: {fileID: 4033750490596033382}
   - component: {fileID: 4033750490596033384}
   - component: {fileID: 4033750490596033367}
@@ -3031,14 +3030,13 @@ GameObject:
   - component: {fileID: 4033750490596033361}
   - component: {fileID: 9041221754246398002}
   - component: {fileID: 4033750490596033362}
-  - component: {fileID: 8462517019920155844}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Ghoul
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4033750490596466485
 Transform:
   m_ObjectHideFlags: 0
@@ -3090,7 +3088,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 1
+  m_CollisionDetection: 3
 --- !u!136 &4033750490596033406
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3104,7 +3102,7 @@ CapsuleCollider:
   m_Radius: 0.8
   m_Height: 1.7
   m_Direction: 1
-  m_Center: {x: 0, y: 0.9, z: 0}
+  m_Center: {x: 0, y: 0.9, z: -0.5}
 --- !u!195 &4033750490596033376
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -3139,24 +3137,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09ea48f97f458d84a9bece39b39a7dd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4033750490596033380
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4033750490596033363}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b73af79c99e0c984a92e206003570cc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _searchDelay: 0.25
-  _enemySearchRadius: 15
-  _enemyTargetLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  Target: {fileID: 0}
 --- !u!114 &4033750490596033382
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3181,7 +3161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22401fd145c6e92418e0c5dcd11ed50f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stateTag: 0
+  _stateTag: 0
   _moveSpeed: 6
   _stoppingDistance: 3
 --- !u!114 &4033750490596033367
@@ -3196,7 +3176,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f03a7e6971aeec4fb91a7a3313382e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stateTag: 1
+  _stateTag: 1
   _isCombo: 1
   _impossibleComboInputAnimationNormalizedTime: 0.4
   _isSkill: 0
@@ -3221,7 +3201,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f03a7e6971aeec4fb91a7a3313382e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stateTag: 2
+  _stateTag: 2
   _isCombo: 1
   _impossibleComboInputAnimationNormalizedTime: 0.4
   _isSkill: 0
@@ -3246,7 +3226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f03a7e6971aeec4fb91a7a3313382e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stateTag: 3
+  _stateTag: 3
   _isCombo: 0
   _impossibleComboInputAnimationNormalizedTime: 0
   _isSkill: 0
@@ -3271,7 +3251,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2bdb158e1d4f8a4ab75f9a135b6606e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stateTag: 4
+  _stateTag: 4
   _isCombo: 0
   _impossibleComboInputAnimationNormalizedTime: 0
   _isSkill: 1
@@ -3301,17 +3281,3 @@ MonoBehaviour:
   _level: 1
   MaxHPPerLevel: 300
   ATKPerLevel: 10
---- !u!114 &8462517019920155844
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4033750490596033363}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2dd3def6cbd338d4d9dbc08fa3cb9664, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stateTag: 16
-  _experience: 10

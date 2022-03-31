@@ -110,7 +110,12 @@ public class CharacterStatus : MonoBehaviour
         _animator.SetTrigger(CharacterAnimID.IS_DAMAGE);
     }
 
-    public void GainExperience(int exp)
+    public void ObtainExperienceReward(object sender, QuestCompleteEventArgs args)
+    {
+        ObtainExperience(args.ExperienceReward);
+    }
+
+    public void ObtainExperience(int exp)
     {
         _curExperience += exp;
 

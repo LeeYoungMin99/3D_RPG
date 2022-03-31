@@ -47,6 +47,15 @@ public class ProjectileAttack : AttackState
                 _projectileObjects[index].Owner = gameObject;
                 _projectileObjects[index].StartPosition = _startPosition;
                 _projectileObjects[index].TargetLayer = _targetManager.EnemyTargetLayer;
+
+                if(1 << 3 == _targetManager.EnemyTargetLayer)
+                {
+                    _projectileObjects[index].gameObject.layer = 11;
+                }
+                else
+                {
+                    _projectileObjects[index].gameObject.layer = 12;
+                }
             }
         }
 
@@ -90,7 +99,7 @@ public class ProjectileAttack : AttackState
 
             ++_curShotCount;
 
-            yield return new WaitForSeconds(_intervalTime);
+            if (_intervalTime > 0f) yield return new WaitForSeconds(_intervalTime);
         }
 
         _curShotCount = 0;

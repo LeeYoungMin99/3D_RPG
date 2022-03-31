@@ -7,12 +7,15 @@ public class SkillButton : MonoBehaviour
 {
     [Header("Skill Button Setting")]
     [SerializeField] private TagSlot _tagSlot;
+    [SerializeField] private PlacementSlot _placementSlot;
     [SerializeField] private Button _tagSlotButton;
     [SerializeField] private Button _button;
     [SerializeField] private Image _image;
+    [SerializeField] private Sprite _defaultSprite;
 
     private CharacterData _characterData;
     private AttackState _characterSkill;
+    private PlayerTargetManager _playerTargetManager;
     private float _curCooldownTime;
 
     private void Awake()
@@ -20,12 +23,17 @@ public class SkillButton : MonoBehaviour
         _tagSlot.CharacterDataChangeEvent -= SubscribeSkill;
         _tagSlot.CharacterDataChangeEvent += SubscribeSkill;
 
+        _placementSlot.PlacementSlotClickSkillEvent -= SubscribeSkill;
+        _placementSlot.PlacementSlotClickSkillEvent += SubscribeSkill;
+
         _button.onClick.RemoveListener(OnClick);
         _button.onClick.AddListener(OnClick);
     }
 
     private void OnClick()
     {
+        if (null == _playerTargetManager.EnemyTarget) return;
+
         if (false == _characterData.PawnActive)
         {
             _tagSlotButton.onClick?.Invoke();
@@ -41,13 +49,31 @@ public class SkillButton : MonoBehaviour
             _characterSkill.UseSkillEvent -= StartCooldownHelper;
         }
 
-        _button.interactable = true;
+        if (null != args)
+        {
+            _button.interactable = true;
 
-        _characterData = args.CharacterData;
-        _characterSkill = args.CharacterData.Skill;
+            _characterData = args.CharacterData;
+            _characterSkill = args.CharacterData.Skill;
+            _playerTargetManager = _characterSkill.GetComponent<PlayerTargetManager>();
 
-        _characterSkill.UseSkillEvent -= StartCooldownHelper;
-        _characterSkill.UseSkillEvent += StartCooldownHelper;
+            if (null == _characterSkill.SkillIcon)
+            {
+                _image.sprite = _defaultSprite;
+            }
+            else
+            {
+                _image.sprite = _characterSkill.SkillIcon;
+            }
+
+            _characterSkill.UseSkillEvent -= StartCooldownHelper;
+            _characterSkill.UseSkillEvent += StartCooldownHelper;
+        }
+        else
+        {
+            _button.interactable = false;
+            _image.sprite = _defaultSprite;
+        }
     }
 
     private void StartCooldownHelper(object sender, SkillEventArgs args)

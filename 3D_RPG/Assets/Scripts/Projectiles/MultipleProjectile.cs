@@ -21,6 +21,10 @@ public class MultipleProjectile : StraightProjectile
         SetFlyingEffectDisplay(true);
         SetExplosionEffectDisplay(false);
 
+        _startPosition = StartPosition.position;
+        transform.position = StartPosition.position;
+        _isMove = true;
+
         float angle = (transform.parent.childCount - 1) * -_intervalAngle / 2 + (_intervalAngle * transform.GetSiblingIndex());
 
         transform.LookAt(Target);

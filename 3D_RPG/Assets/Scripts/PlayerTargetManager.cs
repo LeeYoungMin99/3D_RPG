@@ -4,23 +4,20 @@ using UnityEngine;
 
 public class PlayerTargetManager : TargetManager
 {
-    [Header("NPC Target Setting")]
-    [SerializeField] private float _NPCSearchRadius = 5f;
-    [SerializeField] private LayerMask _NPCTargetMask;
-
-    private EnemyHealthBar enemyHealthBar;
-    public Transform NPCTarget { get; private set; }
+    private EnemyHealthBar _enemyHealthBar;
 
     private void Awake()
     {
-        enemyHealthBar = GameObject.Find("Enemy Health Bar").GetComponent<EnemyHealthBar>();
+        _enemyTargetLayer = 1 << 3;
+
+        _enemyHealthBar = GameObject.Find("Enemy Health Bar").GetComponent<EnemyHealthBar>();
     }
 
     protected override void OnEnable()
     {
         base.OnEnable();
 
-        enemyHealthBar.PlayerTargetManager = this;
+        _enemyHealthBar.PlayerTargetManager = this;
     }
 
     protected override IEnumerator SearchTarget()
@@ -28,16 +25,14 @@ public class PlayerTargetManager : TargetManager
         while (true == enabled)
         {
             Transform prevEnemyTarget = EnemyTarget;
-            EnemyTarget = SearchTargetHelper(_enemySearchRadius, _enemyTargetLayer); ;
+            EnemyTarget = SearchTargetHelper(EMEMY_SEARCH_RADIUS, _enemyTargetLayer); ;
 
             if (EnemyTarget != prevEnemyTarget)
             {
-                enemyHealthBar.RefreshTarget();
+                _enemyHealthBar.RefreshTarget();
             }
 
-            NPCTarget = SearchTargetHelper(_NPCSearchRadius, _NPCTargetMask);
-
-            yield return new WaitForSeconds(_searchDelay);
+            yield return new WaitForSeconds(SEARCH_DELAY);
         }
     }
 }

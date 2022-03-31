@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class OnSlotClickEventArgs : EventArgs
+public class SlotClickEventArgs : EventArgs
 {
     public CharacterData CharacterData;
 }
@@ -18,6 +18,7 @@ public class AutoButtonEventArgs : EventArgs
 public class DeathEventArgs : EventArgs
 {
     public GameObject GameObject;
+    public int ID;
     public int Experience;
 }
 
@@ -36,4 +37,21 @@ public class SkillEventArgs : EventArgs
 {
     public CharacterData CharacterData;
     public float CooldownTime;
+}
+
+public class QuestChangeEventArgs : EventArgs
+{
+    public string QuestName;
+    public string QuestDescription;
+}
+
+public class TalkEventArgs : EventArgs
+{
+    public int ID;
+}
+
+public class QuestCompleteEventArgs : EventArgs
+{
+    public int ExperienceReward;
+    public string[] CharacterReward;
 }

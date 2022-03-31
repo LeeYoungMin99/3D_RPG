@@ -9,6 +9,7 @@ public class Movement : State
     [SerializeField] private float _stoppingDistance = 3f;
 
     private GameObject _mainCamera;
+    private GameObject _UICover;
     private CharacterRotator _rotator;
     private Rigidbody _rigidbody;
     private Coroutine _coroutineSetNavMeshPath;
@@ -23,38 +24,6 @@ public class Movement : State
     protected const float RUN_ANIMATION_PARAMETER_VALUE = 1f;
 
     private static readonly Vector2 ZERO_VECTOR2 = Vector2.zero;
-
-    protected override void Awake()
-    {
-        base.Awake();
-
-        _rigidbody = GetComponent<Rigidbody>();
-        _animator = GetComponent<Animator>();
-        _navMeshAgent = GetComponent<NavMeshAgent>();
-
-        AttackState[] attackStates = GetComponents<AttackState>();
-
-        _canUseSkill = false;
-        _animator.SetBool(CharacterAnimID.IS_COOLDOWN, true);
-
-        foreach (AttackState attackState in attackStates)
-        {
-            if (false == attackState.IsSkill) continue;
-
-            attackState.OnCooldownTimeElapsedEvent -= ElapseCooldown;
-            attackState.OnCooldownTimeElapsedEvent += ElapseCooldown;
-
-            _canUseSkill = true;
-            _animator.SetBool(CharacterAnimID.IS_COOLDOWN, false);
-
-            break;
-        }
-
-        if (false == _isPlayableCharacter) return;
-
-        _rotator = GetComponent<CharacterRotator>();
-        _mainCamera = GameObject.Find("Field").transform.Find("Main Camera").gameObject;
-    }
 
     private void Rotate(Vector2 input)
     {
@@ -122,6 +91,40 @@ public class Movement : State
         _animator.SetFloat(CharacterAnimID.MOVE, _animationBlend);
     }
 
+    protected override void Awake()
+    {
+        base.Awake();
+
+        _rigidbody = GetComponent<Rigidbody>();
+        _animator = GetComponent<Animator>();
+        _navMeshAgent = GetComponent<NavMeshAgent>();
+        _rotator = GetComponent<CharacterRotator>();
+
+        AttackState[] attackStates = GetComponents<AttackState>();
+
+        _canUseSkill = false;
+        _animator.SetBool(CharacterAnimID.IS_COOLDOWN, true);
+
+        foreach (AttackState attackState in attackStates)
+        {
+            if (false == attackState.IsSkill) continue;
+
+            attackState.OnCooldownTimeElapsedEvent -= ElapseCooldown;
+            attackState.OnCooldownTimeElapsedEvent += ElapseCooldown;
+
+            _canUseSkill = true;
+            _animator.SetBool(CharacterAnimID.IS_COOLDOWN, false);
+
+            break;
+        }
+
+        if (false == _isPlayableCharacter) return;
+
+        Transform field = GameObject.Find("Field").transform;
+        _mainCamera = field.Find("Main Camera").gameObject;
+        _UICover = field.Find("UI Cover Canvas").Find("UI Cover").gameObject;
+    }
+
     public void ChangeRootMotionSettings()
     {
         _animator.applyRootMotion = !_animator.applyRootMotion;
@@ -130,6 +133,13 @@ public class Movement : State
         {
             _rigidbody.velocity = Vector3.zero;
         }
+    }
+
+    public override void EnterState()
+    {
+        if (false == _isPlayableCharacter) return;
+
+        _UICover.SetActive(false);
     }
 
     public override void UpdateState()
@@ -222,5 +232,9 @@ public class Movement : State
         _navMeshAgent.ResetPath();
 
         InitCoroutine();
+
+        if (false == _isPlayableCharacter) return;
+
+        _UICover.SetActive(true);
     }
 }

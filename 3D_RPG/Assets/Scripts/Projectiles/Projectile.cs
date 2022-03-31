@@ -103,6 +103,6 @@ public abstract class Projectile : MonoBehaviour, IExperienceGainer
 
     public void GainExperience(object sender, DeathEventArgs args)
     {
-        Owner.GetComponent<CharacterStatus>().GainExperience(args.Experience);
+        Owner.GetComponent<CharacterStatus>().ObtainExperience(args.Experience);
     }
 }

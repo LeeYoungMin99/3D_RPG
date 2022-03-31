@@ -9,7 +9,7 @@ public abstract class CharacterSlot : MonoBehaviour
     [SerializeField] protected Image _image;
 
     protected CharacterData _characterData;
-    protected OnSlotClickEventArgs _eventArgs;
+    protected SlotClickEventArgs _eventArgs;
 
     protected virtual void Awake()
     {
