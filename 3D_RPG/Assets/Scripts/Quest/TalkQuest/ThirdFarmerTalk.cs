@@ -7,7 +7,9 @@ public class ThirdFarmerTalk : Quest
 {
     public ThirdFarmerTalk()
     {
-        Farmer farmer = GameObject.Find("Field").transform.Find("Farmer").GetComponent<Farmer>();
+        Transform field = GameObject.Find("Field").transform;
+        Farmer farmer = field.Find("Farmer").GetComponent<Farmer>();
+        field.Find("Canvas").Find("Auto Button").GetComponent<AutoButton>().AutoMoveTarget = field.Find("Farmer");
 
         farmer.Dialogues[0] = "Á¤¸» °í¸¿³×...";
 

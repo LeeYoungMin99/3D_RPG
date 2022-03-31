@@ -13,6 +13,7 @@ public class SlotClickEventArgs : EventArgs
 public class AutoButtonEventArgs : EventArgs
 {
     public bool CurAuto;
+    public Transform AutoMoveTarget;
 }
 
 public class DeathEventArgs : EventArgs

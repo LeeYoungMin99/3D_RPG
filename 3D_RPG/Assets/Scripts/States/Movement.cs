@@ -200,24 +200,27 @@ public class Movement : State
             return;
         }
 
-        if (true == _canUseSkill && null != _targetManager.EnemyTarget)
+        if (null != _targetManager.EnemyTarget)
         {
-            _animator.SetTrigger(CharacterAnimID.USE_SKILL);
+            if (true == _canUseSkill)
+            {
+                _animator.SetTrigger(CharacterAnimID.USE_SKILL);
 
-            _canUseSkill = false;
+                _canUseSkill = false;
 
-            _navMeshAgent.isStopped = true;
+                _navMeshAgent.isStopped = true;
 
-            return;
-        }
+                return;
+            }
 
-        if (_stoppingDistance >= _navMeshAgent.remainingDistance)
-        {
-            _animator.SetTrigger(CharacterAnimID.IS_ATTACKING);
+            if (_stoppingDistance >= _navMeshAgent.remainingDistance)
+            {
+                _animator.SetTrigger(CharacterAnimID.IS_ATTACKING);
 
-            _navMeshAgent.isStopped = true;
+                _navMeshAgent.isStopped = true;
 
-            return;
+                return;
+            }
         }
 
         _navMeshAgent.isStopped = false;

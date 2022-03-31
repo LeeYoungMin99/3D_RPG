@@ -7,7 +7,9 @@ public class GhoulSlayer : Quest
 {
     public GhoulSlayer()
     {
-        Farmer farmer = GameObject.Find("Field").transform.Find("Farmer").GetComponent<Farmer>();
+        Transform field = GameObject.Find("Field").transform;
+        Farmer farmer = field.Find("Farmer").GetComponent<Farmer>();
+        field.Find("Canvas").Find("Auto Button").GetComponent<AutoButton>().AutoMoveTarget = field.Find("Spawners").Find("Ghoul Spawner");
 
         farmer.Dialogues[0] = "구울은 큰 동작을 한 이후에 큰 공격을 한다더군 조심하게";
 

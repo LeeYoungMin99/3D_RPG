@@ -7,7 +7,9 @@ public class BoarSlayer : Quest
 {
     public BoarSlayer()
     {
-        Farmer farmer = GameObject.Find("Field").transform.Find("Farmer").GetComponent<Farmer>();
+        Transform field = GameObject.Find("Field").transform;
+        Farmer farmer = field.Find("Farmer").GetComponent<Farmer>();
+        field.Find("Canvas").Find("Auto Button").GetComponent<AutoButton>().AutoMoveTarget = field.Find("Spawners").Find("Boar Spawner");
 
         farmer.Dialogues[0] = "ºÎÅ¹ÇÏ³×...";
 

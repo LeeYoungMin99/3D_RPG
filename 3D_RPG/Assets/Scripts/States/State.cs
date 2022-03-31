@@ -12,6 +12,7 @@ public class State : MonoBehaviour
     private void SetAuto(object sender, AutoButtonEventArgs args)
     {
         _isAuto = args.CurAuto;
+        _targetManager.Target = args.AutoMoveTarget;
     }
 
     protected virtual void Awake()

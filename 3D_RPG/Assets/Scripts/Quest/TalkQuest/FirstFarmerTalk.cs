@@ -7,7 +7,9 @@ public class FirstFarmerTalk : Quest
 {
     public FirstFarmerTalk()
     {
-        Farmer farmer = GameObject.Find("Field").transform.Find("Farmer").GetComponent<Farmer>();
+        Transform field = GameObject.Find("Field").transform;
+        Farmer farmer = field.Find("Farmer").GetComponent<Farmer>();
+        field.Find("Canvas").Find("Auto Button").GetComponent<AutoButton>().AutoMoveTarget = field.Find("Farmer");
 
         farmer.Dialogues[0] = "반갑네. 난 이 마을의 농부일세";
         farmer.Dialogues[1] = "보아하니 힘 좀 쓸 것 같은데 나 좀 도와주게";

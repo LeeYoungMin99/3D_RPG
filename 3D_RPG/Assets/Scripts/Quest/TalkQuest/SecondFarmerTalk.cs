@@ -7,7 +7,9 @@ public class SecondFarmerTalk : Quest
 {
     public SecondFarmerTalk()
     {
-        Farmer farmer = GameObject.Find("Field").transform.Find("Farmer").GetComponent<Farmer>();
+        Transform field = GameObject.Find("Field").transform;
+        Farmer farmer = field.Find("Farmer").GetComponent<Farmer>();
+        field.Find("Canvas").Find("Auto Button").GetComponent<AutoButton>().AutoMoveTarget = field.Find("Farmer");
 
         farmer.Dialogues[0] = "고맙네";
         farmer.Dialogues[1] = "보답으로 우리 농가에서 기르던 돼지 한마리를 주겠네!";

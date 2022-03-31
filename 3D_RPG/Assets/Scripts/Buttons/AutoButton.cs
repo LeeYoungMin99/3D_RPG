@@ -9,8 +9,21 @@ public class AutoButton : MonoBehaviour
 
     private bool _isAuto = false;
     private AutoButtonEventArgs _autoButtonEventArgs = new AutoButtonEventArgs();
-
+    private Transform _autoMoveTarget;
     public event EventHandler<AutoButtonEventArgs> OnAutoButtonClickEvent;
+
+    public Transform AutoMoveTarget
+    {
+        get { return _autoMoveTarget; }
+        set
+        {
+            _autoMoveTarget = value;
+
+            _autoButtonEventArgs.AutoMoveTarget = _autoMoveTarget;
+
+            OnAutoButtonClickEvent?.Invoke(this, _autoButtonEventArgs);
+        }
+    }
 
     public bool IsAuto { get { return _isAuto; } }
 
@@ -25,6 +38,7 @@ public class AutoButton : MonoBehaviour
         _isAuto = !_isAuto;
 
         _autoButtonEventArgs.CurAuto = _isAuto;
+        _autoButtonEventArgs.AutoMoveTarget = AutoMoveTarget;
 
         OnAutoButtonClickEvent?.Invoke(this, _autoButtonEventArgs);
 
